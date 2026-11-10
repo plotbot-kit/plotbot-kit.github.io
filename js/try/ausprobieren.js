@@ -1,5 +1,5 @@
 // „Im Browser ausprobieren“: Blöcke zusammensetzen und einem simulierten PlotBot beim Zeichnen zusehen.
-// Angepasst aus dem Roboter-Repository: firmware/web/blockly-seite.js (Blöcke, Thema, Werkzeugleiste, Laden der Demos).
+// Angepasst aus der Blockly-Seite der PlotBot-Firmware (Blöcke, Thema, Werkzeugleiste, Laden der Demos).
 // Weggelassen: Senden an den Roboter, Zustand vom Roboter, Speichern, Export und Import. Diese Seite spricht mit keinem Gerät.
 // Texte der Bedienung stehen im HTML (data-Attribute), damit die deutsche und die englische Seite dieselbe Datei nutzen.
 'use strict';
@@ -15,7 +15,7 @@
   for (const eintrag of ['blockHelp', 'blockInline', 'blockCollapseExpand'])
     if (Blockly.ContextMenuRegistry.registry.getItem(eintrag)) Blockly.ContextMenuRegistry.registry.unregister(eintrag);
 
-  // Eigene Blöcke der Schildkröte, unverändert aus blockly-seite.js.
+  // Eigene Blöcke der Schildkröte, unverändert aus der Firmware.
   Blockly.common.defineBlocksWithJsonArray([
     { type: 'zr_start', message0: 'Los', nextStatement: null, colour: 45, tooltip: 'Hier fängt dein Programm an.' },
     { type: 'zr_stift_ab', message0: 'Stift ab', previousStatement: null, nextStatement: null, style: 'stift_blocks',
@@ -91,7 +91,7 @@
   const arbeitsbereich = Blockly.inject('arbeitsbereich', {
     toolbox: WERKZEUGE, theme: THEMA, media: '../../vendor/blockly/', sounds: false, comments: true, trashcan: true,
     renderer: 'zelos',
-    zoom: { controls: true, wheel: true, pinch: true, startScale: 0.6, maxScale: 1.5, minScale: 0.3 },
+    zoom: { controls: true, wheel: true, pinch: true, startScale: document.getElementById('arbeitsbereich').offsetWidth < 500 ? 0.6 : 0.85, maxScale: 1.5, minScale: 0.3 },
     move: { scrollbars: true, drag: true, wheel: false },
   });
   window.plotbotArbeitsbereich = arbeitsbereich;   // für Tests im Browser

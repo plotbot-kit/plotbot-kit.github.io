@@ -1,5 +1,5 @@
 // Beispielprogramme für „Im Browser ausprobieren“.
-// Übernommen aus dem Roboter-Repository: firmware/web/programme.js, Abschnitt DEMOS (Bauhelfer und Demos unverändert).
+// Übernommen aus den Demos der PlotBot-Firmware (Bauhelfer und Demos unverändert).
 // Speichern, Export und Import der Firmware-Seite fehlen hier mit Absicht: Die Webseite merkt sich nichts.
 'use strict';
 (function (wurzel) {

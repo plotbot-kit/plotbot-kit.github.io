@@ -1,5 +1,5 @@
 /* PlotBot-Kinematiksimulator – Kern: Kinematik, Feldanalyse, Testfiguren, Fahrsimulation.
-   Quelle: simulator-kern.js im PlotBot-Quellprojekt (Vorlagen gekürzt, Texte zweisprachig).
+   Angepasst aus dem PlotBot-Kinematiksimulator (Vorlagen gekürzt, Texte zweisprachig).
    Koordinaten in mm: Achse links A = (-d/2, 0), rechts B = (+d/2, 0), +y zeigt zum Zeichenfeld.
    Winkel in Grad ab +x, gegen den Uhrzeigersinn. "Arm" = Abtriebsseite, "Motor" = Armwinkel × Untersetzung. */
 (function (root) {

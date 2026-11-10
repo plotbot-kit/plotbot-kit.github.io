@@ -1,5 +1,5 @@
 /* PlotBot-Kinematiksimulator – Bedienung: Regler, Maus, Overlays, Testfiguren, JSON, Messwert-Anzeige.
-   Quelle: simulator.js im PlotBot-Quellprojekt (ohne Fehlermodell, Texte zweisprachig). */
+   Angepasst aus dem PlotBot-Kinematiksimulator (ohne Fehlermodell, Texte zweisprachig). */
 (function () {
   'use strict';
   const ZK = window.ZK, ZD = window.ZD, t = ZK.t, $ = id => document.getElementById(id);

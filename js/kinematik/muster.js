@@ -1,5 +1,5 @@
 /* PlotBot-Kinematiksimulator – Testmuster als Daten.
-   Quelle: muster.js im PlotBot-Quellprojekt (gekürzt auf fünf Testfiguren).
+   Angepasst aus dem PlotBot-Kinematiksimulator (gekürzt auf fünf Testfiguren).
    Koordinaten in mm, ausgelegt für das Feld x −30…30, y 70…130.
    Ein Muster ist eine Liste von Strichen (Stift unten); ein Strich ist eine Liste von Stücken, die aneinander anschließen:
      {"p": [[x, y], …]}                          Polygonzug

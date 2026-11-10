@@ -1,8 +1,8 @@
-// Kopie aus dem Roboter-Repository: firmware/web/schildkroete.js (unverändert bis auf diesen Kopf).
+// Übernommen aus der PlotBot-Firmware (Schildkröte der Handyseite).
 // Auf der Webseite rechnet sie die Striche für die Vorschau; gesendet wird nichts.
-// Schildkröte für die Seite /blockly (Issue #128): führt die Blöcke aus und prüft das Ergebnis für die Vorschau.
+// Schildkröte für die Blockly-Seite: führt die Blöcke aus und prüft das Ergebnis für die Vorschau.
 // Kein eval, kein erzeugter Code: ausfuehren() läuft über den gespeicherten Baum der Blöcke (Blockly-JSON) und kennt nur
-// die Blocktypen unten. Ohne Blockly und ohne Browser testbar (tests/blockly.test.js).
+// die Blocktypen unten. Ohne Blockly und ohne Browser testbar.
 // Koordinaten des Kinds: mm ab der Ecke links unten des Felds, so wie die Vorschau es zeigt, y nach oben.
 // Gesendet wird in 1/10 mm Maschinenkoordinaten (BR-61); drehen tut die Firmware (BR-68), nicht diese Datei.
 'use strict';
@@ -210,14 +210,14 @@
     function wenn(ein, extra) {
       const zweige = 1 + Math.max(0, Math.floor(Number(extra && extra.elseIfCount) || 0));
       for (let i = 0; i < zweige; i++)
-        if (wahrheit(ein[`IF${i}`], 'falls', 'eine Bedingung')) return stapel(ein[`DO${i}`] && ein[`DO${i}`].block);   // Name wie auf der Seite (#157)
+        if (wahrheit(ein[`IF${i}`], 'falls', 'eine Bedingung')) return stapel(ein[`DO${i}`] && ein[`DO${i}`].block);   // Name wie auf der Seite
       return stapel(ein.ELSE && ein.ELSE.block);
     }
 
-    // zähle von a bis b in Schritten s: Richtung aus a und b, Schritt als Betrag wie in Blockly; Schritt 0 hält an (BR-94).
+    // zähle von a bis b in Schritten s: Richtung aus a und b, Schritt als Betrag wie in Blockly; Schritt 0 hält an.
     // Gezählt wird mit k und relativer Toleranz, damit die Anzahl nicht an Rundungsfehlern hängt: 0 bis 0,3 in 0,1 läuft
     // viermal (Blockly summiert den Fehler auf und läuft dreimal). Der Wert geht nie über b hinaus
-    // und landet auf b, wenn er es bis auf Rundungsfehler trifft (Review PR #151).
+    // und landet auf b, wenn er es bis auf Rundungsfehler trifft.
     function zaehleSchleife(b, ein) {
       const von = zahl(ein.FROM, 'zähle von'), bis = zahl(ein.TO, 'zähle bis'), schritt = Math.abs(zahl(ein.BY, 'zähle in Schritten'));
       if (schritt === 0) throw new Abbruch('Bei „zähle“ geht Schritt 0 nicht: Die Schleife käme nie an.');
@@ -277,7 +277,7 @@
       if (!programm || programm.type !== 'zr_start') throw new Abbruch('Kein Startblock „Los“.');
       stapel(programm);
     } catch (e) {
-      if (e instanceof RangeError) fehler = 'Das Programm ist zu tief verschachtelt.';   // Aufrufstapel voll (Review PR #145)
+      if (e instanceof RangeError) fehler = 'Das Programm ist zu tief verschachtelt.';   // Aufrufstapel voll
       else if (e instanceof Abbruch) fehler = e.message;
       else throw e;
     }

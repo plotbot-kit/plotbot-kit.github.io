@@ -8,16 +8,18 @@ Assumptions about the source:
   i.e. the view closest to the static hero image img/roboter.png. Rotation direction follows the file order.
 - Renders with alpha are only trimmed; opaque renders get their flat background (pixel 2,2) keyed out.
 
-All frames are cropped with ONE common bounding box (union over all frames), so the robot does not jump.
-The box is padded to the aspect of the hero image (800 x 1021), so frames and static image line up,
-then scaled to WIDTH px. Fresh WebP files carry no EXIF/XMP metadata.
+All frames are cropped with ONE common bounding box (union over all frames), so the robot does not jump,
+then scaled to WIDTH px. The static hero image img/roboter.{png,webp} (HERO_W px wide) is cut from frame 0
+with the same box, so the first swap from the static image to a frame shows no jump. Run this after
+tools/cad_renders.py, which would otherwise overwrite img/roboter.*. Update width/height of the hero <img>
+in de/ and en/index.html to the printed hero size. Fresh files carry no EXIF/XMP metadata.
 """
 import os
 import re
 import sys
 from PIL import Image
 
-WIDTH, HERO_W, HERO_H, MARGIN, FRAMES = 600, 800, 1021, 12, 36
+WIDTH, HERO_W, MARGIN, FRAMES = 600, 800, 12, 36
 EXT = (".png", ".webp", ".jpg", ".jpeg")
 
 
@@ -39,16 +41,11 @@ def alpha_of(im):
 
 
 def common_box(frames):
-    """Union of all alpha bounding boxes plus margin, widened or heightened to the hero aspect."""
+    """Union of all alpha bounding boxes plus margin."""
     boxes = [f.getchannel("A").getbbox() for f in frames]
     boxes = [b for b in boxes if b]
     l, t = min(b[0] for b in boxes) - MARGIN, min(b[1] for b in boxes) - MARGIN
     r, b = max(b[2] for b in boxes) + MARGIN, max(b[3] for b in boxes) + MARGIN
-    w, h = r - l, b - t
-    if w / h < HERO_W / HERO_H:            # too narrow: add width on both sides
-        extra = round(h * HERO_W / HERO_H) - w; l -= extra // 2; r += extra - extra // 2
-    else:                                   # too wide: add height on both sides
-        extra = round(w * HERO_H / HERO_W) - h; t -= extra // 2; b += extra - extra // 2
     return l, t, r, b                       # may reach outside the frame: crop pads with transparency
 
 
@@ -65,7 +62,8 @@ def main():
         im = Image.open(os.path.join(src, n))
         rgba = im.convert("RGBA"); rgba.putalpha(alpha_of(im)); frames.append(rgba)
     box = common_box(frames)
-    size = (WIDTH, round(WIDTH * HERO_H / HERO_W))
+    bw, bh = box[2] - box[0], box[3] - box[1]
+    size = (WIDTH, round(WIDTH * bh / bw))
     os.makedirs(out, exist_ok=True)
     total = 0
     for i, (n, f) in enumerate(zip(names, frames)):
@@ -74,6 +72,10 @@ def main():
         total += os.path.getsize(path)
         print(f"{n} -> {path}")
     print(f"box {box}, frame size {size}, total {total / 1024:.0f} KiB")
+    hero = frames[0].crop(box).resize((HERO_W, round(HERO_W * bh / bw)), Image.LANCZOS)
+    hero.save("img/roboter.png", optimize=True)
+    hero.save("img/roboter.webp", "WEBP", quality=82, alpha_quality=90, method=6)
+    print(f"hero img/roboter.png + .webp, size {hero.size}")
 
 
 if __name__ == "__main__":

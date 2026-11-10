@@ -1,5 +1,5 @@
 /* PlotBot-Kinematiksimulator – Zeichnen auf dem Canvas (Draufsicht, mm-Raster, Overlays, Arme, Fahrspur).
-   Quelle: simulator-zeichnen.js im PlotBot-Quellprojekt (ohne Messwert-Ringe, Texte zweisprachig). */
+   Angepasst aus dem PlotBot-Kinematiksimulator (ohne Messwert-Ringe, Texte zweisprachig). */
 (function (root) {
   'use strict';
   const ZK = root.ZK, t = ZK.t;

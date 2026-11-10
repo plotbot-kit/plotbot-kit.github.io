@@ -78,6 +78,7 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
   .hero .wrap { grid-template-columns: 1.1fr 1fr; align-items: start;
     grid-template-areas: "nav nav" "intro robot" "doodles robot" "cta robot"; }
   .hero .stage { align-self: center; }
+  .stage .robot { max-width: min(100%, 32rem); max-height: min(34rem, 72vh); }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .cards.three { grid-template-columns: repeat(3, 1fr); }
   .split { grid-template-columns: 1fr 1fr; }
@@ -88,9 +89,9 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
   .doodles li:hover { transform: rotate(-3deg) scale(1.05); }
 }
 
-/* Turntable (js/drehscheibe.js): only active once all frames have loaded */
-.turntable picture { display: block; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: var(--radius); }
-.turntable picture:active { cursor: grabbing; }
-.turntable picture:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+/* Turntable (js/drehscheibe.js): set up by JS; frames load on intent */
+.turntable-pending picture { display: block; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: var(--radius); }
+.turntable-pending picture:active { cursor: grabbing; }
+.turntable-pending picture:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
 .spin-hint { margin: .25rem 0 0; text-align: center; font-size: .9rem; font-weight: 700; color: var(--pink); }
 .spin-hint::before, .spin-hint::after { content: "↔"; content: "↔" / ""; margin: 0 .4em; }

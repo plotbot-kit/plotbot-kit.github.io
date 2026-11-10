@@ -1,5 +1,5 @@
 // Draufsicht auf den PlotBot für „Im Browser ausprobieren“: Grundplatte, zwei Armpaare, Stift und ein Blatt 80 × 80 mm.
-// Eigene, kleine Fassung. Maße und Konvention aus dem Roboter-Repository: firmware/lib/zeichnen/src/kinematik.h
+// Eigene, kleine Fassung. Maße und Konvention wie in der Kinematik der PlotBot-Firmware.
 // (Wellen bei x = ±achsabstand/2, y = 0, +y zum Zeichenfeld; Ellbogen beider Seiten „aussen“; Feld x −40…40, y 35…115).
 // Die Striche kommen aus schildkroete.js in Koordinaten des Kinds (mm ab der Ecke links unten des Felds, y nach oben).
 'use strict';
@@ -10,7 +10,7 @@
   const TEMPO_AB = 20;    // mm/s mit Stift auf dem Papier (bei Tempo 1)
   const TEMPO_AUF = 45;   // mm/s beim Umsetzen mit gehobenem Stift
 
-  // Schnittpunkte zweier Kreise; „links“ liegt links der Blickrichtung c1 → c2 (wie simulator-kern.js).
+  // Schnittpunkte zweier Kreise; „links“ liegt links der Blickrichtung c1 → c2.
   function schnitt(c1, r1, c2, r2) {
     const dx = c2.x - c1.x, dy = c2.y - c1.y, s = Math.hypot(dx, dy);
     if (s < 1e-9 || s > r1 + r2 || s < Math.abs(r1 - r2)) return null;

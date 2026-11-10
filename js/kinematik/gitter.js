@@ -1,6 +1,6 @@
 /* PlotBot-Kinematiksimulator – Schrittgitter: alle Stiftpunkte, die mit ganzzahligen Schritten beider Motoren
    erreichbar sind, im sichtbaren Ausschnitt. Zeigt, wie fein die Winkelauflösung das Feld rastert.
-   Quelle: simulator-gitter.js im PlotBot-Quellprojekt (Texte zweisprachig). */
+   Angepasst aus dem PlotBot-Kinematiksimulator (Texte zweisprachig). */
 (function (root) {
   'use strict';
   const ZK = root.ZK, ZD = root.ZD, t = ZK.t, L = ZK.LOCALE, MAX_PUNKTE = 120000, MIN_PX_JE_MM = 8;
