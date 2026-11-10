@@ -1,13 +1,13 @@
-# Zeichenroboter (Drawing Robot)
+# PlotBot-Kit – PlotBot, the drawing robot (German: Zeichenroboter)
 
-> A Leanpub book about building a small drawing robot as a holiday project for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
+> PlotBot is a small drawing robot; the PlotBot-Kit (Leanpub book, print files, firmware) shows how to build it as a holiday project for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
 
-## The robot
+## The robot (PlotBot)
 - Five-bar SCARA linkage: shoulders 36 mm apart, upper arms 65 mm, forearms 90 mm; drawing area 80 × 80 mm
 - ESP32 board (ELEGOO ESP-32 with pre-soldered headers), 2 × 28BYJ-48 stepper motors with ULN2003 drivers, SG90 servo with eccentric cam for the pen lift, 2 limit switches for homing
 - 3D-printed parts in PLA (0.4 mm nozzle, 0.2 mm layers, no supports, fits a 220 × 220 mm bed); estimated print time about 14 hours
 - Power: 5 V from a USB supply with at least 2 A; no soldering
-- Control: the robot opens its own Wi-Fi ("Zeichenroboter-XXXX") with a captive portal; no app and no internet needed. The phone page offers a setup wizard, ready-made motifs, writing text, tic-tac-toe, calibration with a test sheet, over-the-air updates and Blockly ("Selbst zeichnen") with turtle blocks
+- Control: PlotBot opens its own Wi-Fi ("Zeichenroboter-XXXX") with a captive portal; no app and no internet needed. The phone page offers a setup wizard, ready-made motifs, writing text, tic-tac-toe, calibration with a test sheet, over-the-air updates and Blockly ("Selbst zeichnen") with turtle blocks
 - Tools: 2.5 mm hex key, small screwdriver, needle-nose pliers, small file
 
 ## What kids learn
@@ -16,7 +16,8 @@
 - Programming: Blockly turtle graphics on the phone
 - Geometry: angles and coordinates in millimetres
 
-## The book
+## The kit (PlotBot-Kit)
+- Book title (provisional): "PlotBot – a holiday build project" / "PlotBot – das Bastelprojekt für die Feiertage"
 - Editions: Build it yourself (families, hobbyists), Student edition (courses where trainers prepare parts), Trainer edition (schools, clubs, makerspaces)
 - Downloads: STL and 3MF print files, ESP32 firmware, firmware source project, QR sticker program
 - Buy: Leanpub (link and price to follow)
