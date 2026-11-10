@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawing Robot – a holiday build project | Book on Leanpub</title>
+<meta name="description" content="Build a robot that draws, together with your kid: 3D-printed parts, two stepper motors, an ESP32 and Blockly on your phone. The book walks you through every step, in three editions.">
+<link rel="alternate" hreflang="de" href="../de/">
+<link rel="alternate" hreflang="en" href="../en/">
+<link rel="alternate" hreflang="x-default" href="../">
+<meta property="og:type" content="book">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:title" content="Drawing Robot – a holiday build project">
+<meta property="og:description" content="A robot that draws – printed, wired and programmed with Blockly by you. The book that shows you how.">
+<meta property="og:image" content="../img/og.png">
+<meta property="og:image:alt" content="3D model of the drawing robot: a yellow base plate and two arms that meet at the pen">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <nav class="topbar" aria-label="Language">
+        <a class="brand" href="./">Drawing Robot</a>
+        <span class="lang"><a href="../de/" hreflang="de" lang="de">Deutsch</a><a href="./" aria-current="page" hreflang="en" lang="en">English</a></span>
+      </nav>
+      <h1>Build a robot <span>that draws.</span></h1>
+      <p class="kicker">Two arms, one pen – and your phone tells it what to draw.</p>
+      <ul class="doodles" aria-label="Pictures the robot draws from small programs">
+        <li><img src="../img/blume.svg" alt="A flower with eight petals" width="72" height="72">Flower</li>
+        <li><img src="../img/stern.svg" alt="A five-pointed star" width="72" height="72">Star</li>
+        <li><img src="../img/spirale.svg" alt="A square spiral" width="72" height="72">Spiral</li>
+        <li><img src="../img/haus.svg" alt="A house with a roof and a door" width="72" height="72">House</li>
+      </ul>
+      <div class="cta">
+        <a class="button" href="#leanpub">Buy the book on Leanpub</a>
+        <span class="price">Price: <strong>$XX</strong> (placeholder)</span>
+      </div>
+    </div>
+    <figure class="stage">
+      <picture>
+        <source srcset="../img/roboter.webp" type="image/webp">
+        <img class="robot" src="../img/roboter.png" width="549" height="686"
+             alt="3D model of the drawing robot: on a yellow base plate, two motors each turn an arm; the arms meet at an upright red pen.">
+      </picture>
+      <figcaption>What it looks like once everything is printed and screwed together (3D model).</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main id="content">
+
+<section class="film" aria-labelledby="film-title">
+  <div class="wrap">
+    <h2 id="film-title">Watch it draw</h2>
+    <video controls preload="none" poster="../img/film-poster.webp" width="1280" height="720">
+      <source src="../media/verkaufsfilm-en.mp4" type="video/mp4">
+      <p>Your browser can't play the video here. Everything that matters is in the text below.</p>
+    </video>
+  </div>
+</section>
+
+<section aria-labelledby="parents-title">
+  <div class="wrap">
+    <h2 id="parents-title">Your kid builds a machine – and understands how it works</h2>
+    <p class="lead">This isn't a snap-together kit with picture instructions. Your kid prints the parts, presses in bearings,
+      wires up motors and ends up writing programs of their own. Short explainer boxes in the book cover the why behind each step.</p>
+    <ul class="cards">
+      <li><span class="tag">Mechanics</span><h3>Levers, gears, bearings</h3>
+        <p>Two motors each turn an upper arm, and the forearms meet at the pen. Kids see why slack in a gearbox makes a drawing wobble, and what a ball bearing is for.</p></li>
+      <li><span class="tag">Electronics</span><h3>A microcontroller and motors</h3>
+        <p>An ESP32 drives two stepper motors and a servo that lifts the pen. Limit switches tell the robot where its arms are.</p></li>
+      <li><span class="tag">Coding</span><h3>Blockly on a phone</h3>
+        <p>Kids snap blocks together: pen down, move 20 mm, turn 90°, repeat four times. The robot draws the program on paper straight away.</p></li>
+      <li><span class="tag">Geometry</span><h3>Angles you can see</h3>
+        <p>Why does the pen turn 144° five times to draw a star? On paper, the maths turns into a picture – and a mistake turns into a crooked line you can track down.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="needs-title">
+  <div class="wrap split">
+    <div>
+      <h2 id="needs-title">What you'll need, and why it's safe</h2>
+      <dl class="facts">
+        <dt>Age</dt><dd>Kids aged about 12 and up, building with a parent</dd>
+        <dt>Time</dt><dd>A project for the holidays. Printing alone takes an estimated 14 hours – the printer does the work while you do something else.</dd>
+        <dt>Power</dt><dd>5 volts from a USB power supply (2 A or more), nothing else</dd>
+        <dt>Soldering</dt><dd>None. The board comes with its pin headers already soldered, and every wire plugs in.</dd>
+        <dt>Tools</dt><dd>2.5 mm hex key, small screwdriver, needle-nose pliers, small file</dd>
+        <dt>Devices</dt><dd>A 3D printer (220 × 220 mm bed), a computer once to flash the firmware, and after that just a phone</dd>
+      </dl>
+      <p>The book lists the parts to buy, with quantities: the board, two motors with drivers, a servo, limit switches, ball bearings, screws and a felt-tip pen.
+        It also tells you how to stop the robot safely: pull the plug.</p>
+    </div>
+    <figure>
+      <picture>
+        <source srcset="../img/elektronik.webp" type="image/webp">
+        <img src="../img/elektronik.png" width="800" height="420" loading="lazy"
+             alt="3D model of the electronics carrier: the board in the middle, a motor driver board on each side, a power rail in front.">
+      </picture>
+      <figcaption>The electronics carrier: board, two motor drivers and a power rail on a printed plate (3D model).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="phone-title">
+  <div class="wrap split flip">
+    <div>
+      <h2 id="phone-title">No app, no internet – the robot brings its own Wi-Fi</h2>
+      <p>Switch the robot on and it opens a Wi-Fi network called "Zeichenroboter-…". Connect your phone and the control page pops up by itself.
+        A sticker with two QR codes makes it even easier; the book comes with the program that prints it.</p>
+      <p>A four-step wizard on the phone sets everything up. After that, the robot draws ready-made pictures, writes names,
+        plays tic-tac-toe against your kid – or runs whatever your kid has built in Blockly.</p>
+    </div>
+    <figure>
+      <img class="phone" src="../img/handy-blockly.webp" width="390" height="595" loading="lazy"
+           alt="Phone screen showing the Blockly editor: coloured blocks form a small drawing program for a house.">
+      <figcaption>The Blockly page on the robot. The blocks come from the robot, not from the internet. (The robot's pages are in German.)</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="maker-title">
+  <div class="wrap split">
+    <div>
+      <h2 id="maker-title">For makers: open hardware you can check the maths on</h2>
+      <p>The robot is a five-bar SCARA: shoulders 36 mm apart, 65 mm upper arms, 90 mm forearms.
+        The firmware does the kinematics itself. The pen tip lags slightly behind the holder, so the firmware overshoots each corner a little to keep it sharp.</p>
+      <table class="specs">
+        <caption class="skip">Specifications</caption>
+        <tr><th scope="row">Controller</th><td>ESP32 (ELEGOO ESP-32, headers pre-soldered)</td></tr>
+        <tr><th scope="row">Drive</th><td>2 × 28BYJ-48 with ULN2003 drivers, half-stepping</td></tr>
+        <tr><th scope="row">Pen lift</th><td>SG90 servo with an eccentric cam, gentle lowering</td></tr>
+        <tr><th scope="row">Mechanics</th><td>Five-bar linkage with ball bearings</td></tr>
+        <tr><th scope="row">Drawing area</th><td>80 × 80 mm</td></tr>
+        <tr><th scope="row">Homing</th><td>2 limit switches; calibration with a test sheet, values survive firmware updates</td></tr>
+        <tr><th scope="row">Printed parts</th><td>PLA, 0.4 mm nozzle, 0.2 mm layers, no supports; largest part 142 × 97 mm</td></tr>
+        <tr><th scope="row">Control</th><td>Own Wi-Fi with captive portal, phone page, Blockly, over-the-air updates</td></tr>
+        <tr><th scope="row">Power</th><td>5 V, 2 A or more (USB power supply or power bank)</td></tr>
+      </table>
+    </div>
+    <figure>
+      <picture>
+        <source srcset="../img/roboter-vorne.webp" type="image/webp">
+        <img src="../img/roboter-vorne.png" width="596" height="653" loading="lazy"
+             alt="3D model of the drawing robot from the front left: the pen holder with its red pen in front, the two arms and the base plate with motors behind.">
+      </picture>
+      <figcaption>Front-left view (3D model).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="book-title">
+  <div class="wrap">
+    <h2 id="book-title">Buy once, get three books</h2>
+    <p class="lead">On Leanpub you get all three editions as PDFs – plus every future update at no extra cost.</p>
+    <ul class="cards three editions">
+      <li><h3>Build it yourself</h3><p>For families and hobbyists: get and print the parts, flash the firmware, assemble, set up, draw.</p></li>
+      <li><h3>Student edition</h3><p>For kids on a course: the trainers have printed and prepared everything, the kids build and code.</p></li>
+      <li><h3>Trainer edition</h3><p>For schools, clubs and makerspaces: plan, print, let the kids build and run the course. Includes demo ideas and common misconceptions.</p></li>
+    </ul>
+    <h3 style="margin-top:2rem">Included downloads</h3>
+    <p>The print files (STL and 3MF), the ready-to-flash ESP32 firmware, its source project and the program that makes the QR sticker.</p>
+  </div>
+</section>
+
+<section class="final" aria-labelledby="buy-title">
+  <div class="wrap">
+    <h2 id="buy-title">The holidays are coming. Your robot is waiting.</h2>
+    <p>Get the book, start the printer – and by the end, the robot draws whatever your kid has programmed.</p>
+    <div class="cta">
+      <a class="button" href="#leanpub">Buy the book on Leanpub</a>
+      <span class="price">Price: <strong>$XX</strong> (placeholder)</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Drawing Robot – website version <span class="version">0.1.0</span>. Every image is a 3D model or a drawing from the robot's example programs.
+      · <a href="../de/" hreflang="de" lang="de">Deutsche Version</a></p>
+  </div>
+</footer>
+</body>
+</html>
