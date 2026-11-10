@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Im Browser ausprobieren – PlotBot mit Blockly programmieren | PlotBot-Kit</title>
+<meta name="description" content="Probieren Sie aus, wie Ihr Kind den PlotBot programmiert: Blockly-Blöcke zusammensetzen und einem simulierten Zeichenroboter beim Zeichnen zusehen – direkt im Browser, ohne Roboter.">
+<link rel="canonical" href="https://plotbot-kit.github.io/de/ausprobieren/">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/ausprobieren/">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/try/">
+<link rel="alternate" hreflang="x-default" href="https://plotbot-kit.github.io/en/try/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="PlotBot im Browser ausprobieren">
+<meta property="og:description" content="Blöcke zusammensetzen und einem simulierten PlotBot beim Zeichnen zusehen.">
+<meta property="og:url" content="https://plotbot-kit.github.io/de/ausprobieren/">
+<meta property="og:image" content="https://plotbot-kit.github.io/img/og.png">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/try.css">
+<script src="../../js/lang.js" defer></script>
+<script src="../../vendor/blockly/blockly_compressed.js" defer></script>
+<script src="../../vendor/blockly/blocks_compressed.js" defer></script>
+<script src="../../vendor/blockly/de.js" defer></script>
+<script src="../../js/try/schildkroete.js" defer></script>
+<script src="../../js/try/beispiele.js" defer></script>
+<script src="../../js/try/roboter-vorschau.js" defer></script>
+<script src="../../js/try/ausprobieren.js" defer></script>
+<link rel="icon" href="../../img/blume.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt</a>
+
+<header class="try-head">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="brand" href="../">PlotBot-Kit</a>
+      <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="../../en/try/" hreflang="en" lang="en" data-lang="en">English</a></span>
+    </nav>
+    <h1>PlotBot im Browser ausprobieren</h1>
+    <p class="lead">Setzen Sie Blöcke zusammen wie Ihr Kind später auf dem Handy – und sehen Sie einem simulierten PlotBot zu, wie er Ihr Programm auf ein Blatt von 80 × 80 mm zeichnet.</p>
+    <a class="back" href="../">← Zurück zur Startseite</a>
+  </div>
+</header>
+
+<main id="inhalt">
+
+<section aria-labelledby="erklaer-titel">
+  <div class="wrap explain">
+    <div>
+      <h2 id="erklaer-titel">So funktioniert diese Seite</h2>
+      <p>Im Baukasten liegen die Blöcke, die auch der echte PlotBot auf seiner Handyseite „Selbst zeichnen“ anbietet: Stift ab, gehe 20 mm vorwärts, drehe dich um 90°, wiederhole viermal.
+        Alles, was unter dem Block „Los“ hängt, ist das Programm. Daneben, auf dem Handy darunter, sehen Sie den Roboter von oben, mit seiner Grundplatte, den beiden Armpaaren und dem Stift.</p>
+      <p>Ein Tipp auf „Zeichnen lassen“, und die Arme fahren das Programm ab. Gestrichelt steht vorher da, was gezeichnet wird; rote Punkte liegen außerhalb des Blatts.
+        Unter „Beispiel laden“ finden Sie fertige Programme wie Haus, Stern und Blume. Nichts verlässt Ihren Browser: Die Seite spricht mit keinem Roboter und speichert nichts.</p>
+      <noscript><p class="needs-js">Der Baukasten braucht JavaScript. Schalten Sie es in Ihrem Browser ein, dann erscheinen hier die Blöcke und der simulierte Roboter. Wie die Blöcke auf dem Handy aussehen, zeigt das Bild.</p></noscript>
+    </div>
+    <div class="pics">
+      <img class="phone" src="../../img/handy-blockly.webp" width="390" height="595"
+           alt="Handy-Bildschirm mit der Seite „Selbst zeichnen“: farbige Blockly-Blöcke bilden ein kleines Zeichenprogramm.">
+      <img class="doodle" src="../../img/haus.svg" width="72" height="72" alt="Haus mit Dach und Tür, wie es der PlotBot zeichnet">
+    </div>
+  </div>
+</section>
+
+<section id="werkzeug" aria-labelledby="werkzeug-titel" hidden
+  data-bereit="{n} Punkte, alles auf dem Blatt. Bereit zum Zeichnen."
+  data-zeichnet="PlotBot zeichnet … {p} %"
+  data-fertig="Fertig gezeichnet."
+  data-gestoppt="Angehalten."
+  data-stopp="Stopp"
+  data-neu="Blatt leeren">
+  <div class="wrap">
+    <h2 id="werkzeug-titel">Ihr Programm</h2>
+    <div class="tool">
+      <div>
+        <p class="row"><label for="beispiel">Beispiel laden</label>
+          <select id="beispiel">
+            <option value="">Bitte wählen …</option>
+            <option value="0">Quadrat</option>
+            <option value="1">Haus</option>
+            <option value="2">Stern</option>
+            <option value="3">Blume</option>
+            <option value="4">Zufallssterne</option>
+            <option value="5">Quadratspirale</option>
+            <option value="6">Abprallen am Rand</option>
+          </select></p>
+        <div id="arbeitsbereich" role="application" aria-label="Blöcke"></div>
+        <p class="hint">Häng Blöcke unter „Los“. Die Schildkröte startet in der Mitte und schaut nach oben. Die Kategorien links öffnen die Blöcke.</p>
+      </div>
+      <div>
+        <svg id="zeichnung" role="img" aria-label="Simulierter PlotBot von oben mit Blatt"></svg>
+        <p id="meldung" aria-live="polite"></p>
+        <p class="row">
+          <button id="los" class="button" type="button">Zeichnen lassen</button>
+          <button id="stopp" type="button">Blatt leeren</button>
+          <button id="wuerfeln" type="button" hidden>Neu würfeln</button>
+        </p>
+        <p class="row"><label for="tempo">Tempo</label>
+          <select id="tempo">
+            <option value="1">langsam</option>
+            <option value="3" selected>mittel</option>
+            <option value="10">schnell</option>
+          </select></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="mehr-titel">
+  <div class="wrap">
+    <h2 id="mehr-titel">Auf dem echten PlotBot läuft es genauso</h2>
+    <p>Der PlotBot bringt diese Blöcke auf seiner eigenen Handyseite mit, ganz ohne Internet. Dort schickt „Zeichnen lassen“ das Programm an den Roboter, und der Stift fährt übers Papier.
+      Wie Sie den Roboter bauen, steht im <a href="../#buch-titel">PlotBot-Kit</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.6.0</span>. Der Roboter auf dieser Seite ist eine Simulation.
+      · <a href="../../en/try/" hreflang="en" lang="en" data-lang="en">English version</a></p>
+    <p class="license">Blockly © Google, Apache License 2.0 (<a href="../../vendor/blockly/LICENSE">Lizenztext</a>).</p>
+  </div>
+</footer>
+</body>
+</html>
