@@ -1,6 +1,6 @@
 # Zeichenroboter (Drawing Robot)
 
-> A Leanpub book about building a small drawing robot as a holiday project for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: /de/ · English page: /en/
+> A Leanpub book about building a small drawing robot as a holiday project for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
 
 ## The robot
 - Five-bar SCARA linkage: shoulders 36 mm apart, upper arms 65 mm, forearms 90 mm; drawing area 80 × 80 mm
@@ -20,3 +20,8 @@
 - Editions: Build it yourself (families, hobbyists), Student edition (courses where trainers prepare parts), Trainer edition (schools, clubs, makerspaces)
 - Downloads: STL and 3MF print files, ESP32 firmware, firmware source project, QR sticker program
 - Buy: Leanpub (link and price to follow)
+
+## Pages
+- [Deutsch](https://plotbot-kit.github.io/de/)
+- [English](https://plotbot-kit.github.io/en/)
+- [Language chooser](https://plotbot-kit.github.io/)
