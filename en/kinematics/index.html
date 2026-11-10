@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinematics simulator: how accurately does a five-bar linkage draw? | PlotBot-Kit</title>
+<meta name="description" content="Interactive simulator for PlotBot's five-bar linkage: drag the pen, change the arm lengths and see the workspace, singularities and the pen error per motor step as a heatmap.">
+<link rel="canonical" href="https://plotbot-kit.github.io/en/kinematics/">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/kinematik/">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/kinematics/">
+<link rel="alternate" hreflang="x-default" href="https://plotbot-kit.github.io/en/kinematics/">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/kinematik.css">
+<script src="../../js/lang.js" defer></script>
+<link rel="icon" href="../../img/blume.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#content">Skip to <header class="page-head">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="brand" href="../">PlotBot-Kit</a>
+      <span class="lang" role="group" aria-label="Language"><a href="../../de/kinematik/" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="./" aria-current="page" hreflang="en" lang="en" data-lang="en">English</a></span>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+<section aria-labelledby="kin-title">
+  <div class="wrap split page-intro">
+    <div>
+      <p class="back"><a href="../">← Back to the PlotBot page</a></p>
+      <h1 id="kin-title">Kinematics simulator: <span>how accurately does a five-bar linkage draw?</span></h1>
+      <p>PlotBot moves its pen with a five-bar linkage. Two motors each turn a 65 mm upper arm, and their shafts sit 36 mm apart.
+        A 90 mm forearm hangs off each upper arm, and the two forearms meet at the pen. The firmware works out both motor angles from the pen position it wants.</p>
+      <p>The simulator shows that calculation from above. Drag the pen with your mouse or finger and watch the arms follow.
+        Colours show which points the pen can reach, where the linkage gets close to a straight line, and how far the pen jumps when a motor takes one step.</p>
+      <p>You can change the arm lengths, shaft distance, drawing area and motor, and let the robot trace test figures. That shows why the drawing area is 80 × 80 mm and why it sits where it does.</p>
+    </div>
+    <figure>
+      <img class="shot" src="../../img/kinematik-en.webp" width="800" height="600" alt="Top view in the simulator: the two motor shafts at the bottom, blue and orange upper arms and grey forearms up to the pen. A green area marks where the pen can reach; a heatmap inside the dashed square of the drawing area shows where gear backlash has more effect.">
+      <figcaption>The simulator with PlotBot's dimensions.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="colours-title">
+  <div class="wrap">
+    <h2 id="colours-title">What the colours mean</h2>
+    <dl class="legend-static">
+      <dt>Green</dt><dd>The pen can reach these points without the linkage flipping over.</dd>
+      <dt>Yellow and red</dt><dd>Critical zones: a joint is almost straight or the forearms are almost parallel. There, a tiny motor error turns into a large pen error.</dd>
+      <dt>Heatmap</dt><dd>From dark purple (accurate) to yellow (less accurate): how far off the pen lands when gear backlash kicks in on a change of direction. It can also show the pen travel per motor step or per degree.</dd>
+      <dt>Pink hatching</dt><dd>Here the forearms meet at the pen at roughly a right angle (70–110°). That's the best place for the drawing area.</dd>
+      <dt>Grey hatching</dt><dd>Blocked: the upper arms would cross, or an arm would run past its limit switch.</dd>
+    </dl>
+    <p>The simulator needs JavaScript. It's built for a large screen; on a phone the controls sit below the drawing.</p>
+  </div>
+</section>
+
+
+</section>
+
+<section class="sim-section" aria-label="Simulator">
+  <noscript><div class="wrap"><p><strong>The simulator needs JavaScript.</strong> The picture above shows what it displays with PlotBot's dimensions.</p></div></noscript>
+  <div class="sim" id="sim" hidden>
+  <aside id="steuerung" aria-label="Parameters">
+    <section>
+      <h2>Presets</h2>
+      <div id="presets" class="buttons"></div>
+      <p id="presetHint" class="hint"></p>
+      <div id="fieldBtns" class="buttons small"></div>
+    </section>
+    <section>
+      <h2>Control</h2>
+      <div class="pair">
+        <label class="check"><input type="radio" name="mode" value="ik" checked> Drag the pen</label>
+        <label class="check"><input type="radio" name="mode" value="fk"> Motor angles</label>
+      </div>
+      <div id="fkRows" hidden></div>
+      <p class="hint">Drag: left mouse button or finger. Pan: Shift + drag or right mouse button. Zoom: mouse wheel.
+        <button id="fitBtn" type="button">Fit view</button></p>
+    </section>
+    <section>
+      <h2>Trace a test figure</h2>
+      <div class="pair">
+        <select id="figure"></select>
+        <button id="runBtn" type="button">Run</button>
+        <button id="instantBtn" type="button">Instant</button>
+        <button id="clearBtn" type="button">Clear</button>
+      </div>
+      <label class="check"><input type="checkbox" id="figOrig"> Original size in mm (figures made for the area x −30…30, y 70…130); otherwise scaled to fit</label>
+      <label class="row"><span>Time-lapse</span><input type="range" id="tempo" min="-2" max="1" step="0.05" value="-1"><output id="tempoOut">×0.10</output></label>
+      <p class="hint">Dashed green: ideal figure. Red: pen with motor angles on the step grid and backlash. Dotted grey: pen-up moves.</p>
+    </section>
+    <section>
+      <h2>Geometry</h2>
+      <label class="check"><input type="checkbox" id="coupled" checked> left and right linked</label>
+      <div id="geoRows"></div>
+      <div class="pair">
+        <label>Elbow left <select id="elbowL"><option value="aussen">outward</option><option value="innen">inward</option></select></label>
+        <label>right <select id="elbowR"><option value="aussen">outward</option><option value="innen">inward</option></select></label>
+      </div>
+    </section>
+    <section>
+      <h2>Drawing area</h2>
+      <div id="areaRows"></div>
+    </section>
+    <section>
+      <h2>Limits</h2>
+      <label class="check"><input type="checkbox" id="limits"> Limit switches and soft limit (upper arms never cross)</label>
+      <div id="limRows"></div>
+      <p class="hint">Like the firmware: the left arm may not go past its limit-switch angle, the right one not below it;
+        poses with crossing upper arms are blocked (grey hatching).</p>
+    </section>
+    <section>
+      <h2>Drive</h2>
+      <label class="wide">Motor <select id="drive"></select></label>
+      <div id="drvRows"></div>
+      <div class="buttons small" id="ratioBtns">
+        <button type="button" data-r="1">1 : 1</button><button type="button" data-r="1.5">1.5 : 1 (20:30)</button><button type="button" data-r="2">2 : 1 (20:40)</button>
+      </div>
+    </section>
+    <section>
+      <h2>Overlays</h2>
+      <label class="check"><input type="checkbox" data-ov="reach" checked> reachable workspace</label>
+      <label class="check"><input type="checkbox" data-ov="crit" checked> critical zones (singularities)</label>
+      <label class="check"><input type="checkbox" data-ov="heat" checked> Heatmap</label>
+      <label class="wide indent">Measure <select id="heatMode">
+        <option value="wieder">Repeat error: offset on direction change (backlash L/R)</option>
+        <option value="schritt">Pen travel per motor step (resolution)</option>
+        <option value="grad">Pen travel per degree of arm angle</option></select></label>
+      <label class="check indent"><input type="checkbox" data-ov="heatArea" checked> drawing area only</label>
+      <label class="check indent"><input type="checkbox" data-ov="heatFixed"> fixed scale, max.
+        <input type="number" id="heatFixMax" value="2" min="0.05" max="20" step="0.1" class="num"> mm</label>
+      <label class="check"><input type="checkbox" data-ov="fore90" checked> forearms ≈ 90° at the pen (70–110°)</label>
+      <label class="check"><input type="checkbox" data-ov="range" checked> required angle range (arcs)</label>
+      <label class="check"><input type="checkbox" data-ov="lattice"> step lattice: points reachable with whole steps</label>
+      <p class="hint indent">Appears from about 8 pixels per mm. <button id="latticeZoom" type="button">Zoom in at the pen</button></p>
+    </section>
+    <section>
+      <h2>Geometry as JSON</h2>
+      <textarea id="json" rows="7" spellcheck="false" aria-label="Geometry as JSON"></textarea>
+      <div class="buttons small"><button id="exportBtn" type="button">Export</button><button id="importBtn" type="button">Import</button></div>
+      <p id="jsonMsg" class="hint"></p>
+    </section>
+  </aside>
+
+  <section id="buehne" aria-label="Top view">
+    <canvas id="cv" aria-label="Top view of the five-bar linkage; drag the pen with mouse or finger"></canvas>
+    <ul class="legende">
+      <li><i style="background:#1f63b5"></i>Upper arm left</li>
+      <li><i style="background:#c2410c"></i>Upper arm right</li>
+      <li><i style="background:#475569"></i>Forearms</li>
+      <li><i class="dash" style="border-color:#2f7bd8"></i>Drawing area</li>
+      <li><i style="background:rgba(34,197,94,.35)"></i>reachable</li>
+      <li><i style="background:rgba(245,158,11,.6)"></i>Joint angle &lt; 20°</li>
+      <li><i style="background:rgba(220,38,38,.7)"></i>&lt; 10° (singular)</li>
+      <li><i class="hatch"></i>Forearms ≈ 90°</li>
+      <li><i class="x">×</i>real pen on the step grid</li>
+      <li><i class="hatch grey"></i>blocked (soft limit)</li>
+      <li><i class="dash" style="border-color:#dc2626"></i>Limit switch</li>
+    </ul>
+  </section>
+
+  <aside id="rechts" aria-label="Readings">
+    <div id="info"></div>
+  </aside>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – website version <span class="version">0.6.0</span>. The simulator uses simplified models: it covers geometry, step resolution and gear backlash, but not friction or flex.
+      · <a href="../">PlotBot main page</a> · <a href="../../de/kinematik/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
+  </div>
+</footer>
+
+<script src="../../js/kinematik/muster.js"></script>
+<script src="../../js/kinematik/kern.js"></script>
+<script src="../../js/kinematik/zeichnen.js"></script>
+<script src="../../js/kinematik/gitter.js"></script>
+<script src="../../js/kinematik/simulator.js"></script>
+</body>
+</html>

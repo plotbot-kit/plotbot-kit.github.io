@@ -25,4 +25,6 @@
 ## Pages
 - [Deutsch](https://plotbot-kit.github.io/de/)
 - [English](https://plotbot-kit.github.io/en/)
+- [Kinematik-Simulator (Deutsch): Wie genau zeichnet ein Fünfgelenk?](https://plotbot-kit.github.io/de/kinematik/)
+- [Kinematics simulator (English): how accurately does a five-bar linkage draw?](https://plotbot-kit.github.io/en/kinematics/)
 - [Language chooser](https://plotbot-kit.github.io/)
