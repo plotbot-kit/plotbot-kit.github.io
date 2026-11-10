@@ -36,7 +36,7 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
 .hero h1 span { color: var(--pink); }
 .hero .kicker { font-size: 1.25rem; margin: 0 0 1rem; color: var(--muted); }
 .stage { position: relative; }
-.stage .robot { width: min(80%, 26rem); margin: 0 auto; padding-top: .5rem; }
+.stage .robot { width: auto; max-width: min(80%, 26rem); max-height: min(30rem, 62vh); margin: 0 auto; padding-top: .5rem; }
 .doodles { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; max-width: 26rem; margin: 0; padding: 0; list-style: none; }
 .doodles li { background: #fff; border-radius: .75rem; padding: .5rem; box-shadow: 0 2px 0 var(--line); text-align: center; font-size: .85rem; color: var(--muted); }
 .doodles img { width: 100%; max-width: 4.5rem; aspect-ratio: 1; height: auto; object-fit: contain; margin: 0 auto .25rem; }
