@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="../css/site.css">
 <script src="../js/film.js" defer></script>
 <script src="../js/lang.js" defer></script>
+<script src="../js/drehscheibe.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -36,12 +37,13 @@
       <h1>Build a robot <span>that draws.</span></h1>
       <p class="kicker">Meet PlotBot, the drawing robot. Two arms, one pen – and your phone tells it what to draw.</p>
     </div>
-    <figure class="stage">
+    <figure class="stage" data-frames="../img/drehscheibe/" data-label="Rotate PlotBot" data-valuetext="View {deg}°">
       <picture>
         <source srcset="../img/roboter.webp" type="image/webp">
         <img class="robot" src="../img/roboter.png" width="800" height="1021"
              alt="3D model of PlotBot: on a dark grey base plate, two motors each turn an orange upper arm; the light grey forearms meet at an upright pen.">
       </picture>
+      <p class="spin-hint" hidden>Drag to rotate</p>
       <figcaption>What it looks like once everything is printed and screwed together (3D model).</figcaption>
     </figure>
       <ul class="doodles" aria-label="Pictures the robot draws from small programs">

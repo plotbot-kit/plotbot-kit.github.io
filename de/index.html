@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="../css/site.css">
 <script src="../js/film.js" defer></script>
 <script src="../js/lang.js" defer></script>
+<script src="../js/drehscheibe.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -36,12 +37,13 @@
       <h1>Bau dir einen Roboter, <span>der malt.</span></h1>
       <p class="kicker">Das ist PlotBot, der Zeichenroboter. Zwei Arme, ein Stift – und dein Handy sagt ihm, was er zeichnen soll.</p>
     </div>
-    <figure class="stage">
+    <figure class="stage" data-frames="../img/drehscheibe/" data-label="PlotBot drehen" data-valuetext="Ansicht {deg}°">
       <picture>
         <source srcset="../img/roboter.webp" type="image/webp">
         <img class="robot" src="../img/roboter.png" width="800" height="1021"
              alt="3D-Modell des PlotBot: Auf einer dunkelgrauen Grundplatte drehen zwei Motoren je einen orangefarbenen Oberarm; die hellgrauen Unterarme treffen sich an einem senkrecht stehenden Stift.">
       </picture>
+      <p class="spin-hint" hidden>Zum Drehen ziehen</p>
       <figcaption>So sieht er aus, wenn alles gedruckt und verschraubt ist (3D-Modell).</figcaption>
     </figure>
       <ul class="doodles" aria-label="Bilder, die der Roboter nach kleinen Programmen zeichnet">
