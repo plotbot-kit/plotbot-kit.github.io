@@ -12,11 +12,12 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="de_DE">
 <meta property="og:title" content="Drawing Robot – a holiday build project">
-<meta property="og:description" content="A robot that draws – printed, wired and programmed with Blockly by you. The book that shows you how.">
+<meta property="og:description" content="A robot that draws – you print it, wire it and program it in Blockly. The book shows you how.">
 <meta property="og:image" content="../img/og.png">
 <meta property="og:image:alt" content="3D model of the drawing robot: a yellow base plate and two arms that meet at the pen">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../css/site.css">
+<script src="../js/film.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -24,9 +25,9 @@
 
 <header class="hero">
   <div class="wrap">
-      <nav class="topbar" aria-label="Language">
+      <nav class="topbar" aria-label="Navigation">
         <a class="brand" href="./">Drawing Robot</a>
-        <span class="lang"><a href="../de/" hreflang="de" lang="de">Deutsch</a><a href="./" aria-current="page" hreflang="en" lang="en">English</a></span>
+        <span class="lang" role="group" aria-label="Language"><a href="../de/" hreflang="de" lang="de">Deutsch</a><a href="./" aria-current="page" hreflang="en" lang="en">English</a></span>
       </nav>
     <div class="intro">
       <h1>Build a robot <span>that draws.</span></h1>
@@ -48,7 +49,7 @@
       </ul>
       <div class="cta">
         <a class="button" href="#leanpub">Buy the book on Leanpub</a>
-        <span class="price">Price: <strong>$XX</strong> (placeholder)</span>
+        <span class="price">Price: <strong>XX</strong> (placeholder)</span>
       </div>
   </div>
 </header>
@@ -69,16 +70,16 @@
   <div class="wrap">
     <h2 id="parents-title">Your kid builds a machine – and understands how it works</h2>
     <p class="lead">This isn't a snap-together kit with picture instructions. Your kid prints the parts, presses in bearings,
-      wires up motors and ends up writing programs of their own. Short explainer boxes in the book cover the why behind each step.</p>
+      wires up motors and ends up writing programs of their own. Short explainer boxes in the book cover the why behind the key steps.</p>
     <ul class="cards">
-      <li><span class="tag">Mechanics</span><h3>Levers, gears, bearings</h3>
-        <p>Two motors each turn an upper arm, and the forearms meet at the pen. Kids see why slack in a gearbox makes a drawing wobble, and what a ball bearing is for.</p></li>
+      <li><span class="tag">Mechanics</span><h3>Arms, gears, bearings</h3>
+        <p>Two motors each turn an upper arm, and the forearms meet at the pen. Kids see why a little play between the gears inside the motor makes a line wobble, and what a ball bearing is for.</p></li>
       <li><span class="tag">Electronics</span><h3>A microcontroller and motors</h3>
-        <p>An ESP32 drives two stepper motors and a servo that lifts the pen. Limit switches tell the robot where its arms are.</p></li>
+        <p>An ESP32 drives two stepper motors and a servo that lifts the pen. At start-up each arm moves to a limit switch; from there the robot counts every step.</p></li>
       <li><span class="tag">Coding</span><h3>Blockly on a phone</h3>
-        <p>Kids snap blocks together: pen down, move 20 mm, turn 90°, repeat four times. The robot draws the program on paper straight away.</p></li>
+        <p>Kids snap blocks together: pen down, move 20 mm, turn 90°, repeat four times. Tap "Zeichnen lassen" and the robot draws a square.</p></li>
       <li><span class="tag">Geometry</span><h3>Angles you can see</h3>
-        <p>Why does the pen turn 144° five times to draw a star? On paper, the maths turns into a picture – and a mistake turns into a crooked line you can track down.</p></li>
+        <p>Why does the pen turn 144° at each of the five points of a star? Five times 144° is 720°, two full turns. On paper, the maths turns into a picture – and a maths mistake into a crooked line you can track down.</p></li>
     </ul>
   </div>
 </section>
@@ -86,14 +87,14 @@
 <section aria-labelledby="needs-title">
   <div class="wrap split">
     <div>
-      <h2 id="needs-title">What you'll need, and why it's safe</h2>
+      <h2 id="needs-title">What you'll need, and what to watch out for</h2>
       <dl class="facts">
         <dt>Age</dt><dd>Kids aged about 12 and up, building with a parent</dd>
         <dt>Time</dt><dd>A project for the holidays. Printing alone takes an estimated 14 hours – the printer does the work while you do something else.</dd>
-        <dt>Power</dt><dd>5 volts from a USB power supply (2 A or more), nothing else</dd>
-        <dt>Soldering</dt><dd>None. The board comes with its pin headers already soldered, and every wire plugs in.</dd>
+        <dt>Power</dt><dd>5 volts from a USB charger (2 A or more), nothing else</dd>
+        <dt>Soldering</dt><dd>None. The microcontroller board (ESP32) comes with its pin headers already soldered, and every wire plugs in.</dd>
         <dt>Tools</dt><dd>2.5 mm hex key, small screwdriver, needle-nose pliers, small file</dd>
-        <dt>Devices</dt><dd>A 3D printer (220 × 220 mm bed), a computer once to flash the firmware, and after that just a phone</dd>
+        <dt>Devices</dt><dd>A 3D printer (220 × 220 mm bed), a computer just once, to load the firmware onto the board, and after that only a phone</dd>
       </dl>
       <p>The book lists the parts to buy, with quantities: the board, two motors with drivers, a servo, limit switches, ball bearings, screws and a felt-tip pen.
         It also tells you how to stop the robot safely: pull the plug.</p>
@@ -113,9 +114,9 @@
   <div class="wrap split flip">
     <div>
       <h2 id="phone-title">No app, no internet – the robot brings its own Wi-Fi</h2>
-      <p>Switch the robot on and it opens a Wi-Fi network called "Zeichenroboter-…". Connect your phone and the control page pops up by itself.
-        A sticker with two QR codes makes it even easier; the book comes with the program that prints it.</p>
-      <p>A four-step wizard on the phone sets everything up. After that, the robot draws ready-made pictures, writes names,
+      <p>Switch the robot on and it starts its own Wi-Fi network, called "Zeichenroboter-" plus four characters. Connect your phone and the control page usually opens by itself.
+        If it doesn't, there's a sticker with two QR codes: one connects the phone to the Wi-Fi, the other opens the control page. The program that generates the sticker is part of the downloads.</p>
+      <p>A wizard on the phone walks you through setup in four steps. After that, the robot draws ready-made pictures, writes names,
         plays tic-tac-toe against your kid – or runs whatever your kid has built in Blockly.</p>
     </div>
     <figure>
@@ -129,11 +130,11 @@
 <section aria-labelledby="maker-title">
   <div class="wrap split">
     <div>
-      <h2 id="maker-title">For makers: open hardware you can check the maths on</h2>
+      <h2 id="maker-title">For makers: specs you can check the maths on</h2>
       <p>The robot is a five-bar SCARA: shoulders 36 mm apart, 65 mm upper arms, 90 mm forearms.
         The firmware does the kinematics itself. The pen tip lags slightly behind the holder, so the firmware overshoots each corner a little to keep it sharp.</p>
       <table class="specs">
-        <caption class="skip">Specifications</caption>
+        <caption class="visually-hidden">Specifications</caption>
         <tr><th scope="row">Controller</th><td>ESP32 (ELEGOO ESP-32, headers pre-soldered)</td></tr>
         <tr><th scope="row">Drive</th><td>2 × 28BYJ-48 with ULN2003 drivers, half-stepping</td></tr>
         <tr><th scope="row">Pen lift</th><td>SG90 servo with an eccentric cam, gentle lowering</td></tr>
@@ -141,7 +142,7 @@
         <tr><th scope="row">Drawing area</th><td>80 × 80 mm</td></tr>
         <tr><th scope="row">Homing</th><td>2 limit switches; calibration with a test sheet, values survive firmware updates</td></tr>
         <tr><th scope="row">Printed parts</th><td>PLA, 0.4 mm nozzle, 0.2 mm layers, no supports; largest part 142 × 97 mm</td></tr>
-        <tr><th scope="row">Control</th><td>Own Wi-Fi with captive portal, phone page, Blockly, over-the-air updates</td></tr>
+        <tr><th scope="row">Control</th><td>Its own Wi-Fi hotspot with captive portal, phone page, Blockly, over-the-air updates</td></tr>
         <tr><th scope="row">Power</th><td>5 V, 2 A or more (USB power supply or power bank)</td></tr>
       </table>
     </div>
@@ -162,11 +163,11 @@
     <p class="lead">On Leanpub you get all three editions as PDFs – plus every future update at no extra cost.</p>
     <ul class="cards three editions">
       <li><h3>Build it yourself</h3><p>For families and hobbyists: get and print the parts, flash the firmware, assemble, set up, draw.</p></li>
-      <li><h3>Student edition</h3><p>For kids on a course: the trainers have printed and prepared everything, the kids build and code.</p></li>
-      <li><h3>Trainer edition</h3><p>For schools, clubs and makerspaces: plan, print, let the kids build and run the course. Includes demo ideas and common misconceptions.</p></li>
+      <li><h3>Student edition</h3><p>For kids on a course: the instructors have printed and prepared everything, the kids build and code.</p></li>
+      <li><h3>Instructor edition</h3><p>For schools, clubs and makerspaces: plan, print, let the kids build and run the course. Includes demo ideas and common misconceptions.</p></li>
     </ul>
-    <h3 style="margin-top:2rem">Included downloads</h3>
-    <p>The print files (STL and 3MF), the ready-to-flash ESP32 firmware, its source project and the program that makes the QR sticker.</p>
+    <h3 class="gap">Included downloads</h3>
+    <p>The print files (STL and 3MF), the ready-to-flash ESP32 firmware, its source code and the program that makes the QR sticker.</p>
   </div>
 </section>
 
@@ -176,7 +177,7 @@
     <p>Get the book, start the printer – and by the end, the robot draws whatever your kid has programmed.</p>
     <div class="cta">
       <a class="button" href="#leanpub">Buy the book on Leanpub</a>
-      <span class="price">Price: <strong>$XX</strong> (placeholder)</span>
+      <span class="price">Price: <strong>XX</strong> (placeholder)</span>
     </div>
   </div>
 </section>
@@ -185,7 +186,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Drawing Robot – website version <span class="version">0.1.0</span>. Every image is a 3D model or a drawing from the robot's example programs.
+    <p>Drawing Robot – website version <span class="version">0.1.1</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
       · <a href="../de/" hreflang="de" lang="de">Deutsche Version</a></p>
   </div>
 </footer>

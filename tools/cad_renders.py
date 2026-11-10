@@ -1,7 +1,7 @@
 # Regenerates img/roboter*, img/elektronik* from the CAD renders in the zeichenroboter repo (run from the site root)
 import sys
 from PIL import Image
-src = "/home/rdmueller/projects/zeichenroboter/cad/png/"
+src = sys.argv[1].rstrip("/") + "/"   # path to cad/png in the robot repo
 def key(name, out, crop=None, w=None):
     im = Image.open(src + name).convert("RGB")
     bg = im.getpixel((2, 2))

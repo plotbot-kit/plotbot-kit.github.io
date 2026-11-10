@@ -17,6 +17,7 @@
 <meta property="og:image:alt" content="3D-Modell des Zeichenroboters: gelbe Grundplatte, zwei Arme, die sich am Stift treffen">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../css/site.css">
+<script src="../js/film.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -24,9 +25,9 @@
 
 <header class="hero">
   <div class="wrap">
-      <nav class="topbar" aria-label="Sprache">
+      <nav class="topbar" aria-label="Navigation">
         <a class="brand" href="./">Zeichenroboter</a>
-        <span class="lang"><a href="./" aria-current="page" hreflang="de" lang="de">Deutsch</a><a href="../en/" hreflang="en" lang="en">English</a></span>
+        <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de">Deutsch</a><a href="../en/" hreflang="en" lang="en">English</a></span>
       </nav>
     <div class="intro">
       <h1>Bau dir einen Roboter, <span>der malt.</span></h1>
@@ -48,7 +49,7 @@
       </ul>
       <div class="cta">
         <a class="button" href="#leanpub">Buch auf Leanpub kaufen</a>
-        <span class="price">Preis: <strong>XX&nbsp;€</strong> (Platzhalter)</span>
+        <span class="price">Preis: <strong>XX</strong> (Platzhalter)</span>
       </div>
   </div>
 </header>
@@ -69,16 +70,16 @@
   <div class="wrap">
     <h2 id="eltern-titel">Ihr Kind baut eine Maschine – und versteht sie danach</h2>
     <p class="lead">Der Zeichenroboter ist kein Bausatz zum Zusammenstecken nach Bildern. Ihr Kind druckt Teile, setzt Lager ein,
-      verkabelt Motoren und schreibt am Ende eigene Programme. Kurze Wissenskästen im Buch erklären bei jedem Schritt, warum er funktioniert.</p>
+      verkabelt Motoren und schreibt am Ende eigene Programme. Kurze Wissenskästen im Buch erklären zu den wichtigen Schritten, warum das so funktioniert.</p>
     <ul class="cards">
-      <li><span class="tag">Mechanik</span><h3>Hebel, Getriebe, Lager</h3>
-        <p>Zwei Motoren drehen je einen Oberarm, die Unterarme treffen sich am Stift. Ihr Kind sieht, warum Getriebespiel ein Bild verwackelt und wozu ein Kugellager gut ist.</p></li>
+      <li><span class="tag">Mechanik</span><h3>Arme, Getriebe, Lager</h3>
+        <p>Zwei Motoren drehen je einen Oberarm, die Unterarme treffen sich am Stift. Ihr Kind sieht, warum schon ein wenig Spiel zwischen den Zahnrädern im Motor eine Linie verwackelt und wozu ein Kugellager gut ist.</p></li>
       <li><span class="tag">Elektronik</span><h3>Mikrocontroller und Motoren</h3>
-        <p>Ein ESP32 steuert zwei Schrittmotoren und einen Servo, der den Stift hebt. Endschalter melden dem Roboter, wo seine Arme stehen.</p></li>
+        <p>Ein ESP32 steuert zwei Schrittmotoren und einen Servo, der den Stift hebt. Beim Start fährt jeder Arm an einen Endschalter; von dort zählt der Roboter jeden Schritt mit.</p></li>
       <li><span class="tag">Programmieren</span><h3>Blockly auf dem Handy</h3>
-        <p>Ihr Kind setzt Blöcke zusammen: Stift ab, 20 mm vor, um 90° drehen, viermal wiederholen. Der Roboter zeichnet das Programm sofort aufs Papier.</p></li>
+        <p>Ihr Kind setzt Blöcke zusammen: Stift ab, 20 mm vor, um 90° drehen, viermal wiederholen. Ein Tipp auf „Zeichnen lassen“, und der Roboter zeichnet ein Quadrat.</p></li>
       <li><span class="tag">Geometrie</span><h3>Winkel, die man sieht</h3>
-        <p>Warum dreht sich der Stift beim Stern fünfmal um 144°? Auf dem Papier wird aus der Rechnung ein Bild – und aus einem Fehler eine krumme Linie, die man finden kann.</p></li>
+        <p>Warum biegt der Stift beim Stern fünfmal um 144° ab? Fünfmal 144° sind 720°, also zwei volle Runden. Auf dem Papier wird aus der Rechnung ein Bild – und aus einem Rechenfehler eine krumme Linie, die man finden kann.</p></li>
     </ul>
   </div>
 </section>
@@ -86,17 +87,17 @@
 <section aria-labelledby="rahmen-titel">
   <div class="wrap split">
     <div>
-      <h2 id="rahmen-titel">Das brauchen Sie, und so sicher ist es</h2>
+      <h2 id="rahmen-titel">Das brauchen Sie – und darauf achten Sie</h2>
       <dl class="facts">
         <dt>Alter</dt><dd>Kinder ab etwa 12 Jahren, die mit ihren Eltern bauen</dd>
         <dt>Zeit</dt><dd>Ein Projekt für die Feiertage. Allein der Druck dauert geschätzt rund 14 Stunden – der Drucker arbeitet, während Sie anderes tun.</dd>
-        <dt>Strom</dt><dd>Nur 5 Volt aus einem USB-Netzteil (mindestens 2 A)</dd>
-        <dt>Löten</dt><dd>Nicht nötig: Das Board kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</dd>
+        <dt>Strom</dt><dd>Nur 5 Volt aus einem USB-Ladegerät (mindestens 2 A)</dd>
+        <dt>Löten</dt><dd>Nicht nötig: Das Mikrocontroller-Board (ESP32) kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</dd>
         <dt>Werkzeug</dt><dd>Innensechskantschlüssel 2,5 mm, kleiner Schraubendreher, Spitzzange, kleine Feile</dd>
-        <dt>Geräte</dt><dd>Ein 3D-Drucker (Druckbett 220 × 220 mm), einmal ein Computer zum ersten Aufspielen der Firmware, danach nur noch ein Handy</dd>
+        <dt>Geräte</dt><dd>Ein 3D-Drucker (Druckbett 220 × 220 mm), ein Computer, nur zum ersten Aufspielen der Firmware, danach nur noch ein Handy</dd>
       </dl>
       <p>Das Buch nennt die Kaufteile mit Stückzahl: Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Filzstift.
-        Und es nennt den sicheren Halt: Stecker ziehen.</p>
+        Und es sagt, wie Sie den Roboter jederzeit sicher stoppen: Stecker ziehen.</p>
     </div>
     <figure>
       <picture>
@@ -113,8 +114,8 @@
   <div class="wrap split flip">
     <div>
       <h2 id="handy-titel">Keine App, kein Internet – der Roboter bringt sein eigenes WLAN mit</h2>
-      <p>Nach dem Einschalten öffnet der Roboter ein WLAN namens „Zeichenroboter-…“. Ihr Kind verbindet das Handy, und die Steuerseite geht von selbst auf.
-        Ein Aufkleber mit zwei QR-Codes macht das noch einfacher; das Programm dafür liegt dem Buch bei.</p>
+      <p>Nach dem Einschalten öffnet der Roboter ein eigenes WLAN: „Zeichenroboter-“ plus vier Zeichen. Ihr Kind verbindet das Handy, und die Steuerseite geht meist von selbst auf.
+        Sonst hilft ein Aufkleber mit zwei QR-Codes: Der eine verbindet das Handy mit dem WLAN, der andere öffnet die Steuerseite. Das Programm für den Aufkleber gehört zu den Downloads.</p>
       <p>Auf dem Handy führt ein Assistent in vier Schritten durch die Einrichtung. Dann zeichnet der Roboter fertige Motive, schreibt Namen,
         spielt Tic-Tac-Toe gegen Ihr Kind – oder führt aus, was Ihr Kind in Blockly selbst gebaut hat.</p>
     </div>
@@ -129,11 +130,11 @@
 <section aria-labelledby="maker-titel">
   <div class="wrap split">
     <div>
-      <h2 id="maker-titel">Für Maker: offene Technik, die man nachrechnen kann</h2>
-      <p>Der Roboter ist ein Fünfgelenk-SCARA: Zwei Schultern im Abstand von 36 mm, Oberarme 65 mm, Unterarme 90 mm.
-        Die Firmware rechnet die Kinematik selbst. Damit Ecken spitz werden, obwohl die Stiftspitze etwas nachschleppt, fährt sie an jeder Ecke ein Stück vor.</p>
+      <h2 id="maker-titel">Für Maker: Technik, die man nachrechnen kann</h2>
+      <p>Der Roboter ist ein Fünfgelenk-SCARA: zwei Schultern im Abstand von 36 mm, Oberarme 65 mm, Unterarme 90 mm.
+        Die Firmware rechnet die Kinematik selbst. Weil die Stiftspitze etwas nachschleppt, fährt die Firmware an jeder Ecke ein Stück darüber hinaus. So werden Ecken spitz.</p>
       <table class="specs">
-        <caption class="skip">Technische Daten</caption>
+        <caption class="visually-hidden">Technische Daten</caption>
         <tr><th scope="row">Steuerung</th><td>ESP32 (ELEGOO ESP-32, Stiftleisten angelötet)</td></tr>
         <tr><th scope="row">Antrieb</th><td>2 × 28BYJ-48 mit ULN2003-Treiber, Halbschritt</td></tr>
         <tr><th scope="row">Stifthub</th><td>SG90-Servo mit Exzenter-Nocke, sanftes Absenken</td></tr>
@@ -162,11 +163,11 @@
     <p class="lead">Auf Leanpub bekommen Sie alle drei Ausgaben als PDF – und jede spätere Verbesserung kostenlos dazu.</p>
     <ul class="cards three editions">
       <li><h3>Zum Selberbauen</h3><p>Für Familien und Bastler: Teile besorgen und drucken, Firmware aufspielen, zusammenbauen, einrichten, zeichnen.</p></li>
-      <li><h3>Für Schülerinnen und Schüler</h3><p>Für Kinder in einem Kurs: Die Trainer haben gedruckt und vorbereitet, die Kinder bauen und programmieren.</p></li>
-      <li><h3>Für Trainer</h3><p>Für Schule, AG und Makerspace: planen, drucken, Kinder bauen lassen, den Kurs führen. Mit Vorführideen und typischen Missverständnissen.</p></li>
+      <li><h3>Für Kursteilnehmer</h3><p>Für Kinder in einem Kurs: Die Kursleitung hat gedruckt und vorbereitet, die Kinder bauen und programmieren.</p></li>
+      <li><h3>Für die Kursleitung</h3><p>Für Schule, AG und Makerspace: planen, drucken, Kinder bauen lassen, den Kurs führen. Mit Vorführideen und den Missverständnissen, die Kindern am häufigsten unterlaufen.</p></li>
     </ul>
-    <h3 style="margin-top:2rem">Dazu als Download</h3>
-    <p>Die Druckdateien (STL und 3MF), die fertige Firmware für den ESP32, ihr Quellprojekt und das Programm für den QR-Aufkleber.</p>
+    <h3 class="gap">Dazu als Download</h3>
+    <p>Die Druckdateien (STL und 3MF), die fertige Firmware für den ESP32, den Quellcode der Firmware und das Programm für den QR-Aufkleber.</p>
   </div>
 </section>
 
@@ -176,7 +177,7 @@
     <p>Holen Sie sich das Buch, werfen Sie den Drucker an – und am Ende malt der Roboter, was Ihr Kind programmiert hat.</p>
     <div class="cta">
       <a class="button" href="#leanpub">Buch auf Leanpub kaufen</a>
-      <span class="price">Preis: <strong>XX&nbsp;€</strong> (Platzhalter)</span>
+      <span class="price">Preis: <strong>XX</strong> (Platzhalter)</span>
     </div>
   </div>
 </section>
@@ -185,7 +186,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Zeichenroboter – Webseite Version <span class="version">0.1.0</span>. Alle Bilder sind 3D-Modelle oder Zeichnungen aus den Beispielprogrammen des Roboters.
+    <p>Zeichenroboter – Webseite Version <span class="version">0.1.1</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des Roboters und ein Bildschirmfoto seiner Handyseite.
       · <a href="../en/" hreflang="en" lang="en">English version</a></p>
   </div>
 </footer>

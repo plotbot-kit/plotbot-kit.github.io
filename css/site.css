@@ -1,7 +1,7 @@
 /* Zeichenroboter sales page – system fonts only, mobile first */
 :root {
   --ink: #1d1b2f; --muted: #4a4760; --paper: #fffdf6; --cream: #fff6d6;
-  --sun: #ffd43b; --pink: #d6336c; --blue: #1864ab; --green: #2b8a3e; --line: #e7dfc4;
+  --sun: #ffd43b; --pink: #d6336c; --blue: #1864ab; --green: #237032; --line: #e7dfc4;
   --radius: 1rem; --max: 68rem;
 }
 * { box-sizing: border-box; }
@@ -15,6 +15,9 @@ a { color: var(--blue); }
 a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
 .skip { position: absolute; left: -999px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.gap { margin-top: 2rem; }
+.no-film .film { display: none; }
 .skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 10; }
 
 /* Top bar */
