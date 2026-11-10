@@ -1,5 +1,6 @@
-# Regenerates img/roboter*, img/roboter-vorne*, img/elektronik* from the renders in the robot repo (run from the site root).
-# Usage: python3 -I tools/cad_renders.py <dir with baugruppe.png, baugruppe_vorne_links.png, elektroniktraeger_bestueckt.png>
+# Regenerates img/roboter-vorne*, img/elektronik* from the renders in the robot repo (run from the site root).
+# Usage: python3 -I tools/cad_renders.py <dir with baugruppe_vorne_links.png, elektroniktraeger_bestueckt.png>
+# The hero image img/roboter* comes from tools/drehscheibe.py (cut from turntable frame 0), not from here.
 # Renders with an alpha channel (Three.js) are only trimmed and scaled; opaque renders (old OpenSCAD preview) get their background keyed out.
 import sys
 from PIL import Image
@@ -32,6 +33,5 @@ def render(name, out, w):
     print(out, rgba.size)
 
 
-render("baugruppe.png", "roboter", 800)
 render("baugruppe_vorne_links.png", "roboter-vorne", 800)
 render("elektroniktraeger_bestueckt.png", "elektronik", 1000)
