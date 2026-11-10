@@ -1,7 +1,12 @@
-// Progressive enhancement: hide the film section while the video file is not there yet.
+// Progressive enhancement: hide the film section when the video file cannot be loaded.
+// Uses the error event of the <source> element, so it works over http(s) and file:// alike.
 (function () {
-  var src = document.querySelector('.film source');
-  if (!src || !window.fetch) return;
-  var hide = function () { document.documentElement.classList.add('no-film'); };
-  fetch(src.src, { method: 'HEAD' }).then(function (r) { if (!r.ok) hide(); }).catch(hide);
+  var video = document.querySelector('.film video');
+  if (!video) return;
+  var sources = video.querySelectorAll('source');
+  var last = sources[sources.length - 1];
+  if (!last) return;
+  last.addEventListener('error', function () { document.documentElement.classList.add('no-film'); });
+  video.preload = 'metadata';   // without JS the page keeps preload="none"
+  video.load();
 })();

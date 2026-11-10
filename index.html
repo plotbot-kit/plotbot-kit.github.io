@@ -15,6 +15,19 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://plotbot-kit.github.io/">
 <meta property="og:image" content="https://plotbot-kit.github.io/img/og.png">
+<script>
+  // Progressive enhancement: send visitors straight to their language. A stored manual choice wins.
+  (function () {
+    var lang;
+    try { lang = localStorage.getItem('lang'); } catch (e) { /* storage blocked */ }
+    if (lang !== 'de' && lang !== 'en') {
+      var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      lang = /^de\b/i.test(prefs[0] || '') ? 'de' : 'en';
+    }
+    location.replace(lang + '/' + (location.protocol === 'file:' ? 'index.html' : ''));
+  })();
+</script>
+<script src="js/lang.js" defer></script>
 <link rel="stylesheet" href="css/site.css">
 <link rel="icon" href="img/blume.svg" type="image/svg+xml">
 </head>
@@ -26,8 +39,8 @@
       <p class="kicker" lang="de">PlotBot, der Zeichenroboter: Bau dir einen Roboter, der malt.</p>
       <p class="kicker" lang="en">PlotBot, the drawing robot: build a robot that draws.</p>
       <div class="cta">
-        <a class="button" href="de/" hreflang="de" lang="de">Deutsch</a>
-        <a class="button" href="en/" hreflang="en" lang="en">English</a>
+        <a class="button" href="de/" hreflang="de" lang="de" data-lang="de">Deutsch</a>
+        <a class="button" href="en/" hreflang="en" lang="en" data-lang="en">English</a>
       </div>
     </div>
     <figure class="stage">
@@ -38,6 +51,6 @@
     </figure>
   </div>
 </main>
-<footer><div class="wrap"><p>Version <span class="version">0.3.1</span></p></div></footer>
+<footer><div class="wrap"><p>Version <span class="version">0.4.0</span></p></div></footer>
 </body>
 </html>
