@@ -11,6 +11,9 @@
   var label = fig.getAttribute('data-label') || img.alt;
 
   function url(i) { return base + (i < 10 ? '0' : '') + i + '.webp'; }
+  // Frames are numbered the other way round from the drag direction ("grab the object": drag right, front moves right),
+  // so frame i shows the robot turned by (N - i) * 10°. Dragging right and ArrowRight both go to lower frame numbers.
+  function angle(i) { return ((N - i) % N) * 10; }
   function valuetext(deg) { return (fig.getAttribute('data-valuetext') || '{deg}°').replace('{deg}', deg); }
 
   function fail() {
@@ -42,8 +45,9 @@
     }
     if (i !== current) img.src = frames[i].src;
     current = i;
-    pic.setAttribute('aria-valuenow', i * 10);
-    pic.setAttribute('aria-valuetext', valuetext(i * 10));
+    var deg = angle(i);
+    pic.setAttribute('aria-valuenow', deg);
+    pic.setAttribute('aria-valuetext', valuetext(deg));
   }
 
   function ready() {
@@ -72,7 +76,7 @@
   pic.addEventListener('pointermove', function (e) {
     if (startX === null) return;
     var step = Math.max(5, pic.offsetWidth / 24);   // px per 10°: a full turn is about 1.5 image widths
-    var d = Math.round((e.clientX - startX) / step);
+    var d = -Math.round((e.clientX - startX) / step);
     if (d !== 0 || current >= 0) show(startFrame + d);
   });
   function end() { startX = null; }
@@ -82,12 +86,12 @@
   pic.addEventListener('focus', load);
   pic.addEventListener('keydown', function (e) {
     var k = e.key, at = Math.max(current, 0);
-    if (k === 'ArrowRight' || k === 'ArrowUp') show(at + 1);
-    else if (k === 'ArrowLeft' || k === 'ArrowDown') show(at - 1);
-    else if (k === 'PageUp') show(at + 9);
-    else if (k === 'PageDown') show(at - 9);
+    if (k === 'ArrowRight' || k === 'ArrowUp') show(at - 1);
+    else if (k === 'ArrowLeft' || k === 'ArrowDown') show(at + 1);
+    else if (k === 'PageUp') show(at - 9);
+    else if (k === 'PageDown') show(at + 9);
     else if (k === 'Home') show(0);
-    else if (k === 'End') show(N - 1);
+    else if (k === 'End') show(1);
     else return;
     e.preventDefault();
   });

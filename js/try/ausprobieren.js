@@ -135,6 +135,15 @@
       anteil => { $('meldung').textContent = fuelle(TEXT.zeichnet, { p: Math.round(anteil * 100) }); },
       abgebrochen => { melde(abgebrochen ? TEXT.gestoppt : TEXT.fertig); knoepfe(); });
     knoepfe();
+    zurZeichnung();
+  }
+
+  // Auf dem Handy liegt die Zeichnung unter den Blöcken: dorthin scrollen, wenn sie nicht ganz zu sehen ist.
+  function zurZeichnung() {
+    const r = $('zeichnung').getBoundingClientRect();
+    if (r.top >= 0 && r.bottom <= window.innerHeight) return;
+    const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('zeichnung').scrollIntoView({ behavior: ruhig ? 'auto' : 'smooth', block: 'center' });
   }
 
   let warte = null;
