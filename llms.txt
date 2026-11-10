@@ -26,3 +26,5 @@
 - [Deutsch](https://plotbot-kit.github.io/de/)
 - [English](https://plotbot-kit.github.io/en/)
 - [Language chooser](https://plotbot-kit.github.io/)
+- [Im Browser ausprobieren (Blockly-Simulator, Deutsch)](https://plotbot-kit.github.io/de/ausprobieren/)
+- [Try it in your browser (Blockly simulator, English page, German blocks)](https://plotbot-kit.github.io/en/try/)
