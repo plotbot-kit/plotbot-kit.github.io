@@ -6,7 +6,7 @@
 - Five-bar SCARA linkage: shoulders 36 mm apart, upper arms 65 mm, forearms 90 mm; drawing area 80 × 80 mm
 - ESP32 board (ELEGOO ESP-32 with pre-soldered headers), 2 × 28BYJ-48 stepper motors with ULN2003 drivers, SG90 servo with eccentric cam for the pen lift, 2 limit switches for homing
 - 3D-printed parts in PLA (0.4 mm nozzle, 0.2 mm layers, no supports, fits a 220 × 220 mm bed); estimated print time about 14 hours
-- Power: 5 V from a USB supply with at least 2 A; no soldering
+- Power: USB power supply with 5 V and at least 2 A, via a USB-C cable; draw only on the power supply, not on a computer's USB port (not enough current); a computer is needed at most once, to flash the firmware; no soldering
 - Control: PlotBot opens its own Wi-Fi ("PlotBot-XXXX") with a captive portal; no app and no internet needed. The phone page offers a setup wizard, ready-made motifs, writing text, tic-tac-toe, calibration with a test sheet, over-the-air updates and Blockly ("Selbst zeichnen") with turtle blocks
 - Tools: 2.5 mm hex key, small screwdriver, needle-nose pliers, small file
 
