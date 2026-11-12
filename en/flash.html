@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flash the firmware | PlotBot-Kit</title>
+<meta name="description" content="Flash the PlotBot firmware onto its ESP32 board straight from your browser: Chrome or Edge on a computer and a USB data cable are all you need.">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/lang.js" defer></script>
+<script type="module" src="../vendor/esp-web-tools/install-button.js"></script>
+<link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/flashen.html">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/flash.html">
+</head>
+<body>
+<header class="wrap">
+  <nav class="topbar" aria-label="Navigation">
+    <a class="brand" href="./">PlotBot-Kit</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../de/flashen.html" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="flash.html" aria-current="page" hreflang="en" lang="en" data-lang="en">English</a></span>
+  </nav>
+</header>
+<main class="wrap legal">
+<h1>Flash the firmware</h1>
+<p class="lead">This page loads PlotBot's firmware onto its ESP32 board, straight from your browser. You don't need to install anything, and you need a computer only this once. After that, you control PlotBot from your phone.</p>
+<p>Firmware version <span class="firmware-version">0.30.1</span></p>
+
+<h2>What you need</h2>
+<ul>
+  <li>A computer with <strong>Chrome or Edge</strong>. Firefox and Safari can't talk to the board, and neither can phones or tablets.</li>
+  <li>A <strong>USB data cable</strong>. Some cables only charge and don't carry data. If your computer doesn't detect the board, the cable is the usual suspect.</li>
+  <li>On Windows, you may need the <strong>driver for the CP2102 USB chip</strong>. Windows usually installs it by itself. If the board doesn't show up in the list, download the “CP210x USB to UART Bridge VCP Driver” from <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">Silicon Labs</a>.</li>
+</ul>
+
+<h2>How it works</h2>
+<ol class="flash-steps">
+  <li>Plug the ESP32 board into your computer with the USB cable.</li>
+  <li>Click “Flash the firmware” below. Your browser shows a list. Pick the entry that says “CP2102” or “USB to UART” and click “Connect”.</li>
+  <li>Confirm with “Install”.</li>
+  <li>The first time, it's fine to erase the device (“Erase device”). For an update, don't erase it – you'd lose the calibration.</li>
+  <li>Wait for “Installation complete”. It takes about a minute. PlotBot then restarts and opens its own Wi-Fi network.</li>
+</ol>
+
+<div class="flash-box">
+  <esp-web-install-button manifest="../firmware/manifest.json">
+    <button slot="activate" class="button" type="button">Flash the firmware</button>
+    <span slot="unsupported">This browser can't talk to the board. Open this page on a computer in Chrome or Edge.</span>
+    <span slot="not-allowed">Your browser doesn't allow the connection here. Open the page at https://plotbot-kit.github.io/.</span>
+  </esp-web-install-button>
+  <p>The button only appears with JavaScript turned on. The firmware goes from your browser over the cable straight to the board; no data leaves your computer.</p>
+</div>
+
+<h2>If it doesn't work</h2>
+<ul>
+  <li>If the connection drops, hold the <strong>BOOT</strong> button on the board until the transfer starts.</li>
+  <li>If the board isn't in the list, check the cable and the driver (see above).</li>
+  <li>You can also flash the firmware from the command line, without a browser. The <a href="./#book-title">PlotBot-Kit book</a> shows you how.</li>
+</ul>
+</main>
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – website version <span class="version">0.9.0</span> · <a href="./">Back to the PlotBot page</a></p>
+    <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
+  </div>
+</footer>
+</body>
+</html>
