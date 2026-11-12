@@ -1,6 +1,6 @@
 # PlotBot-Kit – PlotBot, the drawing robot (German: Zeichenroboter)
 
-> PlotBot is a small drawing robot; the PlotBot-Kit (Leanpub book, print files, firmware) shows how to build it, for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
+> PlotBot is a small drawing robot; the PlotBot-Kit (book, print files, firmware) shows how to build it, for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
 
 ## The robot (PlotBot)
 - Five-bar SCARA linkage: shoulders 36 mm apart, upper arms 65 mm, forearms 90 mm; drawing area 80 × 80 mm
@@ -20,7 +20,7 @@
 - Book title (provisional): "PlotBot – Build your own drawing robot" / "PlotBot – Bau dir deinen Zeichenroboter"
 - Editions: Build it yourself (families, hobbyists), Student edition (courses where trainers prepare parts), Trainer edition (schools, clubs, makerspaces)
 - Downloads: STL and 3MF print files, ESP32 firmware, firmware source project, QR sticker program
-- Buy: Leanpub (link and price to follow)
+- Availability: not yet on sale. Sign up on the German or English page to get an email when the book and the kit are available.
 
 ## Pages
 - [Deutsch](https://plotbot-kit.github.io/de/)

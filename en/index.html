@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PlotBot – Build your own drawing robot | PlotBot-Kit on Leanpub</title>
+<title>PlotBot – Build your own drawing robot | PlotBot-Kit</title>
 <meta name="description" content="PlotBot, the drawing robot you build yourself: with the PlotBot-Kit you and your kid build a robot that draws – 3D-printed parts, two stepper motors, an ESP32 and Blockly on your phone. The book walks you through every step, in three editions.">
 <link rel="canonical" href="https://plotbot-kit.github.io/en/">
 <link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/">
@@ -53,8 +53,8 @@
         <li><img src="../img/haus.svg" alt="A house with a roof and a door" width="72" height="72">House</li>
       </ul>
       <div class="cta">
-        <a class="button" href="#leanpub">Get the PlotBot-Kit on Leanpub</a>
-        <span class="price">Price: <strong>XX</strong> (placeholder)</span>
+        <a class="button" href="#newsletter">Notify me</a>
+        <span class="price">The book and the kit are coming soon.</span>
       </div>
   </div>
 </header>
@@ -167,7 +167,7 @@
 <section aria-labelledby="book-title">
   <div class="wrap">
     <h2 id="book-title">Buy once, get three books</h2>
-    <p class="lead">The book is part of the PlotBot-Kit: on Leanpub you get all three editions as PDFs – plus every future update at no extra cost.</p>
+    <p class="lead">The book is part of the PlotBot-Kit. Once it's out, one purchase gets you all three editions as PDFs – plus every future update at no extra cost.</p>
     <ul class="cards three editions">
       <li><h3>Build it yourself</h3><p>For families and hobbyists: get and print the parts, flash the firmware, assemble, set up, draw.</p></li>
       <li><h3>Student edition</h3><p>For kids on a course: the instructors have printed and prepared everything, the kids build and code.</p></li>
@@ -178,14 +178,25 @@
   </div>
 </section>
 
-<section class="final" aria-labelledby="buy-title">
+<section class="final" id="newsletter" aria-labelledby="list-title">
   <div class="wrap">
-    <h2 id="buy-title">Ready to build? PlotBot is waiting.</h2>
-    <p>Get the PlotBot-Kit, start the printer – and by the end, PlotBot draws whatever your kid has programmed.</p>
-    <div class="cta">
-      <a class="button" href="#leanpub">Get the PlotBot-Kit on Leanpub</a>
-      <span class="price">Price: <strong>XX</strong> (placeholder)</span>
-    </div>
+    <h2 id="list-title">Coming soon: the book and the PlotBot-Kit</h2>
+    <p>Leave your email address and we'll let you know when the book and the kit are available.</p>
+    <!-- BREVO: replace BREVO_FORM_ACTION with the action URL from the Brevo form code
+         and check the field names in the "Brevo fields" block below. Nothing else changes. -->
+    <form class="signup" method="post" action="BREVO_FORM_ACTION" accept-charset="utf-8">
+      <label class="signup-label" for="email">Email address</label>
+      <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="name@example.com">
+      <label class="consent"><input type="checkbox" name="OPT_IN" value="1" required>
+        <span>Yes, email me when the book and the PlotBot-Kit come out. I can unsubscribe at any time using the link in every email.
+        See the <a href="privacy.html">privacy policy</a> for details.</span></label>
+      <!-- Brevo fields: start -->
+      <input class="visually-hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="en">
+      <!-- Brevo fields: end -->
+      <button class="button" type="submit">Notify me</button>
+      <p class="note">We'll then send you an email with a confirmation link. You're only on the list once you've clicked it.</p>
+    </form>
   </div>
 </section>
 
@@ -193,8 +204,9 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.7.6</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
+    <p>PlotBot-Kit – website version <span class="version">0.8.0</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
       · <a href="../de/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
+    <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a></p>
   </div>
 </footer>
 </body>
