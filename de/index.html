@@ -22,6 +22,7 @@
 <script src="../js/film.js" defer></script>
 <script src="../js/lang.js" defer></script>
 <script src="../js/drehscheibe.js" defer></script>
+<script src="../js/signup.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -182,20 +183,18 @@
   <div class="wrap">
     <h2 id="liste-titel">Bald zu haben: das Buch und das PlotBot-Kit</h2>
     <p>Tragen Sie Ihre E-Mail-Adresse ein. Sie bekommen Bescheid, sobald es Buch und Kit gibt.</p>
-    <!-- BREVO: Ersetzen Sie BREVO_FORM_ACTION durch die action-URL aus dem Brevo-Formularcode
-         und prüfen Sie die Feldnamen im Block "Brevo-Felder" unten. Mehr ist nicht zu tun. -->
-    <form class="signup" method="post" action="BREVO_FORM_ACTION" accept-charset="utf-8">
+    <form class="signup" method="post" action="https://13dc3f59.sibforms.com/serve/MUIFABcriA8V6bByHI6JYUzjwUak0puTFjMndTWrr5HRxrTQ_sp4Oqy7hTil84tE6n1upM_p6Bkey-Kpjr0BLqRPFV2lkhWxNQ7TbAeZ_ODiuXXgiDficczw9x92Tjr7gszWnvrDYp8UAdVVOINkQlja0jcr1OmXkk49bYEimSucF9DdBQuLGCfqnL9BTj6oxio3IXr6QVCzdHpyZQ==" accept-charset="utf-8">
       <label class="signup-label" for="email">E-Mail-Adresse</label>
       <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="name@beispiel.de">
-      <label class="consent"><input type="checkbox" name="OPT_IN" value="1" required>
+      <label class="consent"><input type="checkbox" required>
         <span>Ja, schreiben Sie mir, wenn Buch und PlotBot-Kit erscheinen. Ich kann mich jederzeit über den Link in jeder E-Mail abmelden.
         Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span></label>
       <!-- Brevo-Felder: Anfang -->
       <input class="visually-hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="locale" value="de">
-      <input type="hidden" name="html_type" value="simple">
       <!-- Brevo-Felder: Ende -->
       <button class="button" type="submit">Eintragen</button>
+      <p class="signup-status" role="status" aria-live="polite" hidden data-ok="Fast geschafft: Bitte bestätigen Sie Ihre Anmeldung über den Link in der E-Mail, die wir Ihnen gerade geschickt haben." data-fehler="Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es später noch einmal."></p>
       <p class="note">Danach kommt eine E-Mail mit einem Bestätigungslink. Erst wenn Sie ihn anklicken, stehen Sie auf der Liste.</p>
     </form>
   </div>

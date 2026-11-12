@@ -22,6 +22,7 @@
 <script src="../js/film.js" defer></script>
 <script src="../js/lang.js" defer></script>
 <script src="../js/drehscheibe.js" defer></script>
+<script src="../js/signup.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -187,15 +188,15 @@
     <form class="signup" method="post" action="BREVO_FORM_ACTION" accept-charset="utf-8">
       <label class="signup-label" for="email">Email address</label>
       <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="name@example.com">
-      <label class="consent"><input type="checkbox" name="OPT_IN" value="1" required>
+      <label class="consent"><input type="checkbox" required>
         <span>Yes, email me when the book and the PlotBot-Kit come out. I can unsubscribe at any time using the link in every email.
         See the <a href="privacy.html">privacy policy</a> for details.</span></label>
       <!-- Brevo fields: start -->
       <input class="visually-hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="locale" value="en">
-      <input type="hidden" name="html_type" value="simple">
       <!-- Brevo fields: end -->
       <button class="button" type="submit">Notify me</button>
+      <p class="signup-status" role="status" aria-live="polite" hidden data-ok="Almost done: please confirm your sign-up with the link in the email we just sent you." data-fehler="Sorry, that didn't work. Please try again later."></p>
       <p class="note">We'll then send you an email with a confirmation link. You're only on the list once you've clicked it.</p>
     </form>
   </div>
