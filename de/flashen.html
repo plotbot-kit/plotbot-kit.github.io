@@ -21,12 +21,12 @@
 </header>
 <main class="wrap legal">
 <h1>Firmware aufspielen</h1>
-<p class="lead">Auf dieser Seite spielen Sie die Firmware des PlotBot auf sein ESP32-Board, direkt aus dem Browser. Sie brauchen dafür kein Programm, nur einmal einen Computer. Danach steuern Sie den PlotBot mit dem Handy.</p>
+<p class="lead">Auf dieser Seite spielen Sie die Firmware des PlotBot auf sein ESP32-Board, direkt aus dem Browser. Sie müssen nichts installieren. Danach steuern Sie den PlotBot mit dem Handy, und spätere Updates spielen Sie über seine Handyseite auf.</p>
 <p>Firmware-Version <span class="firmware-version">0.30.1</span></p>
 
 <h2>Das brauchen Sie</h2>
 <ul>
-  <li>Einen Computer mit <strong>Chrome oder Edge</strong>. Firefox und Safari können nicht mit dem Board sprechen, Handys und Tablets auch nicht.</li>
+  <li>Einen Computer mit <strong>Chrome oder Edge</strong>. Damit ist der Weg getestet. Safari kann nicht mit dem Board sprechen.</li>
   <li>Ein <strong>USB-Datenkabel</strong>. Manche Kabel laden nur und übertragen keine Daten. Erkennt der Computer das Board nicht, liegt es oft am Kabel.</li>
   <li>Unter Windows eventuell den <strong>Treiber für den USB-Chip CP2102</strong>. Meist installiert Windows ihn selbst. Erscheint das Board nicht in der Liste, laden Sie den „CP210x USB to UART Bridge VCP Driver“ bei <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">Silicon Labs</a> herunter.</li>
 </ul>
@@ -34,10 +34,11 @@
 <h2>So geht es</h2>
 <ol class="flash-steps">
   <li>Stecken Sie das ESP32-Board mit dem USB-Kabel an den Computer.</li>
-  <li>Klicken Sie unten auf „Firmware aufspielen“. Der Browser zeigt eine Liste. Wählen Sie den Eintrag mit „CP2102“ oder „USB to UART“ und klicken Sie auf „Verbinden“.</li>
-  <li>Bestätigen Sie mit „Install“. Das Fenster ist auf Englisch.</li>
-  <li>Beim ersten Mal dürfen Sie den Speicher löschen lassen („Erase device“). Bei einem Update löschen Sie ihn nicht, sonst ist die Kalibrierung weg.</li>
-  <li>Warten Sie, bis „Installation complete“ erscheint. Das dauert etwa eine Minute. Danach startet der PlotBot neu und öffnet sein eigenes WLAN.</li>
+  <li>Klicken Sie unten auf „Firmware aufspielen“. Der Browser zeigt eine Liste. Wählen Sie den Eintrag mit „CP210x“ oder „USB to UART“ und klicken Sie auf „Verbinden“.</li>
+  <li>Klicken Sie auf „Install PlotBot“. Das Fenster ist auf Englisch.</li>
+  <li>Es fragt, ob Sie das Gerät löschen wollen („Erase device“). Beim ersten Mal dürfen Sie den Haken setzen. Spielen Sie die Firmware später noch einmal auf, lassen Sie ihn weg, sonst ist die Kalibrierung weg. Dann klicken Sie auf „Next“.</li>
+  <li>Bestätigen Sie mit „Install“.</li>
+  <li>Warten Sie, bis „Installation complete!“ erscheint. Das dauert etwa eine Minute. Danach startet der PlotBot neu und öffnet sein eigenes WLAN.</li>
 </ol>
 
 <div class="flash-box">
@@ -51,7 +52,7 @@
 
 <h2>Wenn es nicht klappt</h2>
 <ul>
-  <li>Bricht die Verbindung ab, halten Sie am Board die Taste <strong>BOOT</strong> gedrückt, bis die Übertragung beginnt.</li>
+  <li>Bricht die Verbindung ab, halten Sie die Taste <strong>BOOT</strong> am Board gedrückt, während Sie auf „Install“ klicken. Lassen Sie los, sobald der Fortschritt läuft.</li>
   <li>Fehlt das Board in der Liste, prüfen Sie Kabel und Treiber (siehe oben).</li>
   <li>Sie können die Firmware auch ohne Browser über die Konsole aufspielen. Wie das geht, steht im <a href="./#buch-titel">Buch zum PlotBot-Kit</a>.</li>
 </ul>
