@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PlotBot – Bau dir deinen Zeichenroboter | PlotBot-Kit auf Leanpub</title>
+<title>PlotBot – Bau dir deinen Zeichenroboter | PlotBot-Kit</title>
 <meta name="description" content="PlotBot, der Zeichenroboter zum Selberbauen: Mit dem PlotBot-Kit bauen Sie und Ihr Kind einen Roboter, der malt – 3D-Druck, zwei Schrittmotoren, ein ESP32 und Blockly auf dem Handy. Das Buch erklärt jeden Schritt – in drei Ausgaben.">
 <link rel="canonical" href="https://plotbot-kit.github.io/de/">
 <link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/">
@@ -22,6 +22,7 @@
 <script src="../js/film.js" defer></script>
 <script src="../js/lang.js" defer></script>
 <script src="../js/drehscheibe.js" defer></script>
+<script src="../js/signup.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
 </head>
 <body>
@@ -53,8 +54,8 @@
         <li><img src="../img/haus.svg" alt="Haus mit Dach und Tür" width="72" height="72">Haus</li>
       </ul>
       <div class="cta">
-        <a class="button" href="#leanpub">PlotBot-Kit auf Leanpub kaufen</a>
-        <span class="price">Preis: <strong>XX</strong> (Platzhalter)</span>
+        <a class="button" href="#newsletter">Benachrichtigt werden</a>
+        <span class="price">Buch und Kit erscheinen bald.</span>
       </div>
   </div>
 </header>
@@ -90,7 +91,7 @@
 </section>
 
 <section aria-labelledby="rahmen-titel">
-  <div class="wrap split">
+  <div class="wrap">
     <div>
       <h2 id="rahmen-titel">Das brauchen Sie – und darauf achten Sie</h2>
       <dl class="facts">
@@ -104,14 +105,6 @@
       <p>Das Buch nennt die Kaufteile mit Stückzahl: Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Filzstift.
         Und es sagt, wie Sie den Roboter jederzeit sicher stoppen: Stecker ziehen.</p>
     </div>
-    <figure>
-      <picture>
-        <source srcset="../img/elektronik.webp" type="image/webp">
-        <img src="../img/elektronik.png" width="1000" height="558" loading="lazy"
-             alt="3D-Modell des Elektronikträgers: In der Mitte liegt das ESP32-Board kopfüber, die Stiftleisten zeigen nach oben. Links und rechts davon je eine Motortreiber-Platine, vorne ein Power-Modul und eine Stromschiene, alles auf einer orangefarbenen gedruckten Platte.">
-      </picture>
-      <figcaption>Der Elektronikträger: ESP32-Board (kopfüber, Stiftleisten oben), zwei Motortreiber, Power-Modul und Stromschiene auf einer gedruckten Platte (3D-Modell).</figcaption>
-    </figure>
   </div>
 </section>
 
@@ -167,7 +160,7 @@
 <section aria-labelledby="buch-titel">
   <div class="wrap">
     <h2 id="buch-titel">Ein Kauf, drei Bücher</h2>
-    <p class="lead">Zum PlotBot-Kit gehört das Buch: Auf Leanpub bekommen Sie alle drei Ausgaben als PDF – und jede spätere Verbesserung kostenlos dazu.</p>
+    <p class="lead">Zum PlotBot-Kit gehört das Buch. Wenn es erscheint, bekommen Sie mit einem Kauf alle drei Ausgaben als PDF – und jede spätere Verbesserung kostenlos dazu.</p>
     <ul class="cards three editions">
       <li><h3>Zum Selberbauen</h3><p>Für Familien und Bastler: Teile besorgen und drucken, Firmware aufspielen, zusammenbauen, einrichten, zeichnen.</p></li>
       <li><h3>Für Kursteilnehmer</h3><p>Für Kinder in einem Kurs: Die Kursleitung hat gedruckt und vorbereitet, die Kinder bauen und programmieren.</p></li>
@@ -178,14 +171,24 @@
   </div>
 </section>
 
-<section class="final" aria-labelledby="kauf-titel">
+<section class="final" id="newsletter" aria-labelledby="liste-titel">
   <div class="wrap">
-    <h2 id="kauf-titel">Bereit zum Bauen? PlotBot wartet.</h2>
-    <p>Holen Sie sich das PlotBot-Kit, werfen Sie den Drucker an – und am Ende malt der PlotBot, was Ihr Kind programmiert hat.</p>
-    <div class="cta">
-      <a class="button" href="#leanpub">PlotBot-Kit auf Leanpub kaufen</a>
-      <span class="price">Preis: <strong>XX</strong> (Platzhalter)</span>
-    </div>
+    <h2 id="liste-titel">Bald zu haben: das Buch und das PlotBot-Kit</h2>
+    <p>Tragen Sie Ihre E-Mail-Adresse ein. Sie bekommen Bescheid, sobald es Buch und Kit gibt.</p>
+    <form class="signup" method="post" action="https://13dc3f59.sibforms.com/serve/MUIFABcriA8V6bByHI6JYUzjwUak0puTFjMndTWrr5HRxrTQ_sp4Oqy7hTil84tE6n1upM_p6Bkey-Kpjr0BLqRPFV2lkhWxNQ7TbAeZ_ODiuXXgiDficczw9x92Tjr7gszWnvrDYp8UAdVVOINkQlja0jcr1OmXkk49bYEimSucF9DdBQuLGCfqnL9BTj6oxio3IXr6QVCzdHpyZQ==" accept-charset="utf-8">
+      <label class="signup-label" for="email">E-Mail-Adresse</label>
+      <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="name@beispiel.de">
+      <label class="consent"><input type="checkbox" required>
+        <span>Ja, schreiben Sie mir, wenn Buch und PlotBot-Kit erscheinen. Ich kann mich jederzeit über den Link in jeder E-Mail abmelden.
+        Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span></label>
+      <!-- Brevo-Felder: Anfang -->
+      <input class="visually-hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="de">
+      <!-- Brevo-Felder: Ende -->
+      <button class="button" type="submit">Eintragen</button>
+      <p class="signup-status" role="status" aria-live="polite" hidden data-ok="Fast geschafft: Bitte bestätigen Sie Ihre Anmeldung über den Link in der E-Mail, die wir Ihnen gerade geschickt haben." data-fehler="Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es später noch einmal."></p>
+      <p class="note">Danach kommt eine E-Mail mit einem Bestätigungslink. Erst wenn Sie ihn anklicken, stehen Sie auf der Liste.</p>
+    </form>
   </div>
 </section>
 
@@ -193,8 +196,9 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – Webseite Version <span class="version">0.7.6</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des PlotBot und ein Bildschirmfoto seiner Handyseite.
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.8.0</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des PlotBot und ein Bildschirmfoto seiner Handyseite.
       · <a href="../en/" hreflang="en" lang="en" data-lang="en">English version</a></p>
+    <p class="legal-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></p>
   </div>
 </footer>
 </body>
