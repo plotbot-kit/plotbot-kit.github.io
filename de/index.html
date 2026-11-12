@@ -183,7 +183,7 @@
     <h2 id="liste-titel">Bald zu haben: das Buch und das PlotBot-Kit</h2>
     <p>Tragen Sie Ihre E-Mail-Adresse ein. Sie bekommen Bescheid, sobald es Buch und Kit gibt.</p>
     <!-- BREVO: Ersetzen Sie BREVO_FORM_ACTION durch die action-URL aus dem Brevo-Formularcode
-         und prüfen Sie die Feldnamen im Block "Brevo-Felder" unten. Sonst ändert sich nichts. -->
+         und prüfen Sie die Feldnamen im Block "Brevo-Felder" unten. Mehr ist nicht zu tun. -->
     <form class="signup" method="post" action="BREVO_FORM_ACTION" accept-charset="utf-8">
       <label class="signup-label" for="email">E-Mail-Adresse</label>
       <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="name@beispiel.de">
@@ -193,8 +193,9 @@
       <!-- Brevo-Felder: Anfang -->
       <input class="visually-hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="locale" value="de">
+      <input type="hidden" name="html_type" value="simple">
       <!-- Brevo-Felder: Ende -->
-      <button class="button" type="submit">Benachrichtigen</button>
+      <button class="button" type="submit">Eintragen</button>
       <p class="note">Danach kommt eine E-Mail mit einem Bestätigungslink. Erst wenn Sie ihn anklicken, stehen Sie auf der Liste.</p>
     </form>
   </div>
