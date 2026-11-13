@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flash the firmware | PlotBot-Kit</title>
+<meta name="description" content="Flash the PlotBot firmware onto the ESP32 board from your browser: Chrome or Edge on a computer, a USB data cable and Espressif's ESP Launchpad.">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/lang.js" defer></script>
+<link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/flashen.html">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/flash.html">
+<script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../vendor/goatcounter/count.js"></script>
+</head>
+<body>
+<header class="wrap">
+  <nav class="topbar" aria-label="Navigation">
+    <a class="brand" href="./">PlotBot-Kit</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../de/flashen.html" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="flash.html" aria-current="page" hreflang="en" lang="en" data-lang="en">English</a></span>
+  </nav>
+</header>
+<main class="wrap legal">
+<h1>Flash the firmware</h1>
+<p class="lead">Here's how to load PlotBot's firmware onto its ESP32 board, straight from your browser. You don't need to install any software for this. The flashing is done by ESP Launchpad, a web page run by Espressif, the company that makes the ESP32 chip. After that, you control PlotBot from your phone, and later updates go through its phone page.</p>
+<p>Firmware version <span class="firmware-version">0.30.1</span></p>
+
+<h2>What you need</h2>
+<ul>
+  <li>A computer with <strong>Chrome or Edge</strong>. Launchpad needs a browser that can talk to the board over USB (Web Serial); Safari, for one, can't.</li>
+  <li>A <strong>USB data cable</strong>. Some cables only charge and don't carry data. If your computer doesn't detect the board, the cable is the usual suspect.</li>
+  <li>On Windows, you may need the <strong>driver for the CP2102 USB chip</strong>. Windows usually installs it by itself. If the board doesn't show up in the list, download the “CP210x USB to UART Bridge VCP Driver” from <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">Silicon Labs</a>.</li>
+</ul>
+
+<h2>Step by step</h2>
+<ol class="flash-steps">
+  <li>Plug the ESP32 board into your computer with the USB cable.</li>
+  <li>Click “Flash the firmware” below. ESP Launchpad opens in a new tab and shows “PlotBot” with the firmware's version number.</li>
+  <li>There, click “Connect Your Device”. Your browser shows a list. Pick the entry that says “CP210x” or “USB to UART” and click “Connect”.</li>
+  <li>Launchpad starts straight away, without asking for confirmation: it erases the board's memory and writes the firmware. The black “Device Console” window shows the progress.</li>
+  <li>PlotBot then restarts and opens its own Wi-Fi network. The “Device Console” shows a line starting with “Mein WLAN:” (German for “my Wi-Fi”) and the network's name. You can unplug the cable now.</li>
+</ol>
+
+<div class="flash-box">
+  <p class="flash-warn"><strong>Heads up:</strong> Launchpad wipes the whole board every time, including calibration and settings. For updates, use PlotBot's phone page.</p>
+  <a class="button" href="https://espressif.github.io/esp-launchpad/minimal-launchpad/?flashConfigURL=https://plotbot-kit.github.io/firmware/launchpad.toml" target="_blank" rel="noopener">Flash the firmware</a>
+  <p>The link takes you to ESP Launchpad on <code>espressif.github.io</code>. That page belongs to Espressif, not to us. It downloads the firmware from our website and sends it over the cable to the board. Our <a href="privacy.html#launchpad">privacy policy</a> explains what that means for your data.</p>
+</div>
+
+<h2>Launchpad erases the board every time</h2>
+<p>Before it writes the firmware, Launchpad erases the board's entire memory. The first time, that doesn't matter. If PlotBot is already set up, though, erasing wipes its calibration and its settings. So install updates from PlotBot's phone page instead: that keeps both.</p>
+
+<h2>If it doesn't work</h2>
+<ul>
+  <li>If Launchpad reports “Connection In Progress” or “Connection Error”, click “Try Again” and then “Connect Your Device” again. This time, hold the <strong>BOOT</strong> button on the board as soon as you've picked the port, and let go once lines start scrolling in the “Device Console”.</li>
+  <li>If the board isn't in the list, check the cable and the driver (see above).</li>
+  <li>If Launchpad says “Your browser of choice doesn't support the Web Serial API”, open this page on a computer in Chrome or Edge.</li>
+  <li>Launchpad's error window includes a “Troubleshooting Guide” with more tips, for example on serial port permissions on Linux and the Windows driver: if the current CP210x driver causes trouble, Espressif suggests the older version 6.7 there. The guide lists every possible cause, including ones that don't apply to you.</li>
+  <li>You can also flash the firmware from the command line, without a browser. The <a href="./#book-title">PlotBot-Kit book</a> shows you how.</li>
+</ul>
+</main>
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – website version <span class="version">0.11.0</span> · <a href="./">Back to the PlotBot page</a></p>
+    <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
+  </div>
+</footer>
+<noscript><img src="https://plotbot.goatcounter.com/count?p=/en/flash.html" alt="" width="1" height="1"></noscript>
+</body>
+</html>

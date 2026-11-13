@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firmware aufspielen | PlotBot-Kit</title>
+<meta name="description" content="Die PlotBot-Firmware im Browser auf das ESP32-Board spielen: mit Chrome oder Edge am Computer, einem USB-Datenkabel und dem ESP Launchpad von Espressif.">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/lang.js" defer></script>
+<link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/flashen.html">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/flash.html">
+<script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../vendor/goatcounter/count.js"></script>
+</head>
+<body>
+<header class="wrap">
+  <nav class="topbar" aria-label="Navigation">
+    <a class="brand" href="./">PlotBot-Kit</a>
+    <span class="lang" role="group" aria-label="Sprache"><a href="flashen.html" aria-current="page" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="../en/flash.html" hreflang="en" lang="en" data-lang="en">English</a></span>
+  </nav>
+</header>
+<main class="wrap legal">
+<h1>Firmware aufspielen</h1>
+<p class="lead">So spielen Sie die Firmware des PlotBot auf sein ESP32-Board, direkt aus dem Browser. Ein Programm brauchen Sie dafür nicht zu installieren. Das Aufspielen übernimmt das ESP Launchpad, eine Webseite von Espressif, dem Hersteller des ESP32-Chips. Danach steuern Sie den PlotBot mit dem Handy, und spätere Updates spielen Sie über seine Handyseite auf.</p>
+<p>Firmware-Version <span class="firmware-version">0.30.1</span></p>
+
+<h2>Das brauchen Sie</h2>
+<ul>
+  <li>Einen Computer mit <strong>Chrome oder Edge</strong>. Das Launchpad braucht einen Browser, der über USB mit dem Board sprechen kann (Web Serial). Safari zum Beispiel kann das nicht.</li>
+  <li>Ein <strong>USB-Datenkabel</strong>. Manche Kabel laden nur und übertragen keine Daten. Erkennt der Computer das Board nicht, liegt es oft am Kabel.</li>
+  <li>Unter Windows eventuell den <strong>Treiber für den USB-Chip CP2102</strong>. Meist installiert Windows ihn selbst. Erscheint das Board nicht in der Liste, laden Sie den „CP210x USB to UART Bridge VCP Driver“ bei <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">Silicon Labs</a> herunter.</li>
+</ul>
+
+<h2>So geht es</h2>
+<ol class="flash-steps">
+  <li>Stecken Sie das ESP32-Board mit dem USB-Kabel an den Computer.</li>
+  <li>Klicken Sie unten auf „Firmware aufspielen“. In einem neuen Tab öffnet sich das ESP Launchpad. Die Seite ist auf Englisch und zeigt „PlotBot“ mit der Versionsnummer der Firmware.</li>
+  <li>Klicken Sie dort auf „Connect Your Device“. Der Browser zeigt eine Liste. Wählen Sie den Eintrag mit „CP210x“ oder „USB to UART“ und klicken Sie auf „Verbinden“.</li>
+  <li>Das Launchpad fragt nicht nach: Es löscht den Speicher des Boards und spielt die Firmware auf. Im schwarzen Fenster „Device Console“ sehen Sie den Fortschritt.</li>
+  <li>Danach startet der PlotBot neu und öffnet sein eigenes WLAN. In der „Device Console“ erscheint die Zeile „Mein WLAN:“ mit dem Namen des WLANs. Jetzt können Sie das Kabel abziehen.</li>
+</ol>
+
+<div class="flash-box">
+  <p class="flash-warn"><strong>Achtung:</strong> Das Launchpad löscht das Board jedes Mal ganz, auch Kalibrierung und Einstellungen. Für Updates nehmen Sie die Handyseite des PlotBot.</p>
+  <a class="button" href="https://espressif.github.io/esp-launchpad/minimal-launchpad/?flashConfigURL=https://plotbot-kit.github.io/firmware/launchpad.toml" target="_blank" rel="noopener">Firmware aufspielen</a>
+  <p>Der Link führt zum ESP Launchpad auf <code>espressif.github.io</code>. Diese Seite gehört Espressif, nicht uns. Sie lädt die Firmware von unserer Webseite und schickt sie über das Kabel ans Board. Was das für Ihre Daten heißt, steht in der <a href="datenschutz.html#launchpad">Datenschutzerklärung</a>.</p>
+</div>
+
+<h2>Das Launchpad löscht das Board jedes Mal</h2>
+<p>Das Launchpad löscht vor dem Aufspielen den ganzen Speicher des Boards. Beim ersten Mal stört das nicht. Ist der PlotBot schon eingerichtet, gehen dabei seine Kalibrierung und seine Einstellungen verloren. Spielen Sie Updates deshalb über die Handyseite des PlotBot auf: Dort bleibt beides erhalten.</p>
+
+<h2>Wenn es nicht klappt</h2>
+<ul>
+  <li>Meldet das Launchpad „Connection In Progress“ oder „Connection Error“, klicken Sie auf „Try Again“ und danach wieder auf „Connect Your Device“. Halten Sie diesmal die Taste <strong>BOOT</strong> am Board gedrückt, sobald Sie den Anschluss gewählt haben. Lassen Sie los, sobald im Fenster „Device Console“ Zeilen durchlaufen.</li>
+  <li>Fehlt das Board in der Liste, prüfen Sie Kabel und Treiber (siehe oben).</li>
+  <li>Schreibt das Launchpad „Your browser of choice doesn't support the Web Serial API“, öffnen Sie diese Seite am Computer in Chrome oder Edge.</li>
+  <li>Im Fehlerfenster des Launchpads steht ein „Troubleshooting Guide“ auf Englisch mit weiteren Hinweisen, etwa zu Zugriffsrechten unter Linux und zum Treiber unter Windows: Macht der aktuelle CP210x-Treiber Schwierigkeiten, empfiehlt Espressif dort die ältere Version 6.7. Der Guide zählt alle denkbaren Ursachen auf, auch solche, die bei Ihnen nicht zutreffen.</li>
+  <li>Sie können die Firmware auch ohne Browser über die Konsole aufspielen. Wie das geht, steht im <a href="./#buch-titel">Buch zum PlotBot-Kit</a>.</li>
+</ul>
+</main>
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.11.0</span> · <a href="./">Zur PlotBot-Seite</a></p>
+    <p class="legal-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20R%C3%BCckmeldung">Rückmeldung schicken</a></p>
+  </div>
+</footer>
+<noscript><img src="https://plotbot.goatcounter.com/count?p=/de/flashen.html" alt="" width="1" height="1"></noscript>
+</body>
+</html>
