@@ -30,5 +30,6 @@
 - [Kinematics simulator (English): how accurately does a five-bar linkage draw?](https://plotbot-kit.github.io/en/kinematics/)
 - [Im Browser ausprobieren (Blockly-Simulator, Deutsch)](https://plotbot-kit.github.io/de/ausprobieren/)
 - [Try it in your browser (Blockly simulator, English page, German blocks)](https://plotbot-kit.github.io/en/try/)
-- [Firmware aufspielen (Web-Flasher, Deutsch): ESP32-Firmware im Browser flashen, Chrome oder Edge am Computer](https://plotbot-kit.github.io/de/flashen.html)
-- [Flash the firmware (web flasher, English): flash the ESP32 firmware from Chrome or Edge on a computer](https://plotbot-kit.github.io/en/flash.html)
+- [Firmware aufspielen (Deutsch): Anleitung und Link zu Espressifs ESP Launchpad, das die ESP32-Firmware im Browser flasht; Chrome oder Edge am Computer](https://plotbot-kit.github.io/de/flashen.html)
+- [Flash the firmware (English): instructions and a link to Espressif's ESP Launchpad, which flashes the ESP32 firmware from Chrome or Edge on a computer](https://plotbot-kit.github.io/en/flash.html)
+- [ESP Launchpad configuration (TOML): firmware parts and flash offsets](https://plotbot-kit.github.io/firmware/launchpad.toml)

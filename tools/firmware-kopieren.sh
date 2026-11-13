@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Copies the ESP32 firmware for the web flasher (de/flashen.html, en/flash.html)
-# from the main project into firmware/ and writes the version into the manifest
-# and onto both flasher pages.
+# Copies the ESP32 firmware for the flasher pages (de/flashen.html, en/flash.html)
+# from the main project into firmware/ and writes the version into the ESP Launchpad
+# configuration (firmware/launchpad.toml) and onto both flasher pages.
 #
 # Usage: tools/firmware-kopieren.sh [path to the zeichenroboter repo]
 # Build first:  cd ~/projects/zeichenroboter/firmware && pio run -e esp32
@@ -25,7 +25,11 @@ mkdir -p "$SITE/firmware"
 cp "$BUILD/bootloader.bin" "$BUILD/partitions.bin" "$BUILD/firmware.bin" "$SITE/firmware/"
 cp "$BOOT_APP0" "$SITE/firmware/"
 
-sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" "$SITE/firmware/manifest.json"
+TOML="$SITE/firmware/launchpad.toml"
+[ -f "$TOML" ] || { echo "Fehlt: $TOML" >&2; exit 1; }
+# The app name "PlotBot <version>" appears twice: in supported_apps and as the table header.
+sed -i "s/\"PlotBot [^\"]*\"/\"PlotBot $VERSION\"/g" "$TOML"
+[ "$(grep -c "\"PlotBot $VERSION\"" "$TOML")" = 2 ] || { echo "launchpad.toml: App-Name \"PlotBot $VERSION\" nicht an beiden Stellen" >&2; exit 1; }
 for page in "$SITE/de/flashen.html" "$SITE/en/flash.html"; do
   sed -i "s|<span class=\"firmware-version\">[^<]*</span>|<span class=\"firmware-version\">$VERSION</span>|g" "$page"
 done

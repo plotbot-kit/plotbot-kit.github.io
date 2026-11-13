@@ -121,8 +121,6 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
 .draft { background: var(--cream); border-left: 4px solid var(--sun); padding: .75rem 1rem; }
 
 /* Web flasher (de/flashen.html, en/flash.html) */
-esp-web-install-button:not(:defined) { display: none; }
 .flash-box { background: var(--cream); border-left: 4px solid var(--sun); padding: 1rem 1.2rem; margin: 1.5rem 0; }
 .flash-box p { margin: .5rem 0 0; }
-.flash-box .button { border: 0; cursor: pointer; font-family: inherit; }
 .flash-steps li { margin-bottom: .5rem; }
