@@ -17,7 +17,6 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
 .skip { position: absolute; left: -999px; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .gap { margin-top: 2rem; }
-.no-film .film { display: none; }
 .skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 10; }
 
 /* Top bar */
@@ -69,7 +68,16 @@ figcaption { font-size: .9rem; color: var(--muted); margin-top: .4rem; }
 .specs th, .specs td { text-align: left; vertical-align: top; padding: .55rem .5rem; border-bottom: 1px solid var(--line); }
 .specs th { width: 34%; }
 .editions li h3 { color: var(--blue); }
-.film video { width: 100%; border-radius: var(--radius); background: var(--cream); }
+/* Film (js/film.js): poster with a link; with JS a play button that loads the YouTube player on click */
+.film-frame { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--cream); }
+.film-poster { display: block; position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: none; font: inherit; cursor: pointer; }
+.film-poster img, .film-frame iframe { width: 100%; height: 100%; border: 0; object-fit: cover; }
+.film-poster:focus-visible { outline: 3px solid var(--pink); outline-offset: -3px; }
+.film-cta { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--pink); color: #fff; font-weight: 700;
+  font-size: 1.1rem; padding: .8rem 1.4rem; border-radius: 999px; box-shadow: 0 3px 0 #a61e4d; white-space: nowrap; }
+.film-cta::before { content: "▶"; content: "▶" / ""; margin-right: .5em; }
+.film-poster:hover .film-cta { background: #c2255c; }
+.film-note { font-size: .9rem; color: var(--muted); margin: .5rem 0 0; }
 .final { background: var(--cream); text-align: center; }
 .final .cta { justify-content: center; }
 footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }

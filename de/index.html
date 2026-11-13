@@ -24,6 +24,7 @@
 <script src="../js/drehscheibe.js" defer></script>
 <script src="../js/signup.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+<script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../vendor/goatcounter/count.js"></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt</a>
@@ -65,10 +66,14 @@
 <section class="film" aria-labelledby="film-titel">
   <div class="wrap">
     <h2 id="film-titel">Sehen Sie ihm beim Zeichnen zu</h2>
-    <video controls preload="none" poster="../img/film-poster.webp" width="1280" height="720">
-      <source src="../media/verkaufsfilm-de.mp4" type="video/mp4">
-      <p>Ihr Browser zeigt hier keinen Film. Alles Wichtige steht auch unten im Text.</p>
-    </video>
+    <!-- YouTube video ID (unlisted video): it appears twice in the next line, in data-youtube-id and in the link. -->
+    <div class="film-frame">
+      <a class="film-poster" data-youtube-id="JmEut_4dexs" href="https://youtu.be/JmEut_4dexs" data-play-label="Film abspielen" data-title="PlotBot-Film auf YouTube">
+        <img src="../img/film-poster.webp" width="1280" height="720" alt="">
+        <span class="film-cta">Film auf YouTube ansehen</span>
+      </a>
+    </div>
+    <p class="film-note">Ein Klick auf das Bild lädt den Film von YouTube (Google). Dabei erfährt Google unter anderem Ihre IP-Adresse. Mehr dazu in der <a href="datenschutz.html#youtube">Datenschutzerklärung</a>.</p>
   </div>
 </section>
 
@@ -196,10 +201,11 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – Webseite Version <span class="version">0.9.1</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des PlotBot und ein Bildschirmfoto seiner Handyseite.
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.10.0</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des PlotBot und ein Bildschirmfoto seiner Handyseite.
       · <a href="../en/" hreflang="en" lang="en" data-lang="en">English version</a></p>
     <p class="legal-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20R%C3%BCckmeldung">Rückmeldung schicken</a></p>
   </div>
 </footer>
+<noscript><img src="https://plotbot.goatcounter.com/count?p=/de/" alt="" width="1" height="1"></noscript>
 </body>
 </html>

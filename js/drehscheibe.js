@@ -1,6 +1,8 @@
 // Turntable for the hero robot: drag (Pointer Events) or arrow keys swap between 36 pre-rendered WebP frames.
-// Progressive enhancement: frames load only on intent (pointer over or on the image, keyboard focus),
-// so visitors who never touch the robot download nothing extra.
+// The robot turns slowly by itself (one turn in about 20 s) until the visitor first touches it: pointer down, touch,
+// key or focus on the image. Then it stops for good. It pauses while the stage is off-screen.
+// With prefers-reduced-motion it never turns by itself, and frames load only on intent (pointer over, focus).
+// Without JS the static <picture> stays.
 // If any frame fails to load, the hint disappears and the static <picture> stays.
 // Texts come from data attributes in the HTML: data-frames, data-label, data-valuetext ("{deg}" = angle).
 (function () {
@@ -58,6 +60,22 @@
     pic.setAttribute('aria-valuemax', '350');
     pic.setAttribute('aria-valuenow', '0');
     pic.setAttribute('aria-valuetext', valuetext(0));
+    spin();
+  }
+
+  // Auto-rotation: a timer steps one frame at a time; stop() ends it for good.
+  var TURN_MS = 20000, timer = null, stopped = false, visible = false;
+  var calm = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  function pause() { if (timer !== null) { clearTimeout(timer); timer = null; } }
+  function stop() { stopped = true; pause(); }
+  function spin() {
+    if (stopped || !visible || !isReady || timer !== null) return;
+    timer = setTimeout(function () {
+      timer = null;
+      if (calm.matches) { stop(); return; }
+      if (!document.hidden) show(Math.max(current, 0) - 1);
+      spin();
+    }, TURN_MS / N);
   }
 
   // Set up right away (cheap): focusable, labelled, hint visible. Frames follow on intent.
@@ -69,7 +87,7 @@
 
   var startX = null, startFrame = 0;
   pic.addEventListener('pointerdown', function (e) {
-    load();
+    stop(); load();
     startX = e.clientX; startFrame = Math.max(current, 0);
     pic.setPointerCapture(e.pointerId);
   });
@@ -83,8 +101,10 @@
   pic.addEventListener('pointerup', end);
   pic.addEventListener('pointercancel', end);
   pic.addEventListener('pointerenter', load);
-  pic.addEventListener('focus', load);
+  pic.addEventListener('focus', function () { stop(); load(); });
+  pic.addEventListener('touchstart', stop, { passive: true });
   pic.addEventListener('keydown', function (e) {
+    stop();
     var k = e.key, at = Math.max(current, 0);
     if (k === 'ArrowRight' || k === 'ArrowUp') show(at - 1);
     else if (k === 'ArrowLeft' || k === 'ArrowDown') show(at + 1);
@@ -95,4 +115,13 @@
     else return;
     e.preventDefault();
   });
+
+  if (!calm.matches) {
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[entries.length - 1].isIntersecting;
+        if (visible && !stopped) { load(); spin(); } else pause();
+      }).observe(fig);
+    } else { visible = true; load(); }
+  }
 })();

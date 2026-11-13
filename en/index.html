@@ -24,6 +24,7 @@
 <script src="../js/drehscheibe.js" defer></script>
 <script src="../js/signup.js" defer></script>
 <link rel="icon" href="../img/blume.svg" type="image/svg+xml">
+<script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../vendor/goatcounter/count.js"></script>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -65,10 +66,14 @@
 <section class="film" aria-labelledby="film-title">
   <div class="wrap">
     <h2 id="film-title">Watch it draw</h2>
-    <video controls preload="none" poster="../img/film-poster.webp" width="1280" height="720">
-      <source src="../media/verkaufsfilm-en.mp4" type="video/mp4">
-      <p>Your browser can't play the video here. Everything that matters is in the text below.</p>
-    </video>
+    <!-- YouTube video ID (unlisted video): it appears twice in the next line, in data-youtube-id and in the link. -->
+    <div class="film-frame">
+      <a class="film-poster" data-youtube-id="0bYeE9UlEwY" href="https://youtu.be/0bYeE9UlEwY" data-play-label="Play the video" data-title="PlotBot video on YouTube">
+        <img src="../img/film-poster.webp" width="1280" height="720" alt="">
+        <span class="film-cta">Watch the video on YouTube</span>
+      </a>
+    </div>
+    <p class="film-note">Clicking the picture loads the video from YouTube (Google). Google then sees your IP address, among other things. More in the <a href="privacy.html#youtube">privacy policy</a>.</p>
   </div>
 </section>
 
@@ -196,10 +201,11 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.9.1</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
+    <p>PlotBot-Kit – website version <span class="version">0.10.0</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
       · <a href="../de/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
     <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
   </div>
 </footer>
+<noscript><img src="https://plotbot.goatcounter.com/count?p=/en/" alt="" width="1" height="1"></noscript>
 </body>
 </html>
