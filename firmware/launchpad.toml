@@ -1,0 +1,24 @@
+# Configuration for Espressif's ESP Launchpad (minimal variant). The flasher pages
+# de/flashen.html and en/flash.html link to
+#   https://espressif.github.io/esp-launchpad/minimal-launchpad/?flashConfigURL=https://plotbot-kit.github.io/firmware/launchpad.toml
+# Launchpad reads this file and flashes the parts listed below.
+# Format: https://github.com/espressif/esp-launchpad/blob/main/config/minimal_launchpad_config.toml
+# tools/firmware-kopieren.sh writes the firmware version into the app name.
+
+esp_toml_version = 1.0
+multipart = true
+chip = "esp32"
+
+# Launchpad shows this name above its "Connect Your Device" button.
+supported_apps = ["PlotBot 0.30.1"]
+
+["PlotBot 0.30.1"]
+icon = "https://plotbot-kit.github.io/img/blume.svg"
+console_baudrate = 115200
+image.esp32.parts = [
+    "https://plotbot-kit.github.io/firmware/bootloader.bin",
+    "https://plotbot-kit.github.io/firmware/partitions.bin",
+    "https://plotbot-kit.github.io/firmware/boot_app0.bin",
+    "https://plotbot-kit.github.io/firmware/firmware.bin"
+]
+image.esp32.addresses = ["0x1000", "0x8000", "0xe000", "0x10000"]
