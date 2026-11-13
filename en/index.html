@@ -29,15 +29,26 @@
 <body>
 <a class="skip" href="#content">Skip to content</a>
 
-<header class="hero">
+<header class="sitebar">
   <div class="wrap">
-      <nav class="topbar" aria-label="Navigation">
-        <a class="brand" href="./">PlotBot-Kit</a>
-        <span class="lang" role="group" aria-label="Language"><a href="../de/" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="./" aria-current="page" hreflang="en" lang="en" data-lang="en">English</a></span>
-      </nav>
+    <nav class="topbar" aria-label="Navigation">
+      <a class="brand" href="./">PlotBot-Kit</a>
+      <a class="button small" href="#newsletter">Notify me</a>
+      <span class="lang" role="group" aria-label="Language"><a href="../de/" hreflang="de" lang="de" data-lang="de" title="Deutsch"><span class="short">DE</span><span class="long">Deutsch</span></a><a href="./" aria-current="page" hreflang="en" lang="en" data-lang="en" title="English"><span class="short">EN</span><span class="long">English</span></a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
     <div class="intro">
-      <h1>Build a robot <span>that draws.</span></h1>
-      <p class="kicker">Meet PlotBot, the drawing robot. Two arms, one pen – and your phone tells it what to draw.</p>
+      <h1>Your kid builds a robot <span>that draws.</span></h1>
+      <p class="kicker">PlotBot is a drawing robot you build yourselves: two arms, one pen, and a phone that tells it what to draw. For kids aged about 12 and up, building with a parent.</p>
+    </div>
+    <div class="cta">
+      <a class="button" href="#newsletter">Notify me</a>
+      <a class="button ghost" href="try/">Try it in your browser</a>
+      <span class="price">The book and the kit are coming soon. You can have a go today: snap blocks together in your browser and watch a simulated PlotBot draw your program.</span>
     </div>
     <figure class="stage" data-frames="../img/drehscheibe/" data-label="Rotate PlotBot" data-valuetext="View {deg}°">
       <picture>
@@ -45,21 +56,17 @@
         <img class="robot" src="../img/roboter.png" width="800" height="849"
              alt="3D model of PlotBot: on a dark grey base plate, two motors each turn an orange upper arm; the light grey forearms meet at an upright pen.">
       </picture>
-      <p class="spin-hint" id="spin-hint" hidden>Drag or use the arrow keys to rotate</p>
+      <p class="spin-hint" id="spin-hint" hidden>Drag to rotate</p>
       <figcaption>What it looks like once everything is printed and screwed together (3D model).</figcaption>
     </figure>
-      <ul class="doodles" aria-label="Pictures the robot draws from small programs">
-        <li><img src="../img/blume.svg" alt="A flower with eight petals" width="72" height="72">Flower</li>
-        <li><img src="../img/stern.svg" alt="A five-pointed star" width="72" height="72">Star</li>
-        <li><img src="../img/spirale.svg" alt="A square spiral" width="72" height="72">Spiral</li>
-        <li><img src="../img/haus.svg" alt="A house with a roof and a door" width="72" height="72">House</li>
-      </ul>
-      <div class="cta">
-        <a class="button" href="#newsletter">Notify me</a>
-        <span class="price">The book and the kit are coming soon.</span>
-      </div>
+    <ul class="doodles" aria-label="Pictures the robot draws from small programs">
+      <li><img src="../img/blume.svg" alt="A flower with eight petals" width="72" height="72">Flower</li>
+      <li><img src="../img/stern.svg" alt="A five-pointed star" width="72" height="72">Star</li>
+      <li><img src="../img/spirale.svg" alt="A square spiral" width="72" height="72">Spiral</li>
+      <li><img src="../img/haus.svg" alt="A house with a roof and a door" width="72" height="72">House</li>
+    </ul>
   </div>
-</header>
+</div>
 
 <main id="content">
 
@@ -69,7 +76,7 @@
     <!-- YouTube video ID (unlisted video): it appears in data-youtube-id and in the link in the next line, and in the note below the picture. -->
     <div class="film-frame">
       <a class="film-poster" aria-describedby="film-note" data-youtube-id="0bYeE9UlEwY" href="https://youtu.be/0bYeE9UlEwY" data-play-label="Play the video" data-title="PlotBot video on YouTube">
-        <img src="../img/film-poster.webp" width="1280" height="720" alt="">
+        <img src="../img/film-poster-en.webp" width="1280" height="720" alt="">
         <span class="film-cta">Watch the video on YouTube</span>
       </a>
     </div>
@@ -86,7 +93,7 @@
       <li><span class="tag">Mechanics</span><h3>Arms, gears, bearings</h3>
         <p>Two motors each turn an upper arm, and the forearms meet at the pen. Kids see why a little play between the gears inside the motor makes a line wobble, and what a ball bearing is for.</p></li>
       <li><span class="tag">Electronics</span><h3>A microcontroller and motors</h3>
-        <p>An ESP32 drives two stepper motors and a servo that lifts the pen. At start-up each arm moves to a limit switch; from there the robot counts every step.</p></li>
+        <p>A microcontroller drives two stepper motors and a servo that lifts the pen. At start-up each arm moves to a limit switch; from there the robot counts every step.</p></li>
       <li><span class="tag">Coding</span><h3>Blockly on a phone</h3>
         <p>Kids snap blocks together: pen down, move 20 mm, turn 90°, repeat four times. Tap "Zeichnen lassen" and the robot draws a square.</p></li>
       <li><span class="tag">Geometry</span><h3>Angles you can see</h3>
@@ -97,18 +104,28 @@
 
 <section aria-labelledby="needs-title">
   <div class="wrap">
-    <div>
-      <h2 id="needs-title">What you'll need, and what to watch out for</h2>
-      <dl class="facts">
-        <dt>Age</dt><dd>Kids aged about 12 and up, building with a parent</dd>
-        <dt>Time</dt><dd>A project for several afternoons. Printing alone takes an estimated 14 hours – the printer does the work while you do something else.</dd>
-        <dt>Power</dt><dd>A 5-volt USB power supply rated at 2&nbsp;A or more, plus a USB-C cable. Don't draw with PlotBot plugged into a computer: its USB port can't deliver enough current. Tip: a power bank works too – the book shows how PlotBot keeps it from switching off.</dd>
-        <dt>Soldering</dt><dd>None. The microcontroller board (ESP32) comes with its pin headers already soldered, and every wire plugs in.</dd>
-        <dt>Tools</dt><dd>2.5 mm hex key, small screwdriver, needle-nose pliers, small file</dd>
-        <dt>Devices</dt><dd>A 3D printer (220 × 220 mm bed), the USB power supply, a computer at most once, to <a href="flash.html">load the firmware onto the board</a>, and after that only a phone</dd>
-      </dl>
-      <p>The book lists the parts to buy, with quantities: the board, two motors with drivers, a servo, limit switches, ball bearings, screws and a felt-tip pen.
-        It also tells you how to stop the robot safely: pull the plug.</p>
+    <h2 id="needs-title">What you'll need, and what to watch out for</h2>
+    <div class="needs">
+      <div>
+        <h3>What you'll need</h3>
+        <ul class="checks">
+          <li>A 3D printer (220 × 220 mm bed)</li>
+          <li>The parts to buy: a microcontroller board, two motors with drivers, a servo, limit switches, ball bearings, screws and a felt-tip pen. The book lists each one with its quantity.</li>
+          <li>A 5-volt USB power supply rated at 2&nbsp;A or more, plus a USB-C cable</li>
+          <li>Tools: a 2.5&nbsp;mm hex key, a small screwdriver, needle-nose pliers and a small file</li>
+          <li>A phone – and a computer at most once, to <a href="flash.html">load the firmware onto the board</a></li>
+          <li>No soldering iron: the board comes with its pin headers already soldered, and every wire plugs in.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What to watch out for</h3>
+        <dl class="facts">
+          <dt>Age</dt><dd>Kids aged about 12 and up, building with a parent</dd>
+          <dt>Time</dt><dd>A project for several afternoons. Printing alone takes an estimated 14 hours – the printer does the work while you do something else.</dd>
+          <dt>Power</dt><dd>Run PlotBot from the power supply, not from a computer: a computer's USB port can't deliver enough current. A power bank works too; the book shows how PlotBot keeps it from switching off.</dd>
+          <dt>Stopping</dt><dd>Pull the plug. That stops the robot safely at any time.</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
@@ -137,27 +154,28 @@
       <h2 id="maker-title">For makers: specs you can check the maths on</h2>
       <p>PlotBot is a five-bar SCARA: shoulders 36 mm apart, 65 mm upper arms, 90 mm forearms.
         The firmware does the kinematics itself. The pen tip lags slightly behind the holder, so the firmware overshoots each corner a little to keep it sharp.</p>
+      <p>An ESP32 runs the show. It sets up its own Wi-Fi hotspot with a captive portal, and firmware updates arrive over that same Wi-Fi.</p>
       <p><a href="kinematics/">Kinematics simulator: how accurately does a five-bar linkage draw?</a></p>
-      <table class="specs">
-        <caption class="visually-hidden">Specifications</caption>
-        <tr><th scope="row">Controller</th><td>ESP32 (ELEGOO ESP-32, headers pre-soldered)</td></tr>
-        <tr><th scope="row">Drive</th><td>2 × 28BYJ-48 with ULN2003 drivers, half-stepping</td></tr>
-        <tr><th scope="row">Pen lift</th><td>SG90 servo with an eccentric cam, gentle lowering</td></tr>
-        <tr><th scope="row">Mechanics</th><td>Five-bar linkage with ball bearings</td></tr>
-        <tr><th scope="row">Drawing area</th><td>80 × 80 mm</td></tr>
-        <tr><th scope="row">Homing</th><td>2 limit switches; calibration with a test sheet, values survive firmware updates</td></tr>
-        <tr><th scope="row">Printed parts</th><td>PLA, 0.4 mm nozzle, 0.2 mm layers, no supports; largest part 142 × 97 mm</td></tr>
-        <tr><th scope="row">Control</th><td>Its own Wi-Fi hotspot with captive portal, phone page, Blockly, over-the-air updates</td></tr>
-        <tr><th scope="row">Power</th><td>5 V, 2 A or more over USB-C, power supply, not a computer</td></tr>
-      </table>
+      <details>
+        <summary>Specifications for makers</summary>
+        <table class="specs">
+          <caption class="visually-hidden">Specifications</caption>
+          <tr><th scope="row">Controller</th><td>ESP32 (ELEGOO ESP-32, headers pre-soldered)</td></tr>
+          <tr><th scope="row">Drive</th><td>2 × 28BYJ-48 with ULN2003 drivers, half-stepping</td></tr>
+          <tr><th scope="row">Pen lift</th><td>SG90 servo with an eccentric cam, gentle lowering</td></tr>
+          <tr><th scope="row">Mechanics</th><td>Five-bar linkage with ball bearings</td></tr>
+          <tr><th scope="row">Drawing area</th><td>80 × 80 mm</td></tr>
+          <tr><th scope="row">Homing</th><td>2 limit switches; calibration with a test sheet, values survive firmware updates</td></tr>
+          <tr><th scope="row">Printed parts</th><td>PLA, 0.4 mm nozzle, 0.2 mm layers, no supports; largest part 142 × 97 mm</td></tr>
+          <tr><th scope="row">Control</th><td>Its own Wi-Fi hotspot with captive portal, phone page, Blockly, over-the-air updates</td></tr>
+          <tr><th scope="row">Power</th><td>5 V, 2 A or more over USB-C, power supply, not a computer</td></tr>
+        </table>
+      </details>
     </div>
     <figure>
-      <picture>
-        <source srcset="../img/roboter-vorne.webp" type="image/webp">
-        <img src="../img/roboter-vorne.png" width="800" height="884" loading="lazy"
-             alt="3D model of PlotBot from the front left: the pen holder with its upright pen in front, the two arms and the base plate with motors behind.">
-      </picture>
-      <figcaption>Front-left view (3D model).</figcaption>
+      <a href="kinematics/"><img class="diagram" src="../img/kinematik-en.webp" width="800" height="600" loading="lazy"
+           alt="Top view from the kinematics simulator: the two motor shafts at the bottom, the upper arms and forearms reaching up to the pen. A green area marks where the pen can reach; a star sits inside the dashed square of the 80 × 80 mm drawing area."></a>
+      <figcaption>From the kinematics simulator: both arms seen from above, the 80 × 80 mm drawing area and the region the pen can reach.</figcaption>
     </figure>
   </div>
 </section>
@@ -173,6 +191,54 @@
     </ul>
     <h3 class="gap">Also in the PlotBot-Kit</h3>
     <p>The print files (STL and 3MF), the ready-to-flash ESP32 firmware, its source code and the program that makes the QR sticker.</p>
+    <div class="cta">
+      <a class="button" href="#newsletter">Notify me</a>
+      <span class="price">The book and the kit are coming soon. We'll email you when they're out.</span>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Do I need a 3D printer?</summary>
+        <p>Yes. You print PlotBot's parts yourself, in PLA and without supports, on a printer with a 220 × 220 mm bed. A course is different: there the instructors do the printing, and the kids build and code.</p>
+      </details>
+      <details>
+        <summary>What age is PlotBot for?</summary>
+        <p>Kids aged about 12 and up, with an adult alongside. Loading the firmware from a computer the first time is a job for the adult.</p>
+      </details>
+      <details>
+        <summary>Do I need to know how to solder?</summary>
+        <p>No. The microcontroller board comes with its pin headers already soldered, and every wire plugs in.</p>
+      </details>
+      <details>
+        <summary>Does the robot need an app or an internet connection?</summary>
+        <p>Neither. PlotBot starts its own Wi-Fi network and serves its own control page, which opens in your phone's browser. You need a computer at most once, to load the firmware the first time.</p>
+      </details>
+      <details>
+        <summary>Are the robot's pages in English?</summary>
+        <p>No. The control page on the robot and its Blockly blocks are in German.</p>
+      </details>
+      <details>
+        <summary>How big does it draw, and with what?</summary>
+        <p>The drawing area is 80 × 80 mm, on a sheet of A4 paper. The pen holder is made for the edding 1340 brush pen.</p>
+      </details>
+      <details>
+        <summary>What if something doesn't work?</summary>
+        <p>The book has a troubleshooting chapter that goes through the typical faults: the control page doesn't open by itself, corners come out round, lines are drawn double. Every page on the robot has a red stop button at the bottom – and if that ever fails to respond, pull the plug.</p>
+      </details>
+      <details>
+        <summary>How do firmware updates get onto the robot?</summary>
+        <p>Over its Wi-Fi, from your phone, with no computer and no cable. Your calibration and settings are kept. Only the first install <a href="flash.html">goes over USB from a computer</a>.</p>
+      </details>
+      <details>
+        <summary>What happens to my email address?</summary>
+        <p>We use it for one thing: to tell you when the book and the PlotBot-Kit come out. You're only on the list once you've clicked the link in the confirmation email, and every email has an unsubscribe link. The emails are sent through Brevo, a service based in France. The <a href="privacy.html">privacy policy</a> has the details.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -201,7 +267,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.11.0</span>. The images are 3D models, drawings from the robot's example programs and a screenshot of its phone page.
+    <p>PlotBot-Kit – website version <span class="version">0.12.0</span>. The pictures of the robot are 3D models, not photos, and the video is a 3D animation too. The four drawings come from PlotBot's example programs, the phone picture is a screenshot of its control page, and the diagram comes from the kinematics simulator.
       · <a href="../de/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
     <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
   </div>
