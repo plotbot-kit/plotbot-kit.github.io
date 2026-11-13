@@ -5,7 +5,7 @@
   --radius: 1rem; --max: 68rem;
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4rem; }
 body {
   margin: 0; color: var(--ink); background: var(--paper);
   font: 1.0625rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -25,15 +25,24 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
 .lang a { margin-left: .75rem; }
 .lang [aria-current] { font-weight: 700; color: var(--ink); text-decoration: none; }
 
-/* Hero: for kids – big picture, few words */
+/* Slim page header on the landing pages: stays at the top while scrolling (CSS only) */
+.sitebar { position: sticky; top: 0; z-index: 5; background: var(--cream); border-bottom: 1px solid var(--line); }
+.sitebar .topbar { padding: .45rem 0; }
+.sitebar .topbar { gap: .6rem; }
+.sitebar .brand { margin-right: auto; }
+.sitebar .brand, .sitebar .button { white-space: nowrap; }
+.sitebar .lang a { margin-left: .5rem; }
+.sitebar .lang a:first-child { margin-left: 0; }
+
+/* Hero: speaks to parents – headline, the two buttons, then the picture */
 .hero { background: var(--cream); border-bottom: 4px dashed var(--sun); overflow: hidden; }
-.hero .wrap { display: grid; gap: .75rem 2rem; padding-bottom: 2rem;
-  grid-template-areas: "nav" "intro" "robot" "doodles" "cta"; }
-.hero .topbar { grid-area: nav; } .hero .intro { grid-area: intro; } .hero .stage { grid-area: robot; }
-.hero .doodles { grid-area: doodles; } .hero .cta { grid-area: cta; }
+.hero .wrap { display: grid; gap: .75rem 2rem; padding-top: .75rem; padding-bottom: 2rem;
+  grid-template-areas: "intro" "cta" "robot" "doodles"; }
+.hero .intro { grid-area: intro; } .hero .stage { grid-area: robot; }
+.hero .doodles { grid-area: doodles; } .hero .cta { grid-area: cta; margin: 0 0 .5rem; }
 .hero h1 { font-size: clamp(2.1rem, 8vw, 3.6rem); line-height: 1.05; margin: .5rem 0 .25rem; letter-spacing: -.02em; }
 .hero h1 span { color: var(--pink); }
-.hero .kicker { font-size: 1.25rem; margin: 0 0 1rem; color: var(--muted); }
+.hero .kicker { font-size: clamp(1.05rem, 4.2vw, 1.25rem); margin: 0 0 .5rem; color: var(--muted); }
 .stage { position: relative; }
 .stage .robot { width: auto; max-width: min(80%, 26rem); max-height: min(30rem, 62vh); margin: 0 auto; padding-top: .5rem; }
 .doodles { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; max-width: 26rem; margin: 0; padding: 0; list-style: none; }
@@ -45,6 +54,11 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
 .button { display: inline-block; background: var(--pink); color: #fff; font-weight: 700; font-size: 1.1rem;
   padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; text-align: center; box-shadow: 0 3px 0 #a61e4d; }
 .button:hover { background: #c2255c; }
+.button.small { font-size: .9rem; padding: .4rem .9rem; box-shadow: 0 2px 0 #a61e4d; }
+.button.ghost { background: #fff; color: #a61e4d; box-shadow: inset 0 0 0 2px var(--pink), 0 3px 0 var(--line); }
+.button.ghost:hover { background: #fff0f5; }
+.button.ghost:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.cta .price { flex-basis: 100%; }
 .price { font-size: 1rem; color: var(--muted); }
 
 /* Sections */
@@ -60,6 +74,25 @@ h3 { font-size: 1.2rem; margin: 0 0 .4rem; }
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1rem; margin: 1.25rem 0; }
 .facts dt { font-weight: 700; }
 .facts dd { margin: 0; }
+/* "What you need": checklist with ticks next to the short facts */
+.needs { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+.needs > div { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
+.needs .facts { margin: .75rem 0 0; }
+.checks { list-style: none; padding: 0; margin: .75rem 0 0; display: grid; gap: .6rem; }
+.checks li { position: relative; padding-left: 2rem; }
+.checks li::before { content: "✓"; content: "✓" / ""; position: absolute; left: 0; top: .15rem; width: 1.35rem; height: 1.35rem;
+  border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: .85rem; line-height: 1.35rem; text-align: center; }
+/* Collapsible blocks (<details>, no JS): FAQ and the specs for makers */
+details { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 0 1.2rem; }
+details + details { margin-top: .6rem; }
+summary { cursor: pointer; font-weight: 700; padding: .85rem 0; }
+summary:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+details[open] > summary { border-bottom: 1px solid var(--line); }
+details > p:last-child { margin-bottom: 1rem; }
+details .specs { margin: 0 0 .75rem; table-layout: fixed; }
+details .specs th, details .specs td { overflow-wrap: break-word; hyphens: auto; }
+.faq { max-width: 46rem; }
+.diagram { border: 1px solid var(--line); border-radius: var(--radius); }
 .split { display: grid; gap: 1.5rem; align-items: center; }
 figure { margin: 0; }
 figcaption { font-size: .9rem; color: var(--muted); margin-top: .4rem; }
@@ -73,7 +106,7 @@ figcaption { font-size: .9rem; color: var(--muted); margin-top: .4rem; }
 .film-poster { display: block; position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: none; font: inherit; cursor: pointer; }
 .film-poster img, .film-frame iframe { width: 100%; height: 100%; border: 0; object-fit: cover; }
 .film-poster:focus-visible { outline: 3px solid var(--pink); outline-offset: -3px; }
-.film-cta { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--pink); color: #fff; font-weight: 700;
+.film-cta { position: absolute; left: 50%; top: .75rem; transform: translateX(-50%); background: var(--pink); color: #fff; font-weight: 700;
   font-size: 1.1rem; padding: .8rem 1.4rem; border-radius: 999px; box-shadow: 0 3px 0 #a61e4d; width: max-content; max-width: 90%; text-align: center; }
 .film-cta::before { content: "▶"; content: "▶" / ""; margin-right: .5em; }
 .film-poster:hover .film-cta { background: #c2255c; }
@@ -84,8 +117,10 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
 
 @media (min-width: 48rem) {
   .hero .wrap { grid-template-columns: 1.1fr 1fr; align-items: start;
-    grid-template-areas: "nav nav" "intro robot" "doodles robot" "cta robot"; }
+    grid-template-areas: "intro robot" "cta robot" "doodles robot"; }
+  .hero .wrap { padding-top: 1.5rem; }
   .hero .stage { align-self: center; }
+  .needs { grid-template-columns: 1fr 1fr; align-items: start; }
   .stage .robot { max-width: min(100%, 32rem); max-height: min(34rem, 72vh); }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .cards.three { grid-template-columns: repeat(3, 1fr); }
@@ -115,7 +150,7 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
 .signup .note { margin: 0; font-size: .9rem; color: var(--muted); }
 
 /* Footer links and legal pages */
-.legal-links a { margin-right: .75rem; }
+.legal-links { display: flex; flex-wrap: wrap; gap: .25rem .75rem; }
 .legal { max-width: 46rem; }
 .legal h2 { font-size: 1.4rem; margin-top: 2rem; }
 .draft { background: var(--cream); border-left: 4px solid var(--sun); padding: .75rem 1rem; }

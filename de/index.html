@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PlotBot – Bau dir deinen Zeichenroboter | PlotBot-Kit</title>
+<title>PlotBot – der Zeichenroboter zum Selberbauen | PlotBot-Kit</title>
 <meta name="description" content="PlotBot, der Zeichenroboter zum Selberbauen: Mit dem PlotBot-Kit bauen Sie und Ihr Kind einen Roboter, der malt – 3D-Druck, zwei Schrittmotoren, ein ESP32 und Blockly auf dem Handy. Das Buch erklärt jeden Schritt – in drei Ausgaben.">
 <link rel="canonical" href="https://plotbot-kit.github.io/de/">
 <link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="book">
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_GB">
-<meta property="og:title" content="PlotBot – Bau dir deinen Zeichenroboter">
+<meta property="og:title" content="PlotBot – der Zeichenroboter zum Selberbauen">
 <meta property="og:description" content="PlotBot, der Zeichenroboter – selbst gedruckt, selbst verkabelt, mit Blockly programmiert. Das PlotBot-Kit zeigt, wie es geht.">
 <meta property="og:url" content="https://plotbot-kit.github.io/de/">
 <meta property="og:image" content="https://plotbot-kit.github.io/img/og.png">
@@ -29,15 +29,28 @@
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt</a>
 
-<header class="hero">
+<header class="sitebar">
   <div class="wrap">
-      <nav class="topbar" aria-label="Navigation">
-        <a class="brand" href="./">PlotBot-Kit</a>
-        <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="../en/" hreflang="en" lang="en" data-lang="en">English</a></span>
-      </nav>
+    <nav class="topbar" aria-label="Navigation">
+      <a class="brand" href="./">PlotBot-Kit</a>
+      <a class="button small" href="#newsletter">Eintragen</a>
+      <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de" title="Deutsch">DE</a><a href="../en/" hreflang="en" lang="en" data-lang="en" title="English">EN</a></span>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+
+<div class="hero">
+  <div class="wrap">
     <div class="intro">
-      <h1>Bau dir einen Roboter, <span>der malt.</span></h1>
-      <p class="kicker">Das ist PlotBot, der Zeichenroboter. Zwei Arme, ein Stift – und dein Handy sagt ihm, was er zeichnen soll.</p>
+      <h1>Ihr Kind baut einen Roboter, <span>der malt.</span></h1>
+      <p class="kicker">PlotBot ist ein Zeichenroboter zum Selberbauen: zwei Arme, ein Stift – und das Handy sagt ihm, was er zeichnen soll. Für Kinder ab etwa 12 Jahren, die mit ihren Eltern bauen.</p>
+    </div>
+    <div class="cta">
+      <a class="button" href="#newsletter">Benachrichtigt werden</a>
+      <a class="button ghost" href="ausprobieren/">Im Browser ausprobieren</a>
+      <span class="price">Buch und Kit erscheinen bald. Ausprobieren können Sie schon jetzt: Im Browser setzen Sie Blöcke zusammen, und ein simulierter PlotBot zeichnet Ihr Programm.</span>
     </div>
     <figure class="stage" data-frames="../img/drehscheibe/" data-label="PlotBot drehen" data-valuetext="Ansicht {deg}°">
       <picture>
@@ -45,23 +58,17 @@
         <img class="robot" src="../img/roboter.png" width="800" height="849"
              alt="3D-Modell des PlotBot: Auf einer dunkelgrauen Grundplatte drehen zwei Motoren je einen orangefarbenen Oberarm; die hellgrauen Unterarme treffen sich an einem senkrecht stehenden Stift.">
       </picture>
-      <p class="spin-hint" id="spin-hint" hidden>Zum Drehen ziehen oder Pfeiltasten nutzen</p>
+      <p class="spin-hint" id="spin-hint" hidden>Ziehen oder Pfeiltasten</p>
       <figcaption>So sieht er aus, wenn alles gedruckt und verschraubt ist (3D-Modell).</figcaption>
     </figure>
-      <ul class="doodles" aria-label="Bilder, die der Roboter nach kleinen Programmen zeichnet">
-        <li><img src="../img/blume.svg" alt="Blume aus acht Blütenblättern" width="72" height="72">Blume</li>
-        <li><img src="../img/stern.svg" alt="Fünfzackiger Stern" width="72" height="72">Stern</li>
-        <li><img src="../img/spirale.svg" alt="Eckige Spirale" width="72" height="72">Spirale</li>
-        <li><img src="../img/haus.svg" alt="Haus mit Dach und Tür" width="72" height="72">Haus</li>
-      </ul>
-      <div class="cta">
-        <a class="button" href="#newsletter">Benachrichtigt werden</a>
-        <span class="price">Buch und Kit erscheinen bald.</span>
-      </div>
+    <ul class="doodles" aria-label="Bilder, die der Roboter nach kleinen Programmen zeichnet">
+      <li><img src="../img/blume.svg" alt="Blume aus acht Blütenblättern" width="72" height="72">Blume</li>
+      <li><img src="../img/stern.svg" alt="Fünfzackiger Stern" width="72" height="72">Stern</li>
+      <li><img src="../img/spirale.svg" alt="Eckige Spirale" width="72" height="72">Spirale</li>
+      <li><img src="../img/haus.svg" alt="Haus mit Dach und Tür" width="72" height="72">Haus</li>
+    </ul>
   </div>
-</header>
-
-<main id="inhalt">
+</div>
 
 <section class="film" aria-labelledby="film-titel">
   <div class="wrap">
@@ -69,7 +76,7 @@
     <!-- YouTube video ID (unlisted video): it appears in data-youtube-id and in the link in the next line, and in the note below the picture. -->
     <div class="film-frame">
       <a class="film-poster" aria-describedby="film-hinweis" data-youtube-id="JmEut_4dexs" href="https://youtu.be/JmEut_4dexs" data-play-label="Film abspielen" data-title="PlotBot-Film auf YouTube">
-        <img src="../img/film-poster.webp" width="1280" height="720" alt="">
+        <img src="../img/film-poster-de.webp" width="1280" height="720" alt="">
         <span class="film-cta">Film auf YouTube ansehen</span>
       </a>
     </div>
@@ -86,7 +93,7 @@
       <li><span class="tag">Mechanik</span><h3>Arme, Getriebe, Lager</h3>
         <p>Zwei Motoren drehen je einen Oberarm, die Unterarme treffen sich am Stift. Ihr Kind sieht, warum schon ein wenig Spiel zwischen den Zahnrädern im Motor eine Linie verwackelt und wozu ein Kugellager gut ist.</p></li>
       <li><span class="tag">Elektronik</span><h3>Mikrocontroller und Motoren</h3>
-        <p>Ein ESP32 steuert zwei Schrittmotoren und einen Servo, der den Stift hebt. Beim Start fährt jeder Arm an einen Endschalter; von dort zählt der Roboter jeden Schritt mit.</p></li>
+        <p>Ein Mikrocontroller steuert zwei Schrittmotoren und einen Servo, der den Stift hebt. Beim Start fährt jeder Arm an einen Endschalter; von dort zählt der Roboter jeden Schritt mit.</p></li>
       <li><span class="tag">Programmieren</span><h3>Blockly auf dem Handy</h3>
         <p>Ihr Kind setzt Blöcke zusammen: Stift ab, 20 mm vor, um 90° drehen, viermal wiederholen. Ein Tipp auf „Zeichnen lassen“, und der Roboter zeichnet ein Quadrat.</p></li>
       <li><span class="tag">Geometrie</span><h3>Winkel, die man sieht</h3>
@@ -97,18 +104,28 @@
 
 <section aria-labelledby="rahmen-titel">
   <div class="wrap">
-    <div>
-      <h2 id="rahmen-titel">Das brauchen Sie – und darauf achten Sie</h2>
-      <dl class="facts">
-        <dt>Alter</dt><dd>Kinder ab etwa 12 Jahren, die mit ihren Eltern bauen</dd>
-        <dt>Zeit</dt><dd>Ein Projekt für mehrere Nachmittage. Allein der Druck dauert geschätzt rund 14 Stunden – der Drucker arbeitet, während Sie anderes tun.</dd>
-        <dt>Strom</dt><dd>Ein USB-Netzteil mit 5&nbsp;Volt und mindestens 2&nbsp;A, dazu ein USB-C-Kabel. Gezeichnet wird nicht am Computer: Sein USB-Anschluss liefert zu wenig Strom. Tipp: Eine Powerbank geht auch, das Buch zeigt, wie der PlotBot sie wach hält.</dd>
-        <dt>Löten</dt><dd>Nicht nötig: Das Mikrocontroller-Board (ESP32) kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</dd>
-        <dt>Werkzeug</dt><dd>Innensechskantschlüssel 2,5 mm, kleiner Schraubendreher, Spitzzange, kleine Feile</dd>
-        <dt>Geräte</dt><dd>Ein 3D-Drucker (Druckbett 220 × 220 mm), das USB-Netzteil, höchstens einmal ein Computer zum ersten <a href="flashen.html">Aufspielen der Firmware</a>, danach nur noch ein Handy</dd>
-      </dl>
-      <p>Das Buch nennt die Kaufteile mit Stückzahl: Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Filzstift.
-        Und es sagt, wie Sie den Roboter jederzeit sicher stoppen: Stecker ziehen.</p>
+    <h2 id="rahmen-titel">Das brauchen Sie – und darauf achten Sie</h2>
+    <div class="needs">
+      <div>
+        <h3>Zum Bauen</h3>
+        <ul class="checks">
+          <li>Einen 3D-Drucker (Druckbett 220 × 220 mm)</li>
+          <li>Die Kaufteile: Mikrocontroller-Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Pinselstift (edding 1340). Das Buch nennt jedes Teil mit Stückzahl.</li>
+          <li>Ein USB-Netzteil mit 5&nbsp;Volt und mindestens 2&nbsp;A, dazu ein USB-C-Kabel</li>
+          <li>Werkzeug: Innensechskantschlüssel 2,5&nbsp;mm, kleiner Schraubendreher, Spitzzange, kleine Feile</li>
+          <li>Ein Handy – und höchstens einmal einen Computer, um die <a href="flashen.html">Firmware aufzuspielen</a></li>
+          <li>Keinen Lötkolben: Das Board kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Gut zu wissen</h3>
+        <dl class="facts">
+          <dt>Alter</dt><dd>Kinder ab etwa 12 Jahren, die mit ihren Eltern bauen</dd>
+          <dt>Zeit</dt><dd>Ein Projekt für mehrere Nachmittage. Allein der Druck dauert geschätzt rund 14 Stunden – der Drucker arbeitet, während Sie anderes tun.</dd>
+          <dt>Strom</dt><dd>Der PlotBot zeichnet am Netzteil, nicht am Computer: Dessen USB-Anschluss liefert zu wenig Strom. Eine Powerbank geht auch; das Buch zeigt, wie der PlotBot sie wach hält.</dd>
+          <dt>Stoppen</dt><dd>Stecker ziehen – so halten Sie den Roboter jederzeit sicher an.</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
@@ -137,27 +154,28 @@
       <h2 id="maker-titel">Für Maker: Technik, die man nachrechnen kann</h2>
       <p>Der PlotBot ist ein Fünfgelenk-SCARA: zwei Schultern im Abstand von 36 mm, Oberarme 65 mm, Unterarme 90 mm.
         Die Firmware rechnet die Kinematik selbst. Weil die Stiftspitze etwas nachschleppt, fährt die Firmware an jeder Ecke ein Stück darüber hinaus. So werden Ecken spitz.</p>
+      <p>Gesteuert wird er von einem ESP32, der sein eigenes WLAN mit Captive Portal aufspannt. Auch Updates kommen über dieses WLAN.</p>
       <p><a href="kinematik/">Kinematik-Simulator: Wie genau zeichnet ein Fünfgelenk?</a></p>
-      <table class="specs">
-        <caption class="visually-hidden">Technische Daten</caption>
-        <tr><th scope="row">Steuerung</th><td>ESP32 (ELEGOO ESP-32, Stiftleisten angelötet)</td></tr>
-        <tr><th scope="row">Antrieb</th><td>2 × 28BYJ-48 mit ULN2003-Treiber, Halbschritt</td></tr>
-        <tr><th scope="row">Stifthub</th><td>SG90-Servo mit Exzenter-Nocke, sanftes Absenken</td></tr>
-        <tr><th scope="row">Mechanik</th><td>Fünfgelenkkette mit Kugellagern</td></tr>
-        <tr><th scope="row">Zeichenfläche</th><td>80 × 80 mm</td></tr>
-        <tr><th scope="row">Referenz</th><td>2 Endschalter, Kalibrierung mit Testblatt, Werte überstehen Updates</td></tr>
-        <tr><th scope="row">Druckteile</th><td>PLA, Düse 0,4 mm, Schicht 0,2 mm, ohne Stützen; größtes Teil 142 × 97 mm</td></tr>
-        <tr><th scope="row">Bedienung</th><td>Eigenes WLAN mit Captive Portal, Handyseite, Blockly, Updates über WLAN</td></tr>
-        <tr><th scope="row">Strom</th><td>5 V, mindestens 2 A über USB-C, Netzteil, nicht am Computer</td></tr>
-      </table>
+      <details>
+        <summary>Technische Daten für Maker</summary>
+        <table class="specs">
+          <caption class="visually-hidden">Technische Daten</caption>
+          <tr><th scope="row">Steuerung</th><td>ESP32 (ELEGOO ESP-32, Stiftleisten angelötet)</td></tr>
+          <tr><th scope="row">Antrieb</th><td>2 × 28BYJ-48 mit ULN2003-Treiber, Halbschritt</td></tr>
+          <tr><th scope="row">Stifthub</th><td>SG90-Servo mit Exzenter-Nocke, sanftes Absenken</td></tr>
+          <tr><th scope="row">Mechanik</th><td>Fünfgelenkkette mit Kugellagern</td></tr>
+          <tr><th scope="row">Zeichenfläche</th><td>80 × 80 mm</td></tr>
+          <tr><th scope="row">Referenz</th><td>2 Endschalter, Kalibrierung mit Testblatt, Werte überstehen Updates</td></tr>
+          <tr><th scope="row">Druckteile</th><td>PLA, Düse 0,4 mm, Schicht 0,2 mm, ohne Stützen; größtes Teil 142 × 97 mm</td></tr>
+          <tr><th scope="row">Bedienung</th><td>Eigenes WLAN mit Captive Portal, Handyseite, Blockly, Updates über WLAN</td></tr>
+          <tr><th scope="row">Strom</th><td>5 V, mindestens 2 A über USB-C, Netzteil, nicht am Computer</td></tr>
+        </table>
+      </details>
     </div>
     <figure>
-      <picture>
-        <source srcset="../img/roboter-vorne.webp" type="image/webp">
-        <img src="../img/roboter-vorne.png" width="800" height="884" loading="lazy"
-             alt="3D-Modell des PlotBot von vorn links: Stifthalter mit senkrechtem Stift vorn, dahinter die beiden Arme und die Grundplatte mit Motoren.">
-      </picture>
-      <figcaption>Ansicht von vorn links (3D-Modell).</figcaption>
+      <a href="kinematik/"><img class="diagram" src="../img/kinematik-de.webp" width="800" height="600" loading="lazy"
+           alt="Draufsicht aus dem Kinematik-Simulator: unten die beiden Motorwellen, darüber die Oberarme und die Unterarme bis zum Stift. Ein grüner Bereich zeigt, was der Stift erreicht; im gestrichelten Quadrat der Zeichenfläche von 80 × 80 mm liegt ein Stern."></a>
+      <figcaption>Aus dem Kinematik-Simulator: die beiden Arme von oben, die Zeichenfläche von 80 × 80 mm und der Bereich, den der Stift erreicht.</figcaption>
     </figure>
   </div>
 </section>
@@ -173,6 +191,50 @@
     </ul>
     <h3 class="gap">Außerdem im PlotBot-Kit</h3>
     <p>Die Druckdateien (STL und 3MF), die fertige Firmware für den ESP32, den Quellcode der Firmware und das Programm für den QR-Aufkleber.</p>
+    <div class="cta">
+      <a class="button" href="#newsletter">Benachrichtigt werden</a>
+      <span class="price">Buch und Kit erscheinen bald. Wir schreiben Ihnen, sobald es so weit ist.</span>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="faq-titel">
+  <div class="wrap">
+    <h2 id="faq-titel">Häufige Fragen</h2>
+    <div class="faq">
+      <details>
+        <summary>Brauche ich einen 3D-Drucker?</summary>
+        <p>Ja. Die Teile des PlotBot drucken Sie selbst, aus PLA und ohne Stützen. Der Drucker braucht ein Druckbett von 220 × 220 mm. Anders ist es in einem Kurs: Dort druckt die Kursleitung, und die Kinder bauen und programmieren.</p>
+      </details>
+      <details>
+        <summary>Ab welchem Alter ist der PlotBot geeignet?</summary>
+        <p>Für Kinder ab etwa 12 Jahren, mit einem Erwachsenen an der Seite. Das erste Aufspielen der Firmware am Computer übernimmt ein Erwachsener.</p>
+      </details>
+      <details>
+        <summary>Muss ich löten können?</summary>
+        <p>Nein. Das Mikrocontroller-Board kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</p>
+      </details>
+      <details>
+        <summary>Braucht der Roboter eine App oder Internet?</summary>
+        <p>Nein. Der PlotBot öffnet sein eigenes WLAN und bringt seine Steuerseite selbst mit. Sie läuft im Browser des Handys. Einen Computer brauchen Sie höchstens einmal, zum ersten Aufspielen der Firmware.</p>
+      </details>
+      <details>
+        <summary>Wie groß zeichnet er, und womit?</summary>
+        <p>Die Zeichenfläche misst 80 × 80 mm, gezeichnet wird auf ein Blatt A4. Der Stifthalter ist für den Pinselstift edding 1340 gebaut.</p>
+      </details>
+      <details>
+        <summary>Was ist, wenn etwas nicht klappt?</summary>
+        <p>Das Buch hat dafür ein eigenes Kapitel, „Wenn etwas nicht klappt“. Es geht die typischen Fehlerbilder durch: Die Steuerseite öffnet sich nicht von selbst, Ecken werden rund, Striche liegen doppelt. Jede Handyseite des PlotBot hat unten einen roten Stopp-Knopf – und wenn der einmal nicht reagiert, ziehen Sie den Stecker.</p>
+      </details>
+      <details>
+        <summary>Wie kommt neue Firmware auf den Roboter?</summary>
+        <p>Über sein WLAN, vom Handy aus, ohne Computer und ohne Kabel. Kalibrierung und Einstellungen bleiben dabei erhalten. Nur das erste <a href="flashen.html">Aufspielen der Firmware</a> läuft über USB am Computer.</p>
+      </details>
+      <details>
+        <summary>Was passiert mit meiner E-Mail-Adresse?</summary>
+        <p>Wir nutzen sie nur, um Ihnen zu schreiben, wenn Buch und PlotBot-Kit erscheinen. Auf der Liste stehen Sie erst, wenn Sie den Link in der Bestätigungsmail angeklickt haben, und jede E-Mail enthält einen Link zum Abmelden. Den Versand übernimmt der Dienst Brevo aus Frankreich. Alles Weitere steht in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -201,7 +263,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – Webseite Version <span class="version">0.11.0</span>. Die Bilder sind 3D-Modelle, Zeichnungen aus den Beispielprogrammen des PlotBot und ein Bildschirmfoto seiner Handyseite.
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.12.0</span>. Die Bilder des Roboters sind 3D-Modelle, keine Fotos; auch der Film ist eine 3D-Animation. Die vier Motive stammen aus den Beispielprogrammen des PlotBot, das Handybild ist ein Bildschirmfoto seiner Steuerseite, das Diagramm kommt aus dem Kinematik-Simulator.
       · <a href="../en/" hreflang="en" lang="en" data-lang="en">English version</a></p>
     <p class="legal-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20R%C3%BCckmeldung">Rückmeldung schicken</a></p>
   </div>
