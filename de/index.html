@@ -66,14 +66,14 @@
 <section class="film" aria-labelledby="film-titel">
   <div class="wrap">
     <h2 id="film-titel">Sehen Sie ihm beim Zeichnen zu</h2>
-    <!-- YouTube video ID (unlisted video): it appears twice in the next line, in data-youtube-id and in the link. -->
+    <!-- YouTube video ID (unlisted video): it appears in data-youtube-id and in the link in the next line, and in the note below the picture. -->
     <div class="film-frame">
-      <a class="film-poster" data-youtube-id="JmEut_4dexs" href="https://youtu.be/JmEut_4dexs" data-play-label="Film abspielen" data-title="PlotBot-Film auf YouTube">
+      <a class="film-poster" aria-describedby="film-hinweis" data-youtube-id="JmEut_4dexs" href="https://youtu.be/JmEut_4dexs" data-play-label="Film abspielen" data-title="PlotBot-Film auf YouTube">
         <img src="../img/film-poster.webp" width="1280" height="720" alt="">
         <span class="film-cta">Film auf YouTube ansehen</span>
       </a>
     </div>
-    <p class="film-note">Ein Klick auf das Bild lädt den Film von YouTube (Google). Dabei erfährt Google unter anderem Ihre IP-Adresse. Mehr dazu in der <a href="datenschutz.html#youtube">Datenschutzerklärung</a>.</p>
+    <p class="film-note" id="film-hinweis">Wenn Sie den Film starten, lädt ihn Ihr Browser von YouTube (Google). Dabei erfährt Google unter anderem Ihre IP-Adresse. Mehr dazu in der <a href="datenschutz.html#youtube">Datenschutzerklärung</a>. Sie können den Film auch <a href="https://youtu.be/JmEut_4dexs">direkt bei YouTube ansehen</a>.</p>
   </div>
 </section>
 

@@ -1,7 +1,8 @@
 // Turntable for the hero robot: drag (Pointer Events) or arrow keys swap between 36 pre-rendered WebP frames.
 // The robot turns slowly by itself (one turn in about 20 s) until the visitor first touches it: pointer down, touch,
 // key or focus on the image. Then it stops for good. It pauses while the stage is off-screen.
-// With prefers-reduced-motion it never turns by itself, and frames load only on intent (pointer over, focus).
+// With prefers-reduced-motion or the browser's data-saver setting it never turns by itself,
+// and the frames load only on intent (pointer over, focus).
 // Without JS the static <picture> stays.
 // If any frame fails to load, the hint disappears and the static <picture> stays.
 // Texts come from data attributes in the HTML: data-frames, data-label, data-valuetext ("{deg}" = angle).
@@ -73,7 +74,7 @@
     timer = setTimeout(function () {
       timer = null;
       if (calm.matches) { stop(); return; }
-      if (!document.hidden) show(Math.max(current, 0) - 1);
+      show(Math.max(current, 0) - 1);
       spin();
     }, TURN_MS / N);
   }
@@ -116,7 +117,9 @@
     e.preventDefault();
   });
 
-  if (!calm.matches) {
+  var saveData = navigator.connection && navigator.connection.saveData;
+  document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else spin(); });
+  if (!calm.matches && !saveData) {
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         visible = entries[entries.length - 1].isIntersecting;

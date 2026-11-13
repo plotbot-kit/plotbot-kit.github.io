@@ -66,14 +66,14 @@
 <section class="film" aria-labelledby="film-title">
   <div class="wrap">
     <h2 id="film-title">Watch it draw</h2>
-    <!-- YouTube video ID (unlisted video): it appears twice in the next line, in data-youtube-id and in the link. -->
+    <!-- YouTube video ID (unlisted video): it appears in data-youtube-id and in the link in the next line, and in the note below the picture. -->
     <div class="film-frame">
-      <a class="film-poster" data-youtube-id="0bYeE9UlEwY" href="https://youtu.be/0bYeE9UlEwY" data-play-label="Play the video" data-title="PlotBot video on YouTube">
+      <a class="film-poster" aria-describedby="film-note" data-youtube-id="0bYeE9UlEwY" href="https://youtu.be/0bYeE9UlEwY" data-play-label="Play the video" data-title="PlotBot video on YouTube">
         <img src="../img/film-poster.webp" width="1280" height="720" alt="">
         <span class="film-cta">Watch the video on YouTube</span>
       </a>
     </div>
-    <p class="film-note">Clicking the picture loads the video from YouTube (Google). Google then sees your IP address, among other things. More in the <a href="privacy.html#youtube">privacy policy</a>.</p>
+    <p class="film-note" id="film-note">Starting the video loads it from YouTube (Google). Google then sees your IP address, among other things. More in the <a href="privacy.html#youtube">privacy policy</a>. You can also <a href="https://youtu.be/0bYeE9UlEwY">watch it on YouTube itself</a>.</p>
   </div>
 </section>
 

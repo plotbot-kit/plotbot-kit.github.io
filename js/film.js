@@ -10,6 +10,7 @@
   var button = document.createElement('button');
   button.type = 'button';
   button.className = 'film-poster';
+  if (link.hasAttribute('aria-describedby')) button.setAttribute('aria-describedby', link.getAttribute('aria-describedby'));
   button.appendChild(link.querySelector('img'));
   var cta = document.createElement('span');
   cta.className = 'film-cta';

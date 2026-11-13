@@ -74,7 +74,7 @@ figcaption { font-size: .9rem; color: var(--muted); margin-top: .4rem; }
 .film-poster img, .film-frame iframe { width: 100%; height: 100%; border: 0; object-fit: cover; }
 .film-poster:focus-visible { outline: 3px solid var(--pink); outline-offset: -3px; }
 .film-cta { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--pink); color: #fff; font-weight: 700;
-  font-size: 1.1rem; padding: .8rem 1.4rem; border-radius: 999px; box-shadow: 0 3px 0 #a61e4d; white-space: nowrap; }
+  font-size: 1.1rem; padding: .8rem 1.4rem; border-radius: 999px; box-shadow: 0 3px 0 #a61e4d; width: max-content; max-width: 90%; text-align: center; }
 .film-cta::before { content: "▶"; content: "▶" / ""; margin-right: .5em; }
 .film-poster:hover .film-cta { background: #c2255c; }
 .film-note { font-size: .9rem; color: var(--muted); margin: .5rem 0 0; }
@@ -97,7 +97,7 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
   .doodles li:hover { transform: rotate(-3deg) scale(1.05); }
 }
 
-/* Turntable (js/drehscheibe.js): set up by JS; frames load on intent */
+/* Turntable (js/drehscheibe.js): set up by JS */
 .turntable-pending picture { display: block; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: var(--radius); }
 .turntable-pending picture:active { cursor: grabbing; }
 .turntable-pending picture:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
