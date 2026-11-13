@@ -21,12 +21,13 @@ VERSION="$(sed -n 's/^#define FIRMWARE_VERSION "\(.*\)"/\1/p' "$CONFIG")"
 [ -n "$VERSION" ] || { echo "FIRMWARE_VERSION nicht gefunden in $CONFIG" >&2; exit 1; }
 grep -qaF "$VERSION" "$BUILD/firmware.bin" || { echo "firmware.bin enthält $VERSION nicht – bitte neu bauen" >&2; exit 1; }
 
+TOML="$SITE/firmware/launchpad.toml"
+[ -f "$TOML" ] || { echo "Fehlt: $TOML" >&2; exit 1; }
+
 mkdir -p "$SITE/firmware"
 cp "$BUILD/bootloader.bin" "$BUILD/partitions.bin" "$BUILD/firmware.bin" "$SITE/firmware/"
 cp "$BOOT_APP0" "$SITE/firmware/"
 
-TOML="$SITE/firmware/launchpad.toml"
-[ -f "$TOML" ] || { echo "Fehlt: $TOML" >&2; exit 1; }
 # The app name "PlotBot <version>" appears twice: in supported_apps and as the table header.
 sed -i "s/\"PlotBot [^\"]*\"/\"PlotBot $VERSION\"/g" "$TOML"
 [ "$(grep -c "\"PlotBot $VERSION\"" "$TOML")" = 2 ] || { echo "launchpad.toml: App-Name \"PlotBot $VERSION\" nicht an beiden Stellen" >&2; exit 1; }

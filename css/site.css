@@ -120,7 +120,8 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
 .legal h2 { font-size: 1.4rem; margin-top: 2rem; }
 .draft { background: var(--cream); border-left: 4px solid var(--sun); padding: .75rem 1rem; }
 
-/* Web flasher (de/flashen.html, en/flash.html) */
+/* Flasher pages (de/flashen.html, en/flash.html) */
 .flash-box { background: var(--cream); border-left: 4px solid var(--sun); padding: 1rem 1.2rem; margin: 1.5rem 0; }
 .flash-box p { margin: .5rem 0 0; }
+.flash-box .flash-warn { margin: 0 0 .9rem; }
 .flash-steps li { margin-bottom: .5rem; }
