@@ -34,10 +34,12 @@
     <nav class="topbar" aria-label="Navigation">
       <a class="brand" href="./">PlotBot-Kit</a>
       <a class="button small" href="#newsletter">Notify me</a>
-      <span class="lang" role="group" aria-label="Language"><a href="../de/" hreflang="de" lang="de" data-lang="de" title="Deutsch"><span class="short">DE</span><span class="long">Deutsch</span></a><a href="./" aria-current="page" hreflang="en" lang="en" data-lang="en" title="English"><span class="short">EN</span><span class="long">English</span></a></span>
+      <span class="lang" role="group" aria-label="Language"><a href="../de/" hreflang="de" lang="de" data-lang="de" title="Deutsch">DE</a><a href="./" aria-current="page" hreflang="en" lang="en" data-lang="en" title="English">EN</a></span>
     </nav>
   </div>
 </header>
+
+<main id="content">
 
 <div class="hero">
   <div class="wrap">
@@ -56,7 +58,7 @@
         <img class="robot" src="../img/roboter.png" width="800" height="849"
              alt="3D model of PlotBot: on a dark grey base plate, two motors each turn an orange upper arm; the light grey forearms meet at an upright pen.">
       </picture>
-      <p class="spin-hint" id="spin-hint" hidden>Drag to rotate</p>
+      <p class="spin-hint" id="spin-hint" hidden>Drag or use the arrow keys</p>
       <figcaption>What it looks like once everything is printed and screwed together (3D model).</figcaption>
     </figure>
     <ul class="doodles" aria-label="Pictures the robot draws from small programs">
@@ -67,8 +69,6 @@
     </ul>
   </div>
 </div>
-
-<main id="content">
 
 <section class="film" aria-labelledby="film-title">
   <div class="wrap">
@@ -107,10 +107,10 @@
     <h2 id="needs-title">What you'll need, and what to watch out for</h2>
     <div class="needs">
       <div>
-        <h3>What you'll need</h3>
+        <h3>For the build</h3>
         <ul class="checks">
           <li>A 3D printer (220 × 220 mm bed)</li>
-          <li>The parts to buy: a microcontroller board, two motors with drivers, a servo, limit switches, ball bearings, screws and a felt-tip pen. The book lists each one with its quantity.</li>
+          <li>The parts to buy: a microcontroller board, two motors with drivers, a servo, limit switches, ball bearings, screws and a brush pen (edding 1340). The book lists each one with its quantity.</li>
           <li>A 5-volt USB power supply rated at 2&nbsp;A or more, plus a USB-C cable</li>
           <li>Tools: a 2.5&nbsp;mm hex key, a small screwdriver, needle-nose pliers and a small file</li>
           <li>A phone – and a computer at most once, to <a href="flash.html">load the firmware onto the board</a></li>
@@ -118,7 +118,7 @@
         </ul>
       </div>
       <div>
-        <h3>What to watch out for</h3>
+        <h3>Good to know</h3>
         <dl class="facts">
           <dt>Age</dt><dd>Kids aged about 12 and up, building with a parent</dd>
           <dt>Time</dt><dd>A project for several afternoons. Printing alone takes an estimated 14 hours – the printer does the work while you do something else.</dd>
@@ -204,7 +204,7 @@
     <div class="faq">
       <details>
         <summary>Do I need a 3D printer?</summary>
-        <p>Yes. You print PlotBot's parts yourself, in PLA and without supports, on a printer with a 220 × 220 mm bed. A course is different: there the instructors do the printing, and the kids build and code.</p>
+        <p>Yes. You print PlotBot's parts yourself, in PLA and without supports, on a printer with a 220 × 220 mm bed. On a course, the instructors do the printing and the kids build and code.</p>
       </details>
       <details>
         <summary>What age is PlotBot for?</summary>
@@ -224,15 +224,15 @@
       </details>
       <details>
         <summary>How big does it draw, and with what?</summary>
-        <p>The drawing area is 80 × 80 mm, on a sheet of A4 paper. The pen holder is made for the edding 1340 brush pen.</p>
+        <p>It draws within an 80 × 80 mm area on a sheet of A4. The pen holder is made for the edding 1340 brush pen.</p>
       </details>
       <details>
         <summary>What if something doesn't work?</summary>
-        <p>The book has a troubleshooting chapter that goes through the typical faults: the control page doesn't open by itself, corners come out round, lines are drawn double. Every page on the robot has a red stop button at the bottom – and if that ever fails to respond, pull the plug.</p>
+        <p>The book has a troubleshooting chapter that goes through the typical faults: the control page doesn't open by itself, corners come out round, lines come out doubled. Every page the robot shows on your phone has a red stop button at the bottom – and if that ever fails to respond, pull the plug.</p>
       </details>
       <details>
         <summary>How do firmware updates get onto the robot?</summary>
-        <p>Over its Wi-Fi, from your phone, with no computer and no cable. Your calibration and settings are kept. Only the first install <a href="flash.html">goes over USB from a computer</a>.</p>
+        <p>Over its Wi-Fi, from your phone, with no computer and no cable. Your calibration and settings are kept. Only the <a href="flash.html">first install</a> needs a computer and a USB cable.</p>
       </details>
       <details>
         <summary>What happens to my email address?</summary>

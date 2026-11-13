@@ -33,8 +33,6 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
 .sitebar .brand, .sitebar .button { white-space: nowrap; }
 .sitebar .lang a { margin-left: .5rem; }
 .sitebar .lang a:first-child { margin-left: 0; }
-.long { display: none; }
-@media (min-width: 34rem) { .short { display: none; } .long { display: inline; } }
 
 /* Hero: speaks to parents – headline, the two buttons, then the picture */
 .hero { background: var(--cream); border-bottom: 4px dashed var(--sun); overflow: hidden; }
@@ -57,7 +55,7 @@ a:focus-visible, .button:focus-visible { outline: 3px solid var(--pink); outline
   padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; text-align: center; box-shadow: 0 3px 0 #a61e4d; }
 .button:hover { background: #c2255c; }
 .button.small { font-size: .9rem; padding: .4rem .9rem; box-shadow: 0 2px 0 #a61e4d; }
-.button.ghost { background: #fff; color: #a61e4d; box-shadow: 0 3px 0 var(--line); outline: 2px solid var(--pink); outline-offset: -2px; }
+.button.ghost { background: #fff; color: #a61e4d; box-shadow: inset 0 0 0 2px var(--pink), 0 3px 0 var(--line); }
 .button.ghost:hover { background: #fff0f5; }
 .button.ghost:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .cta .price { flex-basis: 100%; }
@@ -152,7 +150,7 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
 .signup .note { margin: 0; font-size: .9rem; color: var(--muted); }
 
 /* Footer links and legal pages */
-.legal-links a { margin-right: .75rem; }
+.legal-links { display: flex; flex-wrap: wrap; gap: .25rem .75rem; }
 .legal { max-width: 46rem; }
 .legal h2 { font-size: 1.4rem; margin-top: 2rem; }
 .draft { background: var(--cream); border-left: 4px solid var(--sun); padding: .75rem 1rem; }

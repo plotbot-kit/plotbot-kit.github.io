@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PlotBot – Bau dir deinen Zeichenroboter | PlotBot-Kit</title>
+<title>PlotBot – der Zeichenroboter zum Selberbauen | PlotBot-Kit</title>
 <meta name="description" content="PlotBot, der Zeichenroboter zum Selberbauen: Mit dem PlotBot-Kit bauen Sie und Ihr Kind einen Roboter, der malt – 3D-Druck, zwei Schrittmotoren, ein ESP32 und Blockly auf dem Handy. Das Buch erklärt jeden Schritt – in drei Ausgaben.">
 <link rel="canonical" href="https://plotbot-kit.github.io/de/">
 <link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="book">
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_GB">
-<meta property="og:title" content="PlotBot – Bau dir deinen Zeichenroboter">
+<meta property="og:title" content="PlotBot – der Zeichenroboter zum Selberbauen">
 <meta property="og:description" content="PlotBot, der Zeichenroboter – selbst gedruckt, selbst verkabelt, mit Blockly programmiert. Das PlotBot-Kit zeigt, wie es geht.">
 <meta property="og:url" content="https://plotbot-kit.github.io/de/">
 <meta property="og:image" content="https://plotbot-kit.github.io/img/og.png">
@@ -33,11 +33,13 @@
   <div class="wrap">
     <nav class="topbar" aria-label="Navigation">
       <a class="brand" href="./">PlotBot-Kit</a>
-      <a class="button small" href="#newsletter"><span class="short">Eintragen</span><span class="long">Benachrichtigt werden</span></a>
-      <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de" title="Deutsch"><span class="short">DE</span><span class="long">Deutsch</span></a><a href="../en/" hreflang="en" lang="en" data-lang="en" title="English"><span class="short">EN</span><span class="long">English</span></a></span>
+      <a class="button small" href="#newsletter">Eintragen</a>
+      <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de" title="Deutsch">DE</a><a href="../en/" hreflang="en" lang="en" data-lang="en" title="English">EN</a></span>
     </nav>
   </div>
 </header>
+
+<main id="inhalt">
 
 <div class="hero">
   <div class="wrap">
@@ -56,7 +58,7 @@
         <img class="robot" src="../img/roboter.png" width="800" height="849"
              alt="3D-Modell des PlotBot: Auf einer dunkelgrauen Grundplatte drehen zwei Motoren je einen orangefarbenen Oberarm; die hellgrauen Unterarme treffen sich an einem senkrecht stehenden Stift.">
       </picture>
-      <p class="spin-hint" id="spin-hint" hidden>Zum Drehen ziehen</p>
+      <p class="spin-hint" id="spin-hint" hidden>Ziehen oder Pfeiltasten</p>
       <figcaption>So sieht er aus, wenn alles gedruckt und verschraubt ist (3D-Modell).</figcaption>
     </figure>
     <ul class="doodles" aria-label="Bilder, die der Roboter nach kleinen Programmen zeichnet">
@@ -67,8 +69,6 @@
     </ul>
   </div>
 </div>
-
-<main id="inhalt">
 
 <section class="film" aria-labelledby="film-titel">
   <div class="wrap">
@@ -107,22 +107,22 @@
     <h2 id="rahmen-titel">Das brauchen Sie – und darauf achten Sie</h2>
     <div class="needs">
       <div>
-        <h3>Das brauchen Sie</h3>
+        <h3>Zum Bauen</h3>
         <ul class="checks">
           <li>Einen 3D-Drucker (Druckbett 220 × 220 mm)</li>
-          <li>Die Kaufteile: Mikrocontroller-Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Filzstift. Das Buch nennt jedes Teil mit Stückzahl.</li>
+          <li>Die Kaufteile: Mikrocontroller-Board, zwei Motoren mit Treibern, Servo, Endschalter, Kugellager, Schrauben und einen Pinselstift (edding 1340). Das Buch nennt jedes Teil mit Stückzahl.</li>
           <li>Ein USB-Netzteil mit 5&nbsp;Volt und mindestens 2&nbsp;A, dazu ein USB-C-Kabel</li>
           <li>Werkzeug: Innensechskantschlüssel 2,5&nbsp;mm, kleiner Schraubendreher, Spitzzange, kleine Feile</li>
-          <li>Ein Handy – und höchstens einmal einen Computer, zum ersten <a href="flashen.html">Aufspielen der Firmware</a></li>
+          <li>Ein Handy – und höchstens einmal einen Computer, um die <a href="flashen.html">Firmware aufzuspielen</a></li>
           <li>Keinen Lötkolben: Das Board kommt mit fertig angelöteten Stiftleisten, alle Kabel werden gesteckt.</li>
         </ul>
       </div>
       <div>
-        <h3>Darauf achten Sie</h3>
+        <h3>Gut zu wissen</h3>
         <dl class="facts">
           <dt>Alter</dt><dd>Kinder ab etwa 12 Jahren, die mit ihren Eltern bauen</dd>
           <dt>Zeit</dt><dd>Ein Projekt für mehrere Nachmittage. Allein der Druck dauert geschätzt rund 14 Stunden – der Drucker arbeitet, während Sie anderes tun.</dd>
-          <dt>Strom</dt><dd>Gezeichnet wird am Netzteil, nicht am Computer: Sein USB-Anschluss liefert zu wenig Strom. Eine Powerbank geht auch; das Buch zeigt, wie der PlotBot sie wach hält.</dd>
+          <dt>Strom</dt><dd>Der PlotBot zeichnet am Netzteil, nicht am Computer: Dessen USB-Anschluss liefert zu wenig Strom. Eine Powerbank geht auch; das Buch zeigt, wie der PlotBot sie wach hält.</dd>
           <dt>Stoppen</dt><dd>Stecker ziehen – so halten Sie den Roboter jederzeit sicher an.</dd>
         </dl>
       </div>
@@ -224,7 +224,7 @@
       </details>
       <details>
         <summary>Was ist, wenn etwas nicht klappt?</summary>
-        <p>Das Buch hat dafür ein eigenes Kapitel, „Wenn etwas nicht klappt“. Es geht die typischen Fehlerbilder durch: Die Steuerseite öffnet sich nicht von selbst, Ecken werden rund, Striche liegen doppelt. Auf jeder Seite des Roboters steht unten ein roter Stopp-Knopf – und wenn der einmal nicht reagiert, ziehen Sie den Stecker.</p>
+        <p>Das Buch hat dafür ein eigenes Kapitel, „Wenn etwas nicht klappt“. Es geht die typischen Fehlerbilder durch: Die Steuerseite öffnet sich nicht von selbst, Ecken werden rund, Striche liegen doppelt. Jede Handyseite des PlotBot hat unten einen roten Stopp-Knopf – und wenn der einmal nicht reagiert, ziehen Sie den Stecker.</p>
       </details>
       <details>
         <summary>Wie kommt neue Firmware auf den Roboter?</summary>
