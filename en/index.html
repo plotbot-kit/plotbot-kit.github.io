@@ -86,19 +86,49 @@
 
 <section aria-labelledby="parents-title">
   <div class="wrap">
-    <h2 id="parents-title">Your kid builds a machine – and understands how it works</h2>
-    <p class="lead">The PlotBot-Kit isn't a snap-together set with picture instructions. Your kid prints the parts, presses in bearings,
-      wires up motors and ends up writing programs of their own. Short explainer boxes in the book cover the why behind the key steps.</p>
-    <ul class="cards">
-      <li><span class="tag">Mechanics</span><h3>Arms, gears, bearings</h3>
-        <p>Two motors each turn an upper arm, and the forearms meet at the pen. Kids see why a little play between the gears inside the motor makes a line wobble, and what a ball bearing is for.</p></li>
-      <li><span class="tag">Electronics</span><h3>A microcontroller and motors</h3>
-        <p>A microcontroller drives two stepper motors and a servo that lifts the pen. At start-up each arm moves to a limit switch; from there the robot counts every step.</p></li>
-      <li><span class="tag">Coding</span><h3>Blockly on a phone</h3>
-        <p>Kids snap blocks together: pen down, move 20 mm, turn 90°, repeat four times. Tap "Zeichnen lassen" and the robot draws a square.</p></li>
-      <li><span class="tag">Geometry</span><h3>Angles you can see</h3>
-        <p>Why does the pen turn 144° at each of the five points of a star? Five times 144° is 720°, two full turns. On paper, the maths turns into a picture – and a maths mistake into a crooked line you can track down.</p></li>
+    <h2 id="parents-title">What your kid learns along the way</h2>
+    <p class="lead">The PlotBot-Kit isn't a snap-together set with picture instructions. Your kid prints the parts, presses in bearings, wires up motors and ends up writing programs of their own. In the process they get their hands on what school calls STEM: maths, computing, science and engineering. The numbers in the picture show where.</p>
+    <ul class="mint-legend" aria-label="Key: one shape and colour per subject">
+      <li><span class="mk mk-m" aria-hidden="true">M</span>Maths</li>
+      <li><span class="mk mk-i" aria-hidden="true">C</span>Computing</li>
+      <li><span class="mk mk-n" aria-hidden="true">S</span>Science</li>
+      <li><span class="mk mk-t" aria-hidden="true">E</span>Engineering</li>
     </ul>
+    <div class="mint-map">
+      <figure>
+        <div class="mint-bild">
+          <picture>
+            <source srcset="../img/roboter.webp" type="image/webp">
+            <img src="../img/roboter.png" width="800" height="849" loading="lazy" alt="3D model of the PlotBot with ten numbered markers on the arms, pen, motors and base plate. The list explains each number.">
+          </picture>
+          <svg viewBox="0 0 800 849" aria-hidden="true" focusable="false">
+          <g transform="translate(335,305) scale(1.2)"><circle class="m" r="28"/><text y="10">1</text></g>
+          <g transform="translate(548,398) scale(1.2)"><circle class="m" r="28"/><text y="10">2</text></g>
+          <g transform="translate(215,490) scale(1.2)"><rect class="i" x="-26" y="-26" width="52" height="52" rx="5"/><text y="10">3</text></g>
+          <g transform="translate(608,110) scale(1.2)"><rect class="i" x="-26" y="-26" width="52" height="52" rx="5"/><text y="10">4</text></g>
+          <g transform="translate(310,455) scale(1.2)"><polygon class="n" points="0,-36 34,24 -34,24"/><text y="16">5</text></g>
+          <g transform="translate(602,262) scale(1.2)"><polygon class="n" points="0,-36 34,24 -34,24"/><text y="16">6</text></g>
+          <g transform="translate(515,478) scale(1.2)"><polygon class="n" points="0,-36 34,24 -34,24"/><text y="16">7</text></g>
+          <g transform="translate(420,500) scale(1.2)"><polygon class="t" points="0,-36 36,0 0,36 -36,0"/><text y="10">8</text></g>
+          <g transform="translate(640,440) scale(1.2)"><polygon class="t" points="0,-36 36,0 0,36 -36,0"/><text y="10">9</text></g>
+          <g transform="translate(105,600) scale(1.2)"><polygon class="t" points="0,-38 38,0 0,38 -38,0"/><text class="zz" y="9">10</text></g>
+          </svg>
+        </div>
+      </figure>
+      <ol class="mint-list" role="list">
+        <li><span class="mk mk-m" aria-hidden="true">1</span><div><span class="fach">Maths</span><b>From a point to two angles</b>The pen has to reach a point. The robot works out how far each arm must turn to get it there.</div></li>
+        <li><span class="mk mk-m" aria-hidden="true">2</span><div><span class="fach">Maths</span><b>Angles you can see</b>Turn 144° five times and the star closes: five times 144° is 720°, two full turns. A maths mistake shows up as a crooked line you can track down.</div></li>
+        <li><span class="mk mk-i" aria-hidden="true">3</span><div><span class="fach">Computing</span><b>A switch as a sensor</b>When it powers up, the robot doesn't know where its arms are. It moves each arm to a limit switch and counts every step from there.</div></li>
+        <li><span class="mk mk-i" aria-hidden="true">4</span><div><span class="fach">Computing</span><b>Programs made of blocks</b>Kids snap blocks together on a phone: pen down, move 20 mm, turn 90°, repeat four times. The pen draws what the program says.</div></li>
+        <li><span class="mk mk-n" aria-hidden="true">5</span><div><span class="fach">Physics</span><b>Current makes magnets</b>A stepper motor sits under each upper arm. Current turns its coils into magnets, and they pull the shaft round one step at a time.</div></li>
+        <li><span class="mk mk-n" aria-hidden="true">6</span><div><span class="fach">Physics</span><b>Levers</b>If the pen sits loose in its holder, it tilts. A tiny gap at the holder becomes an error at the tip that you can see on paper.</div></li>
+        <li><span class="mk mk-n" aria-hidden="true">7</span><div><span class="fach">Chemistry</span><b>Plastic made from plants</b>The parts are printed in PLA (polylactic acid), a plastic made from maize or sugar beet. It softens above 60 °C, and UV light breaks it down. So the robot doesn't belong in a hot car or outdoors.</div></li>
+        <li><span class="mk mk-t" aria-hidden="true">8</span><div><span class="fach">Engineering</span><b>Gears and backlash</b>Gears make the weak motor strong. But the play between their teeth makes a line wobble. Kids measure it with a test sheet, and the robot compensates for it.</div></li>
+        <li><span class="mk mk-t" aria-hidden="true">9</span><div><span class="fach">Engineering</span><b>Ball bearings</b>In the joints, balls roll where surfaces would otherwise rub. Kids see why the screw must press on the inner ring only.</div></li>
+        <li><span class="mk mk-t" aria-hidden="true">10</span><div><span class="fach">Engineering</span><b>3D printing and fit</b>Every printer prints a little differently. Test pieces show how much clearance two parts need so they neither jam nor rattle.</div></li>
+      </ol>
+    </div>
+    <p class="mint-note">Most of these topics have a short explainer box in the book.</p>
   </div>
 </section>
 
@@ -267,7 +297,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.12.0</span>. The pictures of the robot are 3D models, not photos, and the video is a 3D animation too. The four drawings come from PlotBot's example programs, the phone picture is a screenshot of its control page, and the diagram comes from the kinematics simulator.
+    <p>PlotBot-Kit – website version <span class="version">0.13.0</span>. The pictures of the robot are 3D models, not photos, and the video is a 3D animation too. The four drawings come from PlotBot's example programs, the phone picture is a screenshot of its control page, and the diagram comes from the kinematics simulator.
       · <a href="../de/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
     <p class="legal-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
   </div>
