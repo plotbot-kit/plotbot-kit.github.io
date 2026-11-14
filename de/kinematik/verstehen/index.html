@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inverse Kinematik verstehen: Wie der PlotBot seine Motorwinkel findet | PlotBot-Kit</title>
+<meta name="description" content="Interaktive Lernseite ab etwa 12 Jahren: Stift ziehen und zusehen, wie die beiden Arme des PlotBot folgen. In sieben Schritten mit Zirkel, Lineal und Winkelmesser vom Zielpunkt zu den zwei Motorwinkeln – mit Arbeitsblatt zum Ausdrucken.">
+<link rel="canonical" href="https://plotbot-kit.github.io/de/kinematik/verstehen/">
+<link rel="alternate" hreflang="de" href="https://plotbot-kit.github.io/de/kinematik/verstehen/">
+<link rel="alternate" hreflang="en" href="https://plotbot-kit.github.io/en/kinematics/explained/">
+<link rel="alternate" hreflang="x-default" href="https://plotbot-kit.github.io/en/kinematics/explained/">
+<link rel="stylesheet" href="../../../css/site.css">
+<link rel="stylesheet" href="../../../css/kinematik.css">
+<link rel="stylesheet" href="../../../css/verstehen.css">
+<script src="../../../js/lang.js" defer></script>
+<link rel="icon" href="../../../img/blume.svg" type="image/svg+xml">
+<script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../../../vendor/goatcounter/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt</a>
+
+<header class="page-head">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="brand" href="../../">PlotBot-Kit</a>
+      <span class="lang" role="group" aria-label="Sprache"><a href="./" aria-current="page" hreflang="de" lang="de" data-lang="de">Deutsch</a><a href="../../../en/kinematics/explained/" hreflang="en" lang="en" data-lang="en">English</a></span>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+<section aria-labelledby="ik-titel">
+  <div class="wrap split page-intro">
+    <div>
+      <p class="back"><a href="../../">← Zurück zur PlotBot-Seite</a></p>
+      <h1 id="ik-titel">Inverse Kinematik verstehen: <span>Wie der PlotBot seine Motorwinkel findet</span></h1>
+      <p>Der PlotBot hat zwei Motoren, und jeder kann nur eines: seinen Oberarm auf einen Winkel drehen.
+        Eine Zeichnung besteht aber aus Punkten auf dem Papier, zum Beispiel „30 mm nach rechts, 100 mm nach vorn“.
+        Der Roboter muss deshalb zu jedem Punkt die beiden Motorwinkel finden, bei denen der Stift genau dort steht.</p>
+      <p>Diese Aufgabe heißt inverse Kinematik. „Invers“ bedeutet umgekehrt: Man geht vom Stift rückwärts zu den Motoren.
+        Sie lässt sich mit Zirkel, Lineal und Winkelmesser lösen. Diese Seite zeigt den Weg in sieben Schritten, für Kinder ab etwa 12 Jahren und ihre Eltern.</p>
+      <p>Der Arm ist einfach gebaut. Die beiden Motorwellen stehen 36 mm auseinander. An jeder sitzt ein Oberarm von 65 mm, daran ein Unterarm von 90 mm.
+        Die Unterarme treffen sich in einem Gelenk, und genau in dessen Achse steckt der Stift. Die Winkel zählen ab der Grundlinie nach rechts, gegen den Uhrzeigersinn: 90° zeigt gerade nach vorn.</p>
+    </div>
+    <figure>
+      <!-- ik-fig:aufbau --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Draufsicht auf den PlotBot: unten zwei Motorwellen im Abstand von 36 mm. Von jeder geht ein 65 mm langer Oberarm schräg nach außen, daran hängt ein 90 mm langer Unterarm. Beide Unterarme treffen sich oben im Stift. An jedem Motor ist der Winkel zwischen der Grundlinie und dem Oberarm eingezeichnet: links 119°, rechts 22°."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><path class="wb-l" d="M-2 0A16 16 0 0 0 -25.7 -14"/><text class="lbl kl-l wert" x="-4.7" y="-22.4" text-anchor="middle">119°</text><path class="wb-r" d="M34 0A16 16 0 0 0 32.9 -5.9"/><text class="lbl kl-r wert" x="43.5" y="-4.9" text-anchor="middle">22°</text><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/><text class="lbl kl-l" x="-39.6" y="-26.5" text-anchor="end">Oberarm 65</text><text class="lbl " x="-15.6" y="-82.5" text-anchor="end">Unterarm 90</text><text class="lbl kl-r" x="56.2" y="0.9" text-anchor="start">65</text><text class="lbl " x="60.2" y="-64.1" text-anchor="start">90</text><text class="lbl kl-stift" x="30.0" y="-109.0" text-anchor="middle">Stift</text><text class="lbl " x="0.0" y="22.0" text-anchor="middle">36 mm</text></svg><!-- /ik-fig:aufbau -->
+      <figcaption>Der PlotBot von oben, alle Maße in Millimetern. Der Stift steht auf dem Punkt (30 | 100).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="figur-titel">
+  <div class="wrap">
+    <h2 id="figur-titel">Ziehen Sie den Stift</h2>
+    <noscript><p class="needs-js">Die bewegliche Figur braucht JavaScript. Die sieben Schritte weiter unten zeigen dieselbe Konstruktion mit festen Bildern.</p></noscript>
+    <p class="ik-nur-js" hidden>Ziehen Sie den rosa Punkt mit der Maus oder dem Finger, oder tippen Sie auf eine Stelle im Bild. Mit der Tastatur: Punkt ansteuern, dann schieben ihn die Pfeiltasten um 1 mm, mit Umschalt um 10 mm.</p>
+    <div class="ik" id="ik" hidden>
+      <div>
+        <svg id="ik-svg" class="ikz" viewBox="-110 -165 220 195" role="group" aria-label="Der PlotBot von oben: zwei Motoren unten, zwei Arme und der Stift">
+          <g id="ik-szene"></g>
+          <g id="ik-wahl">
+            <circle class="wahl" r="7" data-seite="l" data-wo="aussen" role="button" tabindex="0" aria-label="Linker Motorkreis, äußerer Schnittpunkt"/>
+            <circle class="wahl" r="7" data-seite="l" data-wo="innen" role="button" tabindex="0" aria-label="Linker Motorkreis, innerer Schnittpunkt"/>
+            <circle class="wahl" r="7" data-seite="r" data-wo="innen" role="button" tabindex="0" aria-label="Rechter Motorkreis, innerer Schnittpunkt"/>
+            <circle class="wahl" r="7" data-seite="r" data-wo="aussen" role="button" tabindex="0" aria-label="Rechter Motorkreis, äußerer Schnittpunkt"/>
+          </g>
+          <g id="ik-griff" tabindex="0" role="application" aria-label="Stift. Pfeiltasten schieben ihn um 1 mm, mit Umschalt um 10 mm." aria-describedby="ik-status"><circle class="griff" r="13"/></g>
+        </svg>
+        <div class="ik-modus" role="group" aria-label="Ansicht">
+          <button type="button" id="ik-frei" aria-pressed="true">Frei ziehen</button>
+          <button type="button" id="ik-schrittweise" aria-pressed="false">Schritt für Schritt</button>
+        </div>
+        <div class="ik-schritte" id="ik-schritte" hidden>
+          <p id="ik-schritt-nr"></p>
+          <p id="ik-schritt-text" aria-live="polite"></p>
+          <div class="ik-modus">
+            <button type="button" id="ik-zurueck">Zurück</button>
+            <button type="button" id="ik-weiter">Weiter</button>
+          </div>
+        </div>
+        <ul class="ik-legende">
+          <li><i style="background:rgba(35,150,70,.3)"></i>erreichbar</li>
+          <li><i class="strich"></i>Zeichenfläche 80 × 80 mm</li>
+          <li><i style="background:#1f63b5"></i>Oberarm links</li>
+          <li><i style="background:#c2410c"></i>Oberarm rechts</li>
+          <li><i style="background:#475569"></i>Unterarme</li>
+        </ul>
+      </div>
+      <div>
+        <fieldset class="ik-werte">
+          <legend class="visually-hidden">Stiftposition und Motorwinkel</legend>
+          <label>Stift x in mm <input id="ik-x" type="number" min="-110" max="110" step="0.5" inputmode="decimal"></label>
+          <label>Stift y in mm <input id="ik-y" type="number" min="-30" max="165" step="0.5" inputmode="decimal"></label>
+          <div>Motor links <output id="ik-wl" class="wl" for="ik-x ik-y"></output></div>
+          <div>Motor rechts <output id="ik-wr" class="wr" for="ik-x ik-y"></output></div>
+        </fieldset>
+        <p id="ik-status" class="ik-status" role="status"></p>
+        <details id="ik-rechnen" class="gap">
+          <summary>Für Fortgeschrittene: die Winkel ausrechnen</summary>
+          <p>Im Dreieck aus Motor, Ellbogen und Stift sind alle drei Seiten bekannt. Der Kosinussatz macht daraus den Winkel α am Motor. Wie das geht, steht unten bei „So rechnet es der Roboter“.</p>
+          <p id="ik-rechen-text"></p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ik-nur-js" aria-labelledby="aufgaben-titel" hidden>
+  <div class="wrap">
+    <h2 id="aufgaben-titel">Probieren Sie selbst</h2>
+    <p>Drei Aufgaben für die Figur oben. Ist eine gelöst, erscheint dahinter ein Haken.</p>
+    <ol class="ik-aufgaben">
+      <li data-aufgabe="links90">Finden Sie einen Punkt, an dem der linke Motor auf 90° steht. <span class="ik-haken" role="status" hidden>✓ geschafft</span>
+        <details><summary>Was fällt dabei auf?</summary><p>Der linke Oberarm zeigt dann gerade nach vorn. Es gibt nicht nur einen solchen Punkt, sondern einen ganzen Bogen davon: Der Ellbogen bleibt stehen, und der Stift wandert auf einem Kreis mit 90 mm Radius um ihn herum.</p></details></li>
+      <li data-aufgabe="mitte">Stellen Sie den Stift genau über die Mitte zwischen den Motoren (x = 0). Zählen Sie beide Motorwinkel zusammen. <span class="ik-haken" role="status" hidden>✓ geschafft</span>
+        <details><summary>Lösung</summary><p>Die Summe ist immer 180°, egal wie weit vorn der Stift steht. Auf der Mittellinie stehen die Arme spiegelbildlich: Was dem linken Arm bis 180° fehlt, hat der rechte.</p></details></li>
+      <li data-aufgabe="hoch">Wie weit nach vorn kommt der Stift? Schieben Sie ihn so weit nach oben, wie er erreichbar bleibt. <span class="ik-haken" role="status" hidden>✓ geschafft</span>
+        <details><summary>Lösung</summary><p>Bei x = 0 ist kurz vor y = 154 mm Schluss. Dann liegen Oberarm und Unterarm fast in einer Linie, zusammen 65 + 90 = 155 mm. Weil die Motoren 18 mm neben der Mitte sitzen, fehlt bis 155 mm noch ein gutes Stück.</p></details></li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="schritte-titel">
+  <div class="wrap">
+    <h2 id="schritte-titel">Sieben Schritte mit Zirkel, Lineal und Winkelmesser</h2>
+    <p class="lead">Das Beispiel: Der Stift soll zum Punkt (30 | 100), also 30 mm rechts der Mitte und 100 mm vor den Motoren.</p>
+    <ol class="ik-rechnung">
+      <li><div><h3>Kreise um die Motoren ziehen</h3>
+        <p>Stellen Sie den Zirkel auf 65 mm, die Länge eines Oberarms, und ziehen Sie um jeden Motor einen Kreis.
+          Der Ellbogen sitzt am Ende des Oberarms. Wohin der Motor auch dreht, der Ellbogen bleibt auf diesem Kreis.</p></div>
+        <figure><!-- ik-fig:s1 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 1: um jede der beiden Motorwellen ein gestrichelter Kreis mit 65 mm Radius, links blau, rechts orange. Die Kreise überlappen sich."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/></svg><!-- /ik-fig:s1 --></figure></li>
+      <li><div><h3>Den Zielpunkt einzeichnen</h3>
+        <p>Markieren Sie den Punkt, an dem der Stift stehen soll. Im Beispiel ist das (30 | 100). Das gestrichelte Quadrat ist die Zeichenfläche des PlotBot.</p></div>
+        <figure><!-- ik-fig:s2 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 2: zu den beiden Kreisen kommt der Zielpunkt des Stifts, rechts oben im gestrichelten Quadrat der Zeichenfläche."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s2 --></figure></li>
+      <li><div><h3>Einen Kreis um das Ziel ziehen</h3>
+        <p>Stellen Sie den Zirkel auf 90 mm, die Länge eines Unterarms, und ziehen Sie einen Kreis um den Zielpunkt.
+          Der Unterarm verbindet Ellbogen und Stift. Jeder Ellbogen ist deshalb 90 mm vom Stift entfernt und liegt auf diesem Kreis.</p></div>
+        <figure><!-- ik-fig:s3 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 3: ein grauer gestrichelter Kreis mit 90 mm Radius um den Zielpunkt. Er schneidet beide Motorkreise."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="kreis kr-stift" cx="30" cy="-100" r="90"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s3 --></figure></li>
+      <li><div><h3>Die Schnittpunkte ansehen</h3>
+        <p>Der Kreis um das Ziel schneidet jeden Motorkreis zweimal. Nur an diesen vier Punkten stimmen beide Abstände: 65 mm bis zum Motor und 90 mm bis zum Stift.
+          Auf jeder Seite gibt es also zwei mögliche Ellbogen.</p></div>
+        <figure><!-- ik-fig:s4 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 4: Vier Schnittpunkte sind markiert, zwei auf dem linken und zwei auf dem rechten Motorkreis. Je Seite liegt einer außen und einer innen, zwischen den Motoren."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="kreis kr-stift" cx="30" cy="-100" r="90"/><circle class="kandidat" cx="-49.1" cy="-57.1" r="3.4"/><circle class="kandidat" cx="46" cy="-11.4" r="3.4"/><circle class="kandidat" cx="78.4" cy="-24.1" r="3.4"/><circle class="kandidat" cx="-35" cy="-37.7" r="3.4"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s4 --></figure></li>
+      <li><div><h3>Den richtigen Ellbogen wählen</h3>
+        <p>Der PlotBot nimmt auf beiden Seiten den äußeren Schnittpunkt: links den linken, rechts den rechten. So bleibt jeder Arm auf seiner Seite.
+          Mit den inneren Punkten griffen die Oberarme zur anderen Seite hinüber. In rund zwei Dritteln der Zeichenfläche würden sich die Arme dann kreuzen und zusammenstoßen.</p></div>
+        <figure><!-- ik-fig:s5 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 5: Die beiden äußeren Schnittpunkte sind grün ausgefüllt und mit Armen verbunden, die beiden inneren bleiben leer."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="kreis kr-stift" cx="30" cy="-100" r="90"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="kandidat richtig" cx="-49.1" cy="-57.1" r="3.4"/><circle class="kandidat" cx="46" cy="-11.4" r="3.4"/><circle class="kandidat richtig" cx="78.4" cy="-24.1" r="3.4"/><circle class="kandidat" cx="-35" cy="-37.7" r="3.4"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s5 --></figure></li>
+      <li><div><h3>Die Arme einzeichnen</h3>
+        <p>Verbinden Sie mit dem Lineal jeden Motor mit seinem Ellbogen: Das sind die Oberarme. Verbinden Sie dann jeden Ellbogen mit dem Ziel: Das sind die Unterarme.
+          So stehen die Arme, wenn der Stift am Ziel ist.</p></div>
+        <figure><!-- ik-fig:s6 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 6: Von jedem Motor führt ein Oberarm zum äußeren Ellbogen und von dort ein Unterarm zum Stift. Die Hilfskreise sind noch zu sehen."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><circle class="kreis kr-l" cx="-18" cy="0" r="65"/><circle class="kreis kr-r" cx="18" cy="0" r="65"/><circle class="kreis kr-stift" cx="30" cy="-100" r="90"/><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s6 --></figure></li>
+      <li><div><h3>Die Motorwinkel ablesen</h3>
+        <p>Legen Sie den Winkelmesser an jeden Motor, die Null zeigt nach rechts. Lesen Sie ab, wohin der Oberarm zeigt.
+          Im Beispiel sind es links 119° und rechts 22°. Auf diese beiden Winkel dreht der Roboter seine Motoren, dann steht der Stift auf (30 | 100).</p></div>
+        <figure><!-- ik-fig:s7 --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Schritt 7: Um jeden Motor liegt ein Winkelmesser. Der linke Oberarm zeigt auf 119°, der rechte auf 22°."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><path class="wm wm-l" d="M-2 -27.7A32 32 0 0 0 -34 27.7"/><path class="wm wm-l" d="M-2 -27.7L-5 -22.5M-7.1 -30.1L-8.1 -27.3M-12.4 -31.5L-13 -28.6M-18 -32L-18 -26M-23.6 -31.5L-23 -28.6M-28.9 -30.1L-27.9 -27.3M-34 -27.7L-31 -22.5M-38.6 -24.5L-36.6 -22.2M-42.5 -20.6L-40.2 -18.6M-45.7 -16L-40.5 -13M-48.1 -10.9L-45.3 -9.9M-49.5 -5.6L-46.6 -5M-50 0L-44 0M-49.5 5.6L-46.6 5M-48.1 10.9L-45.3 9.9M-45.7 16L-40.5 13M-42.5 20.6L-40.2 18.6M-38.6 24.5L-36.6 22.2M-34 27.7L-31 22.5"/><text class="lbl skala" x="-18" y="-35.5" text-anchor="middle">90</text><text class="lbl skala" x="-37" y="-30.4" text-anchor="middle">120</text><text class="lbl skala" x="-50.9" y="-16.5" text-anchor="middle">150</text><text class="lbl skala" x="-56" y="2.5" text-anchor="middle">180</text><text class="lbl skala" x="-50.9" y="21.5" text-anchor="middle">210</text><text class="lbl skala" x="-37" y="35.4" text-anchor="middle">240</text><path class="wm wm-r" d="M34 27.7A32 32 0 0 0 2 -27.7"/><path class="wm wm-r" d="M34 27.7L31 22.5M38.6 24.5L36.6 22.2M42.5 20.6L40.2 18.6M45.7 16L40.5 13M48.1 10.9L45.3 9.9M49.5 5.6L46.6 5M50 0L44 0M49.5 -5.6L46.6 -5M48.1 -10.9L45.3 -9.9M45.7 -16L40.5 -13M42.5 -20.6L40.2 -18.6M38.6 -24.5L36.6 -22.2M34 -27.7L31 -22.5M28.9 -30.1L27.9 -27.3M23.6 -31.5L23 -28.6M18 -32L18 -26M12.4 -31.5L13 -28.6M7.1 -30.1L8.1 -27.3M2 -27.7L5 -22.5"/><text class="lbl skala" x="37" y="35.4" text-anchor="middle">−60</text><text class="lbl skala" x="50.9" y="21.5" text-anchor="middle">−30</text><text class="lbl skala" x="56" y="2.5" text-anchor="middle">0</text><text class="lbl skala" x="50.9" y="-16.5" text-anchor="middle">30</text><text class="lbl skala" x="37" y="-30.4" text-anchor="middle">60</text><text class="lbl skala" x="18" y="-35.5" text-anchor="middle">90</text><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><path class="wb-l" d="M-2 0A16 16 0 0 0 -25.7 -14"/><text class="lbl kl-l wert" x="9.6" y="-46.4" text-anchor="middle">119°</text><path class="wb-r" d="M34 0A16 16 0 0 0 32.9 -5.9"/><text class="lbl kl-r wert" x="71" y="-10.2" text-anchor="middle">22°</text><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:s7 --></figure></li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="rechnen-titel">
+  <div class="wrap">
+    <h2 id="rechnen-titel">Für Fortgeschrittene</h2>
+    <details>
+      <summary>So rechnet es der Roboter</summary>
+      <div class="split">
+        <div>
+          <p>Der Roboter hat keinen Zirkel. Seine Firmware macht dieselbe Konstruktion mit Zahlen: Sie rechnet aus den Koordinaten aus, wo sich der Kreis um den Motor und der Kreis um den Stift schneiden.
+            Dann nimmt sie den äußeren Schnittpunkt und bestimmt die Richtung vom Motor dorthin. Das ist der Motorwinkel.</p>
+          <p>In der Schule führt der Kosinussatz zum selben Ergebnis, meist in Klasse 9 oder 10. Motor, Ellbogen und Stift bilden ein Dreieck, dessen drei Seiten bekannt sind:
+            der Oberarm mit 65 mm, der Unterarm mit 90 mm und der Abstand c vom Motor zum Stift. Für den Winkel α am Motor gilt:</p>
+          <p class="formel">cos α = (65² + c² − 90²) / (2 · 65 · c)</p>
+          <p>Im Beispiel liegt der Stift vom linken Motor aus 48 mm nach rechts und 100 mm nach vorn. Der Satz des Pythagoras ergibt c = 110,9 mm, der Kosinussatz α = 54,2°.
+            Die Linie vom Motor zum Stift steigt unter φ = 64,4°. Der Oberarm liegt um α weiter links: 64,4° + 54,2° = 118,6°.</p>
+          <p>Rechts läuft dieselbe Rechnung spiegelverkehrt, dort wird α abgezogen: c = 100,7 mm, φ = 83,2°, α = 61,4°, also 83,2° − 61,4° = 21,8°.
+            Gerundet sind das die 119° und 22°, die der Winkelmesser zeigt.</p>
+        </div>
+        <figure><!-- ik-fig:dreieck --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Das Dreieck aus linkem Motor, Ellbogen und Stift mit den Seiten 65, 90 und c. Am Motor liegen zwei Winkel übereinander: φ von der Grundlinie bis zur Linie zum Stift, darüber α bis zum Oberarm."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><line class="hilfs" x1="-18" y1="0" x2="30" y2="-100"/><path class="wb-phi" d="M2 0A20 20 0 0 0 -9.3 -18"/><text class="lbl kl-phi" x="4.9" y="-14.4" text-anchor="middle">φ</text><path class="wb-l" d="M-3.3 -30.7A34 34 0 0 0 -34.3 -29.9"/><text class="lbl kl-l" x="-19.1" y="-41" text-anchor="middle">α</text><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><text class="lbl kl-l" x="-42.6" y="-28.5" text-anchor="middle">65</text><text class="lbl " x="-13.6" y="-84.5" text-anchor="middle">90</text><text class="lbl kl-phi" x="15" y="-46" text-anchor="middle">c</text><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:dreieck -->
+          <figcaption>Das Dreieck am linken Motor: φ zeigt zum Stift, α kommt für den Oberarm dazu.</figcaption></figure>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section aria-labelledby="flaeche-titel">
+  <div class="wrap split">
+    <div>
+      <h2 id="flaeche-titel">Wohin der Stift kommt und wohin nicht</h2>
+      <p>Die Konstruktion klappt nicht für jeden Punkt. Liegt das Ziel weiter als 155 mm von einem Motor entfernt, sind die Arme zu kurz: Oberarm und Unterarm messen zusammen 65 + 90 = 155 mm.
+        Der Kreis um das Ziel erreicht den Motorkreis dann nicht, und es gibt keinen Ellbogen.</p>
+      <p>Auch ganz nah an einem Motor ist Schluss. Der Unterarm ist 25 mm länger als der Oberarm. Selbst zusammengefaltet bleibt der Stift deshalb 25 mm von der Motorwelle entfernt.</p>
+      <p>Dazu kommen die Grenzen des Geräts. Der linke Oberarm schwenkt zwischen 78° und 238°, der rechte zwischen −58° und 102°, und die Oberarme dürfen sich nicht kreuzen.
+        Grün ist die Fläche, die danach übrig bleibt. Zum Zeichnen nutzt der PlotBot davon das gestrichelte Quadrat von 80 × 80 mm: Dort stehen die Arme günstig, und der Stift trifft genau.</p>
+    </div>
+    <figure class="ik-bild"><!-- ik-fig:flaeche --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="Die erreichbare Fläche in Grün: ein breiter, nach oben gewölbter Bereich vor dem Roboter. Das gestrichelte Quadrat der Zeichenfläche liegt mitten darin. Direkt um die Motoren bleibt ein Loch."><path class="flaeche" d="M-2 -18h4v-2h-4zM-4 -20h8v-2h-8zM-8 -22h16v-2h-16zM-12 -24h24v-2h-24zM-16 -26h32v-2h-32zM-20 -28h40v-2h-40zM-80 -30h2v-2h-2zM-26 -30h52v-2h-52zM78 -30h2v-2h-2zM-80 -32h10v-2h-10zM-34 -32h68v-2h-68zM70 -32h10v-2h-10zM-80 -34h160v-2h-160zM-82 -36h164v-2h-164zM-82 -38h164v-2h-164zM-82 -40h164v-2h-164zM-84 -42h168v-2h-168zM-84 -44h168v-2h-168zM-84 -46h168v-2h-168zM-84 -48h168v-2h-168zM-84 -50h168v-2h-168zM-84 -52h168v-2h-168zM-86 -54h172v-2h-172zM-86 -56h172v-2h-172zM-86 -58h172v-2h-172zM-86 -60h172v-2h-172zM-86 -62h172v-2h-172zM-86 -64h172v-2h-172zM-86 -66h172v-2h-172zM-86 -68h172v-2h-172zM-86 -70h172v-2h-172zM-86 -72h172v-2h-172zM-84 -74h168v-2h-168zM-84 -76h168v-2h-168zM-84 -78h168v-2h-168zM-84 -80h168v-2h-168zM-84 -82h168v-2h-168zM-82 -84h164v-2h-164zM-82 -86h164v-2h-164zM-82 -88h164v-2h-164zM-82 -90h164v-2h-164zM-80 -92h160v-2h-160zM-80 -94h160v-2h-160zM-80 -96h160v-2h-160zM-78 -98h156v-2h-156zM-78 -100h156v-2h-156zM-76 -102h152v-2h-152zM-76 -104h152v-2h-152zM-74 -106h148v-2h-148zM-74 -108h148v-2h-148zM-72 -110h144v-2h-144zM-70 -112h140v-2h-140zM-70 -114h140v-2h-140zM-68 -116h136v-2h-136zM-66 -118h132v-2h-132zM-64 -120h128v-2h-128zM-64 -122h128v-2h-128zM-62 -124h124v-2h-124zM-60 -126h120v-2h-120zM-58 -128h116v-2h-116zM-56 -130h112v-2h-112zM-52 -132h104v-2h-104zM-50 -134h100v-2h-100zM-48 -136h96v-2h-96zM-44 -138h88v-2h-88zM-42 -140h84v-2h-84zM-38 -142h76v-2h-76zM-34 -144h68v-2h-68zM-30 -146h60v-2h-60zM-24 -148h48v-2h-48zM-16 -150h32v-2h-32zM-6 -152h12v-2h-12z"/><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">Motor links</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">Motor rechts</text><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><path class="wb-l" d="M-2 0A16 16 0 0 0 -25.7 -14"/><text class="lbl kl-l wert" x="-4.7" y="-22.4" text-anchor="middle">119°</text><path class="wb-r" d="M34 0A16 16 0 0 0 32.9 -5.9"/><text class="lbl kl-r wert" x="43.5" y="-4.9" text-anchor="middle">22°</text><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:flaeche -->
+      <figcaption>Grün: Diese Punkte erreicht der Stift.</figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="blatt-titel">
+  <div class="wrap">
+    <h2 id="blatt-titel">Mit echtem Zirkel nachmachen</h2>
+    <p>Das Arbeitsblatt zeigt die beiden Motoren und drei Zielpunkte im Maßstab 1:1. Mit Zirkel, Lineal und Geodreieck finden Sie die Motorwinkel auf dem Papier.
+      Drucken Sie es in Originalgröße (100 %), sonst stimmen die Längen nicht.</p>
+    <p><a class="button ghost" href="arbeitsblatt.pdf">Arbeitsblatt als PDF</a> <a href="arbeitsblatt.html">Arbeitsblatt als Webseite öffnen</a></p>
+    <details>
+      <summary>Lösungen zum Arbeitsblatt</summary>
+      <table class="specs">
+        <tr><th scope="col">Ziel</th><th scope="col">Motor links</th><th scope="col">Motor rechts</th></tr>
+        <tr><th scope="row">A (0 | 75)</th><td>155°</td><td>25°</td></tr>
+        <tr><th scope="row">B (30 | 100)</th><td>119°</td><td>22°</td></tr>
+        <tr><th scope="row">C (−30 | 90)</th><td>166°</td><td>58°</td></tr>
+      </table>
+      <p>Beim Messen mit dem Geodreieck sind ein bis zwei Grad Abweichung normal.</p>
+    </details>
+    <p class="gap">Wie genau der Stift am Ende trifft, hängt auch von den Motorschritten und dem Getriebespiel ab. Das zeigt der <a href="../">Kinematik-Simulator: Wie genau zeichnet ein Fünfgelenk?</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.12.0</span>. Die Figur rechnet mit den Maßen des PlotBot und denselben Formeln wie der Kinematik-Simulator.
+      · <a href="../../">Zur PlotBot-Seite</a> · <a href="../../../en/kinematics/explained/" hreflang="en" lang="en" data-lang="en">English version</a></p>
+    <p class="legal-links"><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20R%C3%BCckmeldung">Rückmeldung schicken</a></p>
+  </div>
+</footer>
+
+<script src="../../../js/kinematik/muster.js"></script>
+<script src="../../../js/kinematik/kern.js"></script>
+<script src="../../../js/kinematik/ik-bild.js"></script>
+<script src="../../../js/kinematik/verstehen.js"></script>
+<noscript><img src="https://plotbot.goatcounter.com/count?p=/de/kinematik/verstehen/" alt="" width="1" height="1"></noscript>
+</body>
+</html>

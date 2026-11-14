@@ -1,0 +1,86 @@
+/* „Inverse Kinematik verstehen“: Lernfigur und feste Abbildungen. Seitenkopf wie beim Simulator (kinematik.css). */
+.ikz { width: 100%; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+.ikz .flaeche { fill: rgba(35, 150, 70, .2); }
+.ikz .feld { fill: none; stroke: #2f7bd8; stroke-width: .9; stroke-dasharray: 3 2; }
+.ikz .achse { stroke: #8a94a0; stroke-width: .5; stroke-dasharray: 2 2; }
+.ikz .arm { fill: none; stroke-width: 4; stroke-linecap: round; }
+.ikz .ober-l { stroke: #1f63b5; } .ikz .ober-r { stroke: #c2410c; } .ikz .unter { stroke: #475569; }
+.ikz .arm.gesperrt { stroke-dasharray: .1 6.5; }
+.ikz .arm.blass { stroke: #94a3b8; stroke-width: 2.5; stroke-dasharray: 4 5; }
+.ikz .gelenk { fill: #fff; stroke: #1d1b2f; stroke-width: 1.2; }
+.ikz .gelenk.hohl { stroke: #94a3b8; }
+.ikz .welle { fill: #1d1b2f; }
+.ikz .stift { fill: #d6336c; stroke: #fff; stroke-width: 1.2; }
+.ikz .stift.gesperrt { fill: #fff; stroke: #b91c1c; stroke-width: 1.8; }
+.ikz .kreis { fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
+.ikz .kr-stift { stroke: #475569; } .ikz .kr-l { stroke: #1f63b5; } .ikz .kr-r { stroke: #c2410c; }
+.ikz .hilfs { stroke: #6d28d9; stroke-width: 1; stroke-dasharray: 5 2; }
+.ikz .wb-l, .ikz .wb-r, .ikz .wb-phi { fill: none; stroke-width: 1.4; }
+.ikz .wb-l { stroke: #1f63b5; } .ikz .wb-r { stroke: #c2410c; } .ikz .wb-phi { stroke: #6d28d9; }
+.ikz .luecke { stroke: #b91c1c; stroke-width: 1; stroke-dasharray: 2 2; }
+.ikz .lbl { font: 600 7.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #1d1b2f; paint-order: stroke; stroke: #fff; stroke-width: 2.5px; stroke-linejoin: round; }
+.ikz .kl-l { fill: #1f63b5; } .ikz .kl-r { fill: #c2410c; } .ikz .kl-phi { fill: #6d28d9; } .ikz .kl-stift { fill: #a61e4d; }
+@media (prefers-reduced-motion: no-preference) {
+  .ikz .neu { animation: ik-ein .45s ease-out; }
+  @keyframes ik-ein { from { opacity: 0; } }
+}
+
+/* Lernfigur: Bühne links, Werte und Schritte rechts; schmal untereinander */
+.ik { display: grid; gap: 1.25rem; margin-top: 1.25rem; }
+.ik[hidden] { display: none; }
+#ik-svg { touch-action: pan-y; cursor: crosshair; }
+#ik-griff { cursor: grab; touch-action: none; outline: none; }
+#ik-griff .griff { fill: transparent; stroke: #d6336c; stroke-width: .8; stroke-dasharray: 2 2; }
+#ik-griff:focus-visible .griff { stroke: #1d1b2f; stroke-width: 1.6; stroke-dasharray: none; }
+.ik-legende { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .2rem 1rem; font-size: .9rem; color: var(--muted); }
+.ik-legende i { display: inline-block; width: 1.1rem; height: .55rem; margin-right: .3rem; border-radius: 2px; vertical-align: middle; }
+.ik-legende i.strich { height: 0; border-top: 2px dashed #2f7bd8; border-radius: 0; }
+.ik-werte { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem 1rem; margin: 0; padding: 0; border: 0; }
+.ik-werte label, .ik-werte div { display: block; font-size: .95rem; }
+.ik-werte input { display: block; width: 100%; font: inherit; padding: .35rem .5rem; border: 1px solid #8a94a0; border-radius: .5rem; }
+.ik-werte output { display: block; font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.ik-werte .wl { color: #1f63b5; } .ik-werte .wr { color: #c2410c; }
+.ik-status { margin: .9rem 0; padding: .6rem .9rem; border-left: 5px solid var(--green); background: #f0f8f1; min-height: 4.6em; }
+.ik-status.schlecht { border-color: #b91c1c; background: #fdf1f1; }
+.ik-modus { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.ik button { font: inherit; font-weight: 700; padding: .5rem 1rem; border-radius: 999px; border: 2px solid var(--pink); background: #fff; color: #a61e4d; cursor: pointer; }
+.ik button[aria-pressed="true"] { background: var(--pink); color: #fff; }
+.ik button:disabled { border-color: #c9ccd2; color: #70757d; cursor: default; }
+.ik button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.ik-schritte { margin-top: .75rem; padding: .8rem 1rem; background: var(--cream); border-radius: var(--radius); }
+.ik-schritte p { margin: 0 0 .6rem; }
+.ik-schritte #ik-schritt-nr { font-weight: 700; }
+.ik-schritte #ik-schritt-text { min-height: 6.5em; }
+.ik-hinweis { font-size: .95rem; color: var(--muted); }
+.needs-js { background: var(--cream); border-left: 5px solid var(--sun); padding: .75rem 1rem; }
+
+/* Aufgaben */
+.ik-aufgaben { padding-left: 1.3rem; max-width: 46rem; }
+.ik-aufgaben li { margin-bottom: 1rem; }
+.ik-aufgaben details { margin-top: .4rem; }
+.ik-haken { display: inline-block; margin-left: .4rem; padding: 0 .6rem; border-radius: 999px; background: var(--green); color: #fff; font-weight: 700; font-size: .9rem; }
+.ik-haken[hidden] { display: none; }
+
+/* Die Rechnung in Schritten: Abbildung neben dem Text */
+.ik-rechnung { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: 2rem; counter-reset: schritt; }
+.ik-rechnung > li { display: grid; gap: .75rem 1.5rem; align-items: center; counter-increment: schritt; }
+.ik-rechnung h3::before { content: counter(schritt) ". "; color: var(--pink); }
+.ik-rechnung figure, .ik-bild { max-width: 26rem; }
+.formel { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .95rem; background: #fff; border: 1px solid var(--line);
+  border-radius: .5rem; padding: .5rem .75rem; overflow-x: auto; white-space: nowrap; }
+@media (min-width: 48rem) {
+  .ik { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
+  .ik-rechnung > li { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); }
+}
+
+/* Schritt 5: Schnittpunkte zum Auswählen (unsichtbare Trefferfläche über dem gezeichneten Punkt) */
+.ikz .kandidat { fill: #fff; stroke: #1d1b2f; stroke-width: 1.4; }
+.ikz .kandidat.richtig { fill: #237032; }
+.ikz .kandidat.falsch { fill: #fff; stroke: #b91c1c; stroke-width: 2; }
+.ikz .wahl { fill: transparent; stroke: #d6336c; stroke-width: 1; stroke-dasharray: 2 2; cursor: pointer; outline: none; }
+.ikz .wahl:focus-visible { stroke: #1d1b2f; stroke-width: 1.8; stroke-dasharray: none; }
+/* Schritt 7: Winkelmesser */
+.ikz .wm { fill: none; stroke-width: .6; }
+.ikz .wm-l { stroke: #1f63b5; } .ikz .wm-r { stroke: #c2410c; }
+.ikz .skala { font-size: 5.5px; font-weight: 400; }
+.ikz .wert { font-size: 9px; }
