@@ -26,22 +26,22 @@ const ALT = {
     'Top view of PlotBot: two motor shafts at the bottom, 36 mm apart. A 65 mm upper arm points outward from each, with a 90 mm forearm attached. The two forearms meet at the pen at the top. At each motor the angle between the baseline and the upper arm is marked: 119° on the left, 22° on the right.'],
   s1: ['Schritt 1: um jede der beiden Motorwellen ein gestrichelter Kreis mit 65 mm Radius, links blau, rechts orange. Die Kreise überlappen sich.',
     'Step 1: a dashed circle with a 65 mm radius around each of the two motor shafts, blue on the left, orange on the right. The circles overlap.'],
-  s2: ['Schritt 2: zu den beiden Kreisen kommt der Zielpunkt des Stifts, rechts oben im gestrichelten Quadrat der Zeichenfläche.',
-    'Step 2: the pen\'s target point joins the two circles, in the upper right of the dashed square of the drawing area.'],
+  s2: ['Schritt 2: Zu den beiden Kreisen kommt der Zielpunkt des Stifts, rechts oben im gestrichelten Quadrat der Zeichenfläche.',
+    'Step 2: the pen\'s target point is added to the two circles, in the upper right of the dashed square of the drawing area.'],
   s3: ['Schritt 3: ein grauer gestrichelter Kreis mit 90 mm Radius um den Zielpunkt. Er schneidet beide Motorkreise.',
     'Step 3: a grey dashed circle with a 90 mm radius around the target point. It crosses both motor circles.'],
-  s4: ['Schritt 4: Vier Schnittpunkte sind markiert, zwei auf dem linken und zwei auf dem rechten Motorkreis. Je Seite liegt einer außen und einer innen, zwischen den Motoren.',
-    'Step 4: four crossing points are marked, two on the left motor circle and two on the right. On each side one lies on the outside and one on the inside, between the motors.'],
-  s5: ['Schritt 5: Die beiden äußeren Schnittpunkte sind grün ausgefüllt und mit Armen verbunden, die beiden inneren bleiben leer.',
-    'Step 5: the two outer crossing points are filled green and joined up with arms; the two inner ones stay empty.'],
+  s4: ['Schritt 4: Vier Schnittpunkte sind markiert, zwei auf dem blauen Kreis des linken Motors und zwei auf dem orangen Kreis des rechten Motors. Auf jedem Kreis liegt ein Punkt außen und einer jenseits des anderen Motors.',
+    'Step 4: four crossing points are marked, two on the left motor\'s blue circle and two on the right motor\'s orange circle. On each circle one point lies on the outside and one beyond the other motor.'],
+  s5: ['Schritt 5: Die beiden äußeren Schnittpunkte sind grün ausgefüllt und mit kräftigen Armen verbunden. Die Arme zu den beiden anderen Punkten sind blass gestrichelt; sie kreuzen sich über den Motoren.',
+    'Step 5: the two outer crossing points are filled green and joined up with bold arms. The arms to the other two points are faint and dashed; they cross above the motors.'],
   s6: ['Schritt 6: Von jedem Motor führt ein Oberarm zum äußeren Ellbogen und von dort ein Unterarm zum Stift. Die Hilfskreise sind noch zu sehen.',
     'Step 6: from each motor an upper arm leads to the outer elbow, and from there a forearm to the pen. The construction circles are still visible.'],
   s7: ['Schritt 7: Um jeden Motor liegt ein Winkelmesser. Der linke Oberarm zeigt auf 119°, der rechte auf 22°.',
     'Step 7: a protractor sits around each motor. The left upper arm points to 119°, the right one to 22°.'],
   dreieck: ['Das Dreieck aus linkem Motor, Ellbogen und Stift mit den Seiten 65, 90 und c. Am Motor liegen zwei Winkel übereinander: φ von der Grundlinie bis zur Linie zum Stift, darüber α bis zum Oberarm.',
     'The triangle of left motor, elbow and pen with sides 65, 90 and c. Two angles stack at the motor: φ from the baseline to the line towards the pen, and above it α up to the upper arm.'],
-  flaeche: ['Die erreichbare Fläche in Grün: ein breiter, nach oben gewölbter Bereich vor dem Roboter. Das gestrichelte Quadrat der Zeichenfläche liegt mitten darin. Direkt um die Motoren bleibt ein Loch.',
-    'The reachable area in green: a wide region in front of the robot, arched at the top. The dashed square of the drawing area sits well inside it. A hole remains right around the motors.'],
+  flaeche: ['Die erreichbare Fläche in Grün: ein breiter, nach oben gewölbter Bereich vor dem Roboter. Er beginnt knapp 20 mm vor den Motoren und reicht bis etwa 154 mm nach vorn. Das gestrichelte Quadrat der Zeichenfläche liegt ganz darin.',
+    'The reachable area in green: a wide region in front of the robot, arched at the top. It starts just under 20 mm in front of the motors and extends to about 154 mm forward. The dashed square of the drawing area lies entirely inside it.'],
 };
 
 function figuren(lang) {
@@ -56,7 +56,7 @@ function figuren(lang) {
     lbl(L.P.x, L.P.y + 9, en ? 'pen' : 'Stift', 'kl-stift') + lbl(0, -22, '36 mm', '');
   const f = { aufbau: svg('aufbau', aufbau), flaeche: svg('flaeche', I.szene(L, { schritt: 0, flaeche: true })),
     dreieck: svg('dreieck', I.szene(L, { schritt: 0, dreieck: true })) };
-  for (let n = 1; n <= 7; n++) f['s' + n] = svg('s' + n, I.szene(L, { schritt: n, wahl: { l: 'aussen', r: 'aussen' } }));
+  for (let n = 1; n <= 7; n++) f['s' + n] = svg('s' + n, I.szene(L, { schritt: n, wahl: { l: 'aussen', r: 'aussen' }, innenZeigen: true }));
   return { f, L, I };
 }
 
@@ -65,14 +65,14 @@ const ZIELE = [['A', 0, 75], ['B', 30, 100], ['C', -30, 90]];
 const BLATT = {
   de: { datei: 'de/kinematik/verstehen/arbeitsblatt.html', titel: 'Arbeitsblatt: Motorwinkel mit Zirkel und Geodreieck finden',
     zurueck: 'Zur Seite „Inverse Kinematik verstehen“', druck: 'Drucken Sie in Originalgröße (100 %, nicht „an Seite anpassen“). Die Kontrollstrecke unten rechts muss 50 mm messen.',
-    schritte: ['Zirkel auf 65 mm stellen (Oberarm). Um jeden Motor einen Kreis ziehen.', 'Zirkel auf 90 mm stellen (Unterarm). Einen Kreis um das Ziel A ziehen.',
-      'Der neue Kreis schneidet jeden Motorkreis zweimal. Je Seite den äußeren Schnittpunkt markieren: Das ist der Ellbogen.',
+    schritte: ['Zirkel auf 65 mm stellen (Oberarm). Um jeden Motor einen Kreis ziehen.', 'Zirkel auf 90 mm stellen (Unterarm). In das Ziel A einstechen und einen Bogen ziehen, der beide Motorkreise schneidet.',
+      'Der Bogen schneidet jeden Motorkreis zweimal. Auf jedem Kreis den äußeren Schnittpunkt markieren (beim linken Motor den linken): Das ist der Ellbogen.',
       'Mit dem Lineal verbinden: Motor – Ellbogen – Ziel.', 'Winkel am Motor messen, die Null zeigt nach rechts. In die Tabelle eintragen. Dann dasselbe für B und C.'],
     ziel: 'Ziel', links: 'Motor links', rechts: 'Motor rechts', feld: 'Zeichenfläche 80 × 80 mm', kontrolle: 'Kontrolle: 50 mm', masse: 'PlotBot von oben, Maßstab 1:1. Oberarm 65 mm, Unterarm 90 mm, Motoren 36 mm auseinander.' },
   en: { datei: 'en/kinematics/explained/worksheet.html', titel: 'Worksheet: find the motor angles with a compass and protractor',
-    zurueck: 'To the page “Understanding inverse kinematics”', druck: 'Print at actual size (100%, not “fit to page”). The check line at the bottom right has to measure 50 mm.',
-    schritte: ['Set the compass to 65 mm (upper arm). Draw a circle around each motor.', 'Set the compass to 90 mm (forearm). Draw a circle around target A.',
-      'The new circle crosses each motor circle twice. Mark the outer crossing point on each side: that\'s the elbow.',
+    zurueck: 'Back to “Understanding inverse kinematics”', druck: 'Print at actual size (100%, not “fit to page”). The check line at the bottom right has to measure 50 mm.',
+    schritte: ['Set the compass to 65 mm (upper arm). Draw a circle around each motor.', 'Set the compass to 90 mm (forearm). Put the point on target A and draw an arc that crosses both motor circles.',
+      'The arc crosses each motor circle twice. On each circle mark the outer crossing point (the left one for the left motor): that\'s the elbow.',
       'Join them up with a ruler: motor – elbow – target.', 'Measure the angle at each motor with zero pointing right. Write it in the table. Then do the same for B and C.'],
     ziel: 'Target', links: 'Left motor', rechts: 'Right motor', feld: 'Drawing area 80 × 80 mm', kontrolle: 'Check: 50 mm', masse: 'PlotBot from above, scale 1:1. Upper arm 65 mm, forearm 90 mm, motors 36 mm apart.' },
 };
@@ -86,7 +86,7 @@ function arbeitsblatt(lang, I) {
     g += kreuz(W.x, W.y, 3) + `<circle cx="${W.x}" cy="0" r="1.2"/><text x="${W.x + dx}" y="8" text-anchor="${anker}">${name}</text>`;
   }
   for (const [n, x, y] of ZIELE) g += kreuz(x, y, 2.5) + `<text class="fett" x="${x + 4}" y="${-y - 3}">${n}</text>`;
-  g += `<path d="M40 60h50M40 58v4M90 58v4"/><text x="65" y="56" text-anchor="middle">${T.kontrolle}</text>`;
+  g += `<path d="M40 67h50M40 65v4M90 65v4"/><text x="65" y="63" text-anchor="middle">${T.kontrolle}</text>`;
   const zeilen = ZIELE.map(z => `<tr><th scope="row">${z[0]}</th><td></td><td></td></tr>`).join('');
   return `<!DOCTYPE html>
 <html lang="${lang}">

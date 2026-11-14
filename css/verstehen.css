@@ -38,9 +38,9 @@
 .ik-werte { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem 1rem; margin: 0; padding: 0; border: 0; }
 .ik-werte label, .ik-werte div { display: block; font-size: .95rem; }
 .ik-werte input { display: block; width: 100%; font: inherit; padding: .35rem .5rem; border: 1px solid #8a94a0; border-radius: .5rem; }
-.ik-werte output { display: block; font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.ik-werte .wl, .ik-werte .wr { display: block; font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
 .ik-werte .wl { color: #1f63b5; } .ik-werte .wr { color: #c2410c; }
-.ik-status { margin: .9rem 0; padding: .6rem .9rem; border-left: 5px solid var(--green); background: #f0f8f1; min-height: 4.6em; }
+.ik-status { margin: .75rem 0 0; padding: .6rem .9rem; border-left: 5px solid var(--green); background: #f0f8f1; min-height: 3.6em; }
 .ik-status.schlecht { border-color: #b91c1c; background: #fdf1f1; }
 .ik-modus { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
 .ik button { font: inherit; font-weight: 700; padding: .5rem 1rem; border-radius: 999px; border: 2px solid var(--pink); background: #fff; color: #a61e4d; cursor: pointer; }
@@ -68,19 +68,21 @@
 .ik-rechnung figure, .ik-bild { max-width: 26rem; }
 .formel { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .95rem; background: #fff; border: 1px solid var(--line);
   border-radius: .5rem; padding: .5rem .75rem; overflow-x: auto; white-space: nowrap; }
+details .split > * { min-width: 0; }
 @media (min-width: 48rem) {
   .ik { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
   .ik-rechnung > li { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); }
 }
 
 /* Schritt 5: Schnittpunkte zum Auswählen (unsichtbare Trefferfläche über dem gezeichneten Punkt) */
-.ikz .kandidat { fill: #fff; stroke: #1d1b2f; stroke-width: 1.4; }
-.ikz .kandidat.richtig { fill: #237032; }
+.ikz .kandidat { fill: #fff; stroke-width: 1.6; }
+.ikz .k-l { stroke: #1f63b5; } .ikz .k-r { stroke: #c2410c; }
+.ikz .kandidat.richtig { fill: #237032; stroke: #1d1b2f; }
 .ikz .kandidat.falsch { fill: #fff; stroke: #b91c1c; stroke-width: 2; }
 .ikz .wahl { fill: transparent; stroke: #d6336c; stroke-width: 1; stroke-dasharray: 2 2; cursor: pointer; outline: none; }
 .ikz .wahl:focus-visible { stroke: #1d1b2f; stroke-width: 1.8; stroke-dasharray: none; }
 /* Schritt 7: Winkelmesser */
 .ikz .wm { fill: none; stroke-width: .6; }
 .ikz .wm-l { stroke: #1f63b5; } .ikz .wm-r { stroke: #c2410c; }
-.ikz .skala { font-size: 5.5px; font-weight: 400; }
+.ikz .skala { font-size: 6.5px; font-weight: 400; }
 .ikz .wert { font-size: 9px; }

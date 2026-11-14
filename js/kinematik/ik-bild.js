@@ -9,13 +9,14 @@
   // Maße des PlotBot aus der Vorlage in kern.js: Wellenabstand 36, Oberarm 65, Unterarm 90, Feld 80 × 80 (y 35–115).
   // Quelle im Roboter-Repo: cad/params.scad:9-11 und firmware/lib/zeichnen/src/kinematik.h:12-16.
   const G = Object.assign(ZK.preset('plotbot'), { limits: false });
-  // Schwenkbereiche der Oberarme in Grad: firmware/lib/zeichnen/src/kinematik.h:17-18 (= cad/params.scad:14-15)
+  // Schwenkbereiche der Oberarme in Grad (Softlimit der Firmware): firmware/lib/zeichnen/src/kinematik.h:17-18.
+  // Die Vorlage in kern.js rechnet stattdessen mit den Endschalterwinkeln 236,96° / −56,96°; hier gilt die Firmware.
   const BEREICH = { l: [78, 238], r: [-58, 102] };
   const A = { x: -G.d / 2, y: 0 }, B = { x: G.d / 2, y: 0 };
   const FELD = { x0: G.cx - G.w / 2, x1: G.cx + G.w / 2, y0: G.cy - G.h / 2, y1: G.cy + G.h / 2 };
   const VIEW = { x0: -110, x1: 110, y0: -30, y1: 165 };   // sichtbarer Ausschnitt in mm
   const t = ZK.t;
-  const zahl = (n, d) => n.toLocaleString(ZK.LOCALE, { minimumFractionDigits: d == null ? 1 : d, maximumFractionDigits: d == null ? 1 : d });
+  const zahl = (n, d) => n.toLocaleString(ZK.LOCALE, { minimumFractionDigits: d == null ? 1 : d, maximumFractionDigits: d == null ? 1 : d }).replace('-', '−');
   const r1 = n => Math.round(n * 10) / 10;
 
   /** Eine Seite als Dreieck Welle–Ellbogen–Stift: Abstand c, Richtung φ zum Stift, Winkel α am Motor (Kosinussatz). */
@@ -93,7 +94,7 @@
 
   /** Zeichnet die Szene als SVG-Inhalt. o.schritt: 0 = ganzer Roboter mit Winkeln, 1–7 = Zirkel-Konstruktion:
       1 Kreise um die Motoren, 2 Zielpunkt, 3 Kreis um das Ziel, 4 Schnittpunkte, 5 Ellbogen wählen (o.wahl = { l, r } mit
-      'aussen' | 'innen'), 6 Arme, 7 Winkel ablesen. o.flaeche: erreichbare Fläche; o.dreieck: Dreieck des Kosinussatzes;
+      'aussen' | 'innen'; o.innenZeigen: die verworfenen inneren Arme blass), 6 Arme, 7 Winkel ablesen. o.flaeche: erreichbare Fläche; o.dreieck: Dreieck des Kosinussatzes;
       o.neu: Neues des Schritts einblenden (CSS-Klasse „neu“). */
   function szene(L, o) {
     o = o || {};
@@ -113,11 +114,11 @@
     if (geht && (n === 4 || n === 5)) {   // vier Schnittpunkte: je Seite ein äußerer und ein innerer Ellbogen
       const kand = (E, seite, wo) => {
         const gewaehlt = n === 5 && wahl[seite] === wo;
-        return punkt(E, 3.4, 'kandidat' + (gewaehlt ? (wo === 'aussen' ? ' richtig' : ' falsch') : '') + neu(4));
+        return punkt(E, 3.4, 'kandidat k-' + seite + (gewaehlt ? (wo === 'aussen' ? ' richtig' : ' falsch') : '') + neu(4));
       };
       if (n === 5) {
-        if (wahl.l === 'innen') h += linie(A, L.innen.E1, 'arm blass') + linie(L.innen.E1, P, 'arm blass');
-        if (wahl.r === 'innen') h += linie(B, L.innen.E2, 'arm blass') + linie(L.innen.E2, P, 'arm blass');
+        if (wahl.l === 'innen' || o.innenZeigen) h += linie(A, L.innen.E1, 'arm blass') + linie(L.innen.E1, P, 'arm blass');
+        if (wahl.r === 'innen' || o.innenZeigen) h += linie(B, L.innen.E2, 'arm blass') + linie(L.innen.E2, P, 'arm blass');
         if (wahl.l === 'aussen') h += linie(A, L.E1, 'arm ober-l') + linie(L.E1, P, 'arm unter');
         if (wahl.r === 'aussen') h += linie(B, L.E2, 'arm ober-r') + linie(L.E2, P, 'arm unter');
       }
