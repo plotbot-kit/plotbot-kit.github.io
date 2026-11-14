@@ -164,15 +164,15 @@
       <summary>Checking it with the law of cosines</summary>
       <div class="split">
         <div>
-          <p>The robot has no compass. Its firmware does the same construction with numbers: from the coordinates it works out where the circle around the motor and the circle around the pen cross.
-            Then it takes the outer crossing point and finds the direction from the motor to that point. That's the motor angle.</p>
-          <p>At school, the law of cosines gets you to the same result, usually around age 15. Motor, elbow and pen form a triangle whose three sides are known:
+          <p>You can also calculate the motor angles without drawing anything. The tool for that is the law of cosines, which you usually meet at school around age 15. Motor, elbow and pen form a triangle whose three sides are known:
             the 65 mm upper arm, the 90 mm forearm and the distance c from the motor to the pen. For the angle α at the motor:</p>
           <p class="formel">cos α = (65² + c² − 90²) / (2 · 65 · c)</p>
           <p>In the example the pen is 48 mm to the right of the left motor and 100 mm in front of it. Pythagoras gives c = 110.9 mm, and the law of cosines gives α = 54.2°.
             The line from the motor to the pen rises at φ = 64.4°. The upper arm lies α further round to the left: 64.4° + 54.2° = 118.6°.</p>
           <p>The right side is the mirror image, so there α is subtracted: c = 100.7 mm, φ = 83.2°, α = 61.4°, which makes 83.2° − 61.4° = 21.8°.
             Rounded, those are the 119° and 22° the protractor shows.</p>
+          <p>The robot itself calculates differently but arrives at the same angles. Its firmware does the compass construction with numbers: from the coordinates it works out where the circle around the motor and the circle around the pen cross.
+            Then it takes the outer crossing point and finds the direction from the motor to that point. That's the motor angle.</p>
         </div>
         <figure><!-- ik-fig:dreieck --><svg class="ikz" viewBox="-110 -165 220 195" role="img" aria-label="The triangle of left motor, elbow and pen with sides 65, 90 and c. Two angles stack at the motor: φ from the baseline to the line towards the pen, and above it α up to the upper arm."><rect class="feld" x="-40" y="-115" width="80" height="80"/><line class="achse" x1="-104" y1="0" x2="104" y2="0"/><text class="lbl kl-l" x="-23" y="11" text-anchor="end">left motor</text><text class="lbl kl-r" x="23" y="11" text-anchor="start">right motor</text><line class="hilfs" x1="-18" y1="0" x2="30" y2="-100"/><path class="wb-phi" d="M2 0A20 20 0 0 0 -9.3 -18"/><text class="lbl kl-phi" x="4.9" y="-14.4" text-anchor="middle">φ</text><path class="wb-l" d="M-3.3 -30.7A34 34 0 0 0 -34.3 -29.9"/><text class="lbl kl-l" x="-19.1" y="-41" text-anchor="middle">α</text><line class="arm ober-r" x1="18" y1="0" x2="78.4" y2="-24.1"/><line class="arm unter" x1="78.4" y1="-24.1" x2="30" y2="-100"/><circle class="gelenk" cx="78.4" cy="-24.1" r="3"/><line class="arm ober-l" x1="-18" y1="0" x2="-49.1" y2="-57.1"/><line class="arm unter" x1="-49.1" y1="-57.1" x2="30" y2="-100"/><circle class="gelenk" cx="-49.1" cy="-57.1" r="3"/><text class="lbl kl-l" x="-42.6" y="-28.5" text-anchor="middle">65</text><text class="lbl " x="-13.6" y="-84.5" text-anchor="middle">90</text><text class="lbl kl-phi" x="15" y="-46" text-anchor="middle">c</text><circle class="welle" cx="-18" cy="0" r="4"/><circle class="welle" cx="18" cy="0" r="4"/><circle class="stift" cx="30" cy="-100" r="4.5"/></svg><!-- /ik-fig:dreieck -->
           <figcaption>The triangle at the left motor: φ points to the pen, and α is added to get to the upper arm.</figcaption></figure>

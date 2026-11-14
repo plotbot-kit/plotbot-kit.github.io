@@ -64,7 +64,7 @@
       `The grey circle crosses each motor circle twice. Only at these four points do both distances fit: ${g.L1l} mm to the motor and ${g.L2l} mm to the pen. So each motor has two possible elbows.`);
     if (n === 5) {
       const frage = t('Welche Ellbogen nimmt der Roboter? Wähle auf jedem Motorkreis einen der beiden Schnittpunkte aus. ', 'Which elbows does the robot use? Pick one of the two crossing points on each motor circle. ');
-      if (wahl.l === 'innen' || wahl.r === 'innen') return frage + t('Dieser Punkt passt in der Zeichnung auch. Der Oberarm greift dann aber über den anderen Motor hinweg, und in großen Teilen der Zeichenfläche kreuzen sich die Arme. Probier den anderen Punkt auf demselben Kreis.',
+      if (wahl.l === 'innen' || wahl.r === 'innen') return frage + t('Dieser Punkt passt in der Zeichnung auch. Der Oberarm greift dann aber über den anderen Motor hinweg, und in großen Teilen der Zeichenfläche kreuzen sich die Arme. Probiere den anderen Punkt auf demselben Kreis.',
         'This point fits the drawing too. But then the upper arm reaches across the other motor, and over large parts of the drawing area the arms cross. Try the other point on the same circle.');
       if (wahl.l && wahl.r) return t('Richtig: Der PlotBot nimmt für jeden Motor den äußeren Ellbogen, links den linken und rechts den rechten. So bleibt jeder Arm auf seiner Seite, und in der ganzen Zeichenfläche kommen sich die Arme nicht in die Quere.',
         'Correct: PlotBot uses the outer elbow for each motor, the left one on the left and the right one on the right. That keeps each arm on its own side, and the arms don\'t get in each other\'s way anywhere in the drawing area.');

@@ -152,18 +152,25 @@
     dot(ctx, v, A, 5, COL.armL); dot(ctx, v, B, 5, COL.armR);
   }
 
-  /** Endschalterwinkel als Strahl je Achse, der gesperrte Sektor dahinter rot getönt. */
+  /** Grenzen des Schwenkbereichs als Strahl je Achse. Außen (swL, swR) lang, der gesperrte Sektor dahinter rot getönt.
+      Innen (swLmin, swRmax) nur ein kurzer Strahl, damit die Zeichenfläche frei bleibt – und nur, wenn die Grenze
+      gesetzt ist: Die Vorgabe 0° / 180° sperrt nichts. */
   function drawSwitches(ctx, v, g, A, B) {
-    const len = Math.max(g.L1l, g.L1r) + 6, R = Math.PI / 180;
-    [[A, g.swL, g.swL + 40, 'L'], [B, g.swR - 40, g.swR, 'R']].forEach(([P, a0, a1, side]) => {
-      const s = toS(v, P), r = len * v.scale, sw = side === 'L' ? a0 : a1;
-      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.arc(s.x, s.y, r, -a1 * R, -a0 * R); ctx.closePath();
-      ctx.fillStyle = 'rgba(220,38,38,0.10)'; ctx.fill();
+    const lang = Math.max(g.L1l, g.L1r) + 6, kurz = 24, R = Math.PI / 180;
+    const grenzen = [[A, g.swL, 'L', g.swL], [B, g.swR, 'R', g.swR - 40]];
+    if (g.swLmin > 0) grenzen.push([A, g.swLmin, 'L']);
+    if (g.swRmax < 180) grenzen.push([B, g.swRmax, 'R']);
+    grenzen.forEach(([P, sw, side, a0]) => {
+      const len = a0 === undefined ? kurz : lang, s = toS(v, P);
+      if (a0 !== undefined) {
+        ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.arc(s.x, s.y, len * v.scale, -(a0 + 40) * R, -a0 * R); ctx.closePath();
+        ctx.fillStyle = 'rgba(220,38,38,0.10)'; ctx.fill();
+      }
       const e = { x: P.x + len * Math.cos(sw * R), y: P.y + len * Math.sin(sw * R) };
       ctx.strokeStyle = COL.real; ctx.lineWidth = 1.5; ctx.setLineDash([5, 3]); line(ctx, v, P, e); ctx.setLineDash([]);
       const ts = toS(v, e);
       ctx.fillStyle = COL.real; ctx.font = '11px system-ui';
-      ctx.fillText(`${t('Endschalter', 'Limit switch')} ${sw.toLocaleString(ZK.LOCALE)}°`, ts.x + (side === 'L' ? -100 : 4), ts.y + 12);
+      ctx.fillText(`${t('Grenze', 'Limit')} ${sw.toLocaleString(ZK.LOCALE)}°`, ts.x + (side === 'L' ? -70 : 4), ts.y + (a0 === undefined ? 0 : 12));
     });
   }
 

@@ -19,7 +19,7 @@
   };
 
   // backlash = Spiel links, backlashR = Spiel rechts (Grad am Motor). limits: Schwenkbereich der Oberarme in Grad,
-  // links swLmin…swL, rechts swR…swRmax (swL und swR sind die Endschalterseiten), dazu das Softlimit
+  // links swLmin…swL, rechts swR…swRmax (am Gerät sitzen die Endschalter bei swL und swR), dazu das Softlimit
   // "Oberarme kreuzen sich nicht" wie in der Firmware.
   const BASE = { d: 36, L1l: 65, L2l: 90, L1r: 65, L2r: 90, coupled: true, cx: 0, cy: 75, w: 80, h: 80,
     drive: 'byj', step: 360 / 4096, backlash: 1.0, backlashR: 1.0, travel: 0, speed: 90, ratio: 1, elbowL: 'aussen', elbowR: 'aussen',
@@ -133,10 +133,8 @@
   function limitViolation(g, s) {
     if (!g.limits) return null;
     const l = normL(s.t1), r = normR(s.t2);
-    if (l > g.swL) return t('Endschalter links', 'left limit switch');
-    if (r < g.swR) return t('Endschalter rechts', 'right limit switch');
-    if (l < g.swLmin) return t('Schwenkbereich links', 'left swing range');
-    if (r > g.swRmax) return t('Schwenkbereich rechts', 'right swing range');
+    if (l > g.swL || l < g.swLmin) return t('Schwenkbereich links', 'left swing range');
+    if (r < g.swR || r > g.swRmax) return t('Schwenkbereich rechts', 'right swing range');
     if (upperCross(s)) return t('Oberarme kreuzen sich', 'upper arms cross');
     return null;
   }
