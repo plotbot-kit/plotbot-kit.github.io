@@ -20,6 +20,7 @@
 }(typeof self !== 'undefined' ? self : this, function (Schildkroete) {
   const ZEITLIMIT_MS = 2000;
   const CODE_MAX = 20000;   // Zeichen
+  const TEXT_MAX = 300;     // Zeichen einer Fehlermeldung aus dem Worker; längere schneidet laufe() ab
   // [interner Name, deutsch, englisch, weitere Schreibweisen]
   const NAMEN = Object.freeze([['vorwaerts', 'vorwaerts', 'forward', 'vorwärts'], ['rechts', 'rechts', 'right'], ['links', 'links', 'left'],
     ['drehe', 'drehe', 'turn'], ['stiftAb', 'stiftAb', 'penDown'], ['stiftAuf', 'stiftAuf', 'penUp'], ['geheZu', 'geheZu', 'goTo'],
@@ -47,12 +48,15 @@
       zeit: 'Nach {s} Sekunden abgebrochen. Wahrscheinlich endet eine Schleife nie.',
       klammer: 'Hier stimmt eine Klammer nicht. Zu jeder ( gehört eine ), zu jeder { eine }.',
       klammerEnde: 'Am Ende fehlt eine Klammer. Zu jeder { gehört eine }, zu jeder ( eine ).',
+      klammerZuViel: 'Hier ist eine schließende Klammer zu viel: Zu ihr gibt es keine öffnende.',
+      klammerUnklar: 'Die Klammern passen nicht zusammen. Zu jeder ( gehört eine ), zu jeder { eine }.',
+      zuWeit: 'So weit kann die Schildkröte nicht rechnen: Die Zahlen sind zu groß geworden.',
       syntax: 'Das versteht JavaScript nicht ({text}). Fehlt hier oder in der Zeile davor eine Klammer, ein Komma oder ein Anführungszeichen?',
       unbekannt: 'Den Namen ‚{name}‘ kenne ich nicht. Vertippt? Groß- und Kleinschreibung zählen.',
       meinst: ' Meinst du ‚{name}‘?',
       keineFunktion: '‚{name}‘ ist keine Funktion, die man aufrufen kann.',
       zeile: 'Zeile {n}: {text}', sonst: 'Fehler in Zeile {n}: {text}', sonstOhne: 'Fehler: {text}',
-      import: '‚import‘ geht hier nicht: Das Programm darf nichts nachladen.',
+      import: 'Das Wort ‚import‘ geht hier nicht, auch nicht in einem Kommentar: Das Programm darf nichts nachladen.',
       zuLang: 'Das Programm ist zu lang: höchstens {n} Zeichen.',
       sperre: 'Dieser Browser kann das Programm nicht abgeschottet ausführen. Nimm bitte die Blöcke.',
       kaputt: 'Das Programm hat kein brauchbares Ergebnis geliefert.',
@@ -62,16 +66,19 @@
       schritte: 'Too many steps: {n} at most. Does a loop run too often?',
       punkte: 'Too many points: {n} at most. Use fewer repeats or longer lines.',
       zufallLeer: 'There is no whole number between {a} and {b}.',
-      schritt0: 'A step of 0 doesn\'t work for counting: the loop would never arrive.',
+      schritt0: 'Counting in steps of 0 doesn\'t work: the loop would never finish.',
       zeit: 'Stopped after {s} seconds. A loop probably never ends.',
-      klammer: 'A bracket is wrong here. Every ( needs a ), every { needs a }.',
+      klammer: 'A bracket doesn\'t match here. Every ( needs a ), every { needs a }.',
       klammerEnde: 'A bracket is missing at the end. Every { needs a }, every ( needs a ).',
+      klammerZuViel: 'There is one closing bracket too many here: it has no opening bracket.',
+      klammerUnklar: 'The brackets don\'t match up. Every ( needs a ), every { needs a }.',
+      zuWeit: 'The turtle can\'t calculate that far: the numbers have become too big.',
       syntax: 'JavaScript doesn\'t understand this ({text}). Is a bracket, a comma or a quotation mark missing here or on the line before?',
-      unbekannt: 'I don\'t know the name "{name}". A typo? Upper and lower case matter.',
+      unbekannt: 'I don\'t know the name "{name}". Is it a typo? Upper and lower case matter.',
       meinst: ' Did you mean "{name}"?',
       keineFunktion: '"{name}" is not a function you can call.',
       zeile: 'Line {n}: {text}', sonst: 'Error in line {n}: {text}', sonstOhne: 'Error: {text}',
-      import: '"import" doesn\'t work here: the program must not load anything.',
+      import: 'You can\'t use the word "import" here, not even in a comment: programs aren\'t allowed to load anything.',
       zuLang: 'The program is too long: {n} characters at most.',
       sperre: 'This browser can\'t run the program in isolation. Please use the blocks.',
       kaputt: 'The program didn\'t return a usable result.',
@@ -109,6 +116,7 @@
     };
     function ziehe(x, y) {
       const von = [s.x, s.y], nach = [x, y];
+      if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Abbruch(T.zuWeit);
       s.x = x;
       s.y = y;
       if (!s.stiftUnten) return;
@@ -151,10 +159,10 @@
         return lo + Math.floor(wuerfel() * (hi - lo + 1));
       },
       // Die Werte von „zähle von … bis …“ als Liste, gezählt wie in schildkroete.js (Richtung aus von und bis, Schritt als Betrag).
-      zaehle(von, bis, weite = 1) {
+      zaehle(von, bis, ...rest) {
         zahl(von, 'zaehle');
         zahl(bis, 'zaehle');
-        const betrag = Math.abs(zahl(weite, 'zaehle'));
+        const betrag = Math.abs(zahl(rest.length ? rest[0] : 1, 'zaehle'));   // ohne Schritt: 1; ein leerer Wert ist ein Fehler
         if (betrag === 0) throw new Abbruch(T.schritt0);
         const vorzeichen = bis >= von ? 1 : -1;
         const anzahl = Math.floor(Math.abs(bis - von) / betrag * (1 + 1e-12)) + 1;
@@ -176,7 +184,8 @@
 
   // Löscht im Worker alles außer den erlaubten Sprachmitteln, auch von den Prototypen des globalen Objekts, und nimmt
   // Funktionen ihren Konstruktor (sonst käme man über (function(){}).constructor wieder an eval heran).
-  // Ergebnis: Namen aus gefaehrlich, die danach noch erreichbar sind; leer heißt: dicht.
+  // Ergebnis: was danach noch erreichbar ist, also Namen aus gefaehrlich und jede Funktion oder jedes Objekt, das sich weder
+  // löschen noch überschreiben ließ; leer heißt: dicht. Zahlen und Texte, die stehen bleiben, zählen nicht.
   function sperre(erlaubt, gefaehrlich) {
     const g = globalThis, rest = [];
     for (let o = g; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) {
@@ -184,7 +193,10 @@
         if (o === g && erlaubt.includes(k)) continue;
         try { delete o[k]; } catch { /* nicht löschbar: unten überschreiben */ }
         if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
-        try { Object.defineProperty(o, k, { value: undefined, writable: false, configurable: false }); } catch { /* unten prüfen */ }
+        try { Object.defineProperty(o, k, { value: undefined, writable: false, configurable: false }); } catch { /* gleich prüfen */ }
+        let wert;
+        try { wert = o[k]; } catch { wert = o; }   // Zugriff wirft: wie ein Objekt behandeln
+        if (wert !== null && (typeof wert === 'object' || typeof wert === 'function')) rest.push(String(k));
       }
     }
     for (const fn of [function () {}, function* () {}, async function () {}, async function* () {}]) {
@@ -218,15 +230,15 @@
       if (e !== null) {
         fehler = { text: '?', name: '', zeile: 0, bekannt: e instanceof k.Abbruch };
         try {
-          fehler.text = String(e && e.message !== undefined ? e.message : e);
-          fehler.name = String((e && e.name) || '');
+          fehler.text = String(e && e.message !== undefined ? e.message : e).slice(0, d.textMax);
+          fehler.name = String((e && e.name) || '').slice(0, 40);
           for (const m of String((e && e.stack) || '').matchAll(/:(\d+):\d+/g)) {
             const zeile = Number(m[1]) - d.versatz;
             if (zeile >= 1 && zeile <= d.zeilen) { fehler.zeile = zeile; break; }
           }
         } catch { /* Fehlerobjekt lässt sich nicht lesen */ }
       }
-      sende({ typ: 'ergebnis', ...k.ergebnis(), fehler });
+      try { sende({ typ: 'ergebnis', ...k.ergebnis(), fehler }); } catch { sende({ typ: 'kaputt' }); }   // Ergebnis nicht übertragbar
     };
   }
 
@@ -238,7 +250,7 @@
     const sprache = o.sprache === 'en' ? 'en' : 'de';
     const grenzen = o.grenzen || Schildkroete;
     const d = { erlaubt: ERLAUBT, gefaehrlich: GEFAEHRLICH, feld: o.feld, startwert: o.startwert >>> 0, texte: TEXTE[sprache], namen: NAMEN,
-      spalte: sprachIndex(sprache), zeilen: code.split('\n').length, versatz: 0,
+      spalte: sprachIndex(sprache), zeilen: code.split('\n').length, versatz: 0, textMax: TEXT_MAX,
       grenzen: { PUNKTE_MAX: grenzen.PUNKTE_MAX, SCHRITTE_MAX: grenzen.SCHRITTE_MAX, RAND_MM: grenzen.RAND_MM } };
     const kopf = () => `'use strict';const __fertig=(${vorspann})(${sperre},${kern},${JSON.stringify(d)});try{(function(){`;
     d.versatz = kopf().split('\n').length;   // JSON steht auf einer Zeile, die Zahl ändert die Zeilenzahl nicht
@@ -272,7 +284,7 @@
     const roh = String(f.text).replace(/^Uncaught\s+/, '');
     const mitZeile = t => (f.zeile ? fuelle(T.zeile, { n: f.zeile, text: t }) : t);
     if (f.bekannt) return mitZeile(roh);
-    if (f.amEnde) return mitZeile(T.klammerEnde);
+    if (f.klammer) return mitZeile(T[f.klammer]);
     let m = /^(?:ReferenceError: )?(\S+) is not defined|Can't find variable: (\S+)/.exec(roh);
     if (m) {
       const name = m[1] || m[2], vorschlag = aehnlich(name, sprache);
@@ -285,6 +297,18 @@
     const kurz = roh.replace(/^[A-Za-z]*Error: /, '');
     if (f.syntax) return mitZeile(fuelle(T.syntax, { text: kurz }));
     return f.zeile ? fuelle(T.sonst, { n: f.zeile, text: kurz }) : fuelle(T.sonstOhne, { text: kurz });
+  }
+
+  // Grobe Zählung der Klammern, nur um die Meldung zu wählen (Texte und Kommentare zählen mit).
+  // zuViel: Zeile der ersten schließenden Klammer ohne öffnende, sonst 0; offen: Zahl der nie geschlossenen.
+  function klammerbilanz(code) {
+    let offen = 0, zeile = 1;
+    for (const c of code) {
+      if (c === '\n') zeile++;
+      else if (c === '(' || c === '{' || c === '[') offen++;
+      else if ((c === ')' || c === '}' || c === ']') && --offen < 0) return { zuViel: zeile, offen: 0 };
+    }
+    return { zuViel: 0, offen };
   }
 
   // Prüft, was aus dem Worker kommt, bevor Vorschau und pruefen() damit rechnen: Der Worker ist nicht vertrauenswürdig.
@@ -333,18 +357,23 @@
         const f = m.fehler && typeof m.fehler === 'object' ? m.fehler : null;
         const zeile = f && Number.isInteger(f.zeile) && f.zeile >= 1 && f.zeile <= zeilen ? f.zeile : 0;
         schluss({ striche: m.striche, schildkroete: m.schildkroete, schritte: Number(m.schritte) || 0, punkte: Number(m.punkte) || 0,
-          zufall: Boolean(m.zufall), fehler: f ? erklaere({ text: String(f.text), zeile, bekannt: f.bekannt === true }, sprache) : null, zeile });
+          zufall: Boolean(m.zufall), fehler: f ? erklaere({ text: String(f.text).slice(0, TEXT_MAX), zeile, bekannt: f.bekannt === true }, sprache) : null, zeile });
       });
       // Fehler, die der Worker nicht selbst fängt: vor allem Syntaxfehler, dann startet das Skript gar nicht.
       arbeiter.beiFehler(f => {
-        const z = Number(f && f.zeile) - versatz, amEnde = z > zeilen;
-        const zeile = z >= 1 ? Math.min(z, zeilen) : 0;
-        schluss(leer(erklaere({ text: String((f && f.text) || '?'), zeile, amEnde, syntax: true }, sprache), zeile));
+        const z = Number(f && f.zeile) - versatz;
+        let zeile = z >= 1 ? Math.min(z, zeilen) : 0, klammer = null;
+        if (z > zeilen) {   // Der Fehler fällt erst hinter dem Programm auf: Die Klammern gehen nicht auf.
+          const bilanz = klammerbilanz(code);
+          klammer = bilanz.zuViel ? 'klammerZuViel' : bilanz.offen ? 'klammerEnde' : 'klammerUnklar';
+          if (bilanz.zuViel) zeile = bilanz.zuViel;
+        }
+        schluss(leer(erklaere({ text: String((f && f.text) || '?').slice(0, TEXT_MAX), zeile, klammer, syntax: true }, sprache), zeile));
       });
       uhr = setTimeout(() => schluss(leer(fuelle(T.zeit, { s: String(zeitlimit / 1000).replace('.', sprache === 'en' ? '.' : ',') }))), zeitlimit);
     });
     return { versprechen, abbrechen: () => abbrechen() };
   }
 
-  return { ZEITLIMIT_MS, CODE_MAX, NAMEN, ERLAUBT, GEFAEHRLICH, TEXTE, nameVon, kern, sperre, workerQuelle, erklaere, gueltig, laufe };
+  return { ZEITLIMIT_MS, CODE_MAX, TEXT_MAX, NAMEN, ERLAUBT, GEFAEHRLICH, TEXTE, nameVon, kern, sperre, workerQuelle, erklaere, gueltig, laufe };
 }));

@@ -128,6 +128,8 @@
     roboter.zeige(ergebnis.striche, pruefung.aussen);
     if (pruefung.sendbar) melde(fuelle(TEXT.bereit, { n: pruefung.anzahl }));
     else if (modus === 'js' && pruefung.anzahl === 0 && !ergebnis.fehler) melde(TEXT.leerJs);
+    else if (modus === 'js' && !ergebnis.fehler && pruefung.aussen.length && TEXT.aussen)   // englische Seite: eigener Text statt des deutschen aus pruefen()
+      melde(fuelle(pruefung.aussen.length === 1 ? TEXT.aussenEins : TEXT.aussen, { n: pruefung.aussen.length }), true);
     else melde(pruefung.grund, pruefung.anzahl > 0 || Boolean(ergebnis.fehler));
     knoepfe();
   }
@@ -168,6 +170,7 @@
     $('modus-bloecke').setAttribute('aria-pressed', String(!js));
     $('modus-js').setAttribute('aria-pressed', String(js));
     roboter.zuruecksetzen();
+    roboter.zeige([], []);   // die Vorschau der anderen Ansicht nicht stehen lassen
     if (js) editor.auffrischen();
     else Blockly.svgResize(arbeitsbereich);
     aktualisieren();

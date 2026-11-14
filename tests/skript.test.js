@@ -133,6 +133,17 @@ test('Drucker: Sonderfälle', () => {
     { type: 'zr_drehe', fields: { RICHTUNG: 'LINKS' }, inputs: { WINKEL: rechne('MULTIPLY', rechne('ADD', z(1), z(2)), z(3)) } }));
   assert.equal(text, 'if (undefined /* hier fehlt ein Wert */) {\n} else if (amRand()) {\n  stiftAuf();\n} else {\n}\n// eins\n// vorwaerts(99)\n'
     + 'vorwaerts(10 - (3 - (-2)));\n// (ausgeschaltet)\nlinks((1 + 2) * 3);\n');
+  // Hilfsnamen von „wiederhole“ verdecken keine Variable; Namen, die JavaScript nicht kennt, werden ersetzt; „import“ im Kommentar stört nicht.
+  const eigen = (name, ...b) => ({ ...start(...b), variables: [{ name, id: 'v1' }] });
+  const mal = (n, ...b) => ({ type: 'controls_repeat_ext', inputs: { TIMES: n, DO: { block: b.reduceRight((next, x) => (next ? { ...x, next: { block: next } } : x), null) } } });
+  const vor = w => ({ type: 'zr_vorwaerts', inputs: { WEG: w } });
+  const setze = n => ({ type: 'variables_set', fields: { VAR: { id: 'v1' } }, inputs: { VALUE: z(n) } });
+  assert.equal(BlockJs.alsJavaScript(eigen('iEnde', setze(3), mal(hol('v1'), vor(z(5))))),
+    'let iEnde = 0;\n\niEnde = 3;\nfor (let i = 0, iEnde_ = Math.floor(iEnde); i < iEnde_; i++) {\n  vorwaerts(5);\n}\n');
+  assert.equal(BlockJs.alsJavaScript(eigen('x²', setze(3), vor(hol('v1')))), 'let x_ = 0;\n\nx_ = 3;\nvorwaerts(x_);\n');
+  const tief = [...Array(8)].reduce(innen => mal(z(1), innen), vor(hol('v1')));
+  assert.match(BlockJs.alsJavaScript(eigen('z8', setze(3), tief)), /for \(let z8_ = 0; z8_ < 1; z8_\+\+\) \{\n +vorwaerts\(z8\);/);
+  assert.equal(BlockJs.alsJavaScript(start({ ...vor(z(1)), icons: { comment: { text: 'kein import' } } })), '// kein Import\nvorwaerts(1);\n');
   assert.equal(BlockJs.alsJavaScript(null), '');
   assert.equal(BlockJs.alsJavaScript({ blocks: { blocks: [{ type: 'zr_start' }] } }), '');
 });
@@ -182,7 +193,7 @@ throw new Error(JSON.stringify({ da, bauer, kette, rest }));`);
 
 test('Sperre: import wird schon am Quelltext abgewiesen, zu langer Code auch', async () => {
   const r = await laufe('vorwaerts(1);\nconst m = import("node:fs");');
-  assert.equal(r.fehler, 'Zeile 2: ‚import‘ geht hier nicht: Das Programm darf nichts nachladen.');
+  assert.equal(r.fehler, 'Zeile 2: Das Wort ‚import‘ geht hier nicht, auch nicht in einem Kommentar: Das Programm darf nichts nachladen.');
   assert.deepEqual(r.striche, []);
   assert.equal(laufende.size, 0);
   assert.match((await laufe(`//${'x'.repeat(Skript.CODE_MAX)}`)).fehler, /^Das Programm ist zu lang/);
@@ -191,12 +202,21 @@ test('Sperre: import wird schon am Quelltext abgewiesen, zu langer Code auch', a
 test('Fehler: Zeilennummer und Erklärung für die häufigen Fälle, sonst die Meldung des Browsers', async () => {
   const fall = async (code, o) => { const r = await laufe(code, o); return [r.zeile, r.fehler]; };
   assert.deepEqual(await fall('vorwaerts(20);\n\nvorwarts(20);'), [3, 'Zeile 3: Den Namen ‚vorwarts‘ kenne ich nicht. Vertippt? Groß- und Kleinschreibung zählen. Meinst du ‚vorwaerts‘?']);
-  assert.deepEqual(await fall('Forward(20);', { sprache: 'en' }), [1, 'Line 1: I don\'t know the name "Forward". A typo? Upper and lower case matter. Did you mean "forward"?']);
+  assert.deepEqual(await fall('Forward(20);', { sprache: 'en' }), [1, 'Line 1: I don\'t know the name "Forward". Is it a typo? Upper and lower case matter. Did you mean "forward"?']);
   assert.deepEqual(await fall('foo(3);'), [1, 'Zeile 1: Den Namen ‚foo‘ kenne ich nicht. Vertippt? Groß- und Kleinschreibung zählen.']);
   assert.deepEqual(await fall('for (let i = 0; i < 3; i++) {\n  rechts(90;\n}'), [2, 'Zeile 2: Hier stimmt eine Klammer nicht. Zu jeder ( gehört eine ), zu jeder { eine }.']);
   assert.deepEqual(await fall('if (true) {\n  vorwaerts(3);'), [2, 'Zeile 2: Am Ende fehlt eine Klammer. Zu jeder { gehört eine }, zu jeder ( eine ).']);
   assert.deepEqual(await fall('vorwaerts(1);\n}\nvorwaerts(2);'), [3, 'Zeile 3: Das versteht JavaScript nicht (Unexpected identifier \'vorwaerts\'). '
     + 'Fehlt hier oder in der Zeile davor eine Klammer, ein Komma oder ein Anführungszeichen?']);
+  assert.deepEqual(await fall('vorwaerts(10);\n}'), [2, 'Zeile 2: Hier ist eine schließende Klammer zu viel: Zu ihr gibt es keine öffnende.']);
+  assert.deepEqual(await fall('vorwaerts(1e308);\nvorwaerts(1e308);'), [2, 'Zeile 2: So weit kann die Schildkröte nicht rechnen: Die Zahlen sind zu groß geworden.']);
+  assert.deepEqual(await fall('for (const i of zaehle(1, 3, undefined)) vorwaerts(i);'), [1, 'Zeile 1: ‚zaehle‘ braucht eine Zahl.']);
+  // Eine riesige Fehlermeldung kommt gekürzt an, damit die Seite sie anzeigen kann.
+  const lang = await laufe('throw new Error("a ".repeat(1e6));');
+  assert.ok(lang.fehler.length < Skript.TEXT_MAX + 40, String(lang.fehler.length));
+  // Ein Ergebnis, das sich nicht übertragen lässt, endet sofort mit einer Meldung, nicht erst am Zeitlimit.
+  const kaputt = await laufe('Array.prototype.filter = function () { return [[() => 1, 2]]; }; vorwaerts(10);');
+  assert.equal(kaputt.fehler, 'Das Programm hat kein brauchbares Ergebnis geliefert.');
   assert.deepEqual(await fall('let a = 5;\na();'), [2, 'Zeile 2: ‚a‘ ist keine Funktion, die man aufrufen kann.']);
   assert.deepEqual(await fall('vorwaerts("zwanzig");'), [1, 'Zeile 1: ‚vorwaerts‘ braucht eine Zahl.']);
   assert.deepEqual(await fall('\nnull.x;'), [2, 'Fehler in Zeile 2: Cannot read properties of null (reading \'x\')']);

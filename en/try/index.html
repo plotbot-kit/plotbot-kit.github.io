@@ -57,7 +57,7 @@
       <p>Press "Draw it" and the arms trace your program. Before that, a dashed line shows what will be drawn; red dots are off the sheet.
         "Load an example" has ready-made programs such as a house, a star and a flower. Nothing leaves your browser: the page doesn't talk to a robot and doesn't save anything.</p>
       <p>The blocks and their messages are in German, just like on the robot itself.</p>
-      <p>If you'd rather type, switch to "JavaScript" above the editor and write the same program as text: <code>forward(20);</code> instead of a block.
+      <p>If you'd rather type, switch to "JavaScript" above the blocks and write the same program as text: <code>forward(20);</code> instead of a block.
         <a href="#js-title">The functions are listed further down.</a></p>
       <noscript><p class="needs-js">The block editor needs JavaScript. Turn it on in your browser and the blocks and the simulated robot appear here. The picture shows what the blocks look like on the phone.</p></noscript>
     </div>
@@ -77,6 +77,8 @@
   data-stopp="Stop"
   data-neu="Clear sheet"
   data-leer-js="No lines yet: try typing forward(20);"
+  data-aussen="{n} points off the sheet (red)."
+  data-aussen-eins="{n} point off the sheet (red)."
   data-ueberschreiben="This replaces the JavaScript program in the editor. Continue?">
   <div class="wrap">
     <h2 id="tool-title">Your program</h2>
@@ -155,7 +157,7 @@
     </div>
     <p>"Show as JavaScript" writes the block program into the editor as JavaScript. It doesn't work the other way round: typed JavaScript can't be turned into blocks.
       Each view keeps its own program; "Load an example" loads the example into whichever view is open. The German names work here too.</p>
-    <p>An error shows up below the editor with the line it's on. A program may draw 1000 points at most and run for 2 seconds at most; a loop that never ends is stopped.
+    <p>An error shows up below the editor, usually with the line it's on. A program may draw 1000 points at most and run for 2 seconds at most; a loop that never ends is stopped.
       It runs sealed off from the page and can neither reach the internet nor save anything.</p>
   </div>
 </section>

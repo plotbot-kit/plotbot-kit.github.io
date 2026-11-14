@@ -53,8 +53,8 @@
     const bekannt = new Map((programm.variables || []).map(v => [v.id, v.name]));
     const vergeben = new Set(), namen = new Map();
     for (const id of ids) {
-      let name = String(bekannt.get(id) || id).normalize('NFC').replace(/[^\p{L}\p{N}_$]/gu, '_');
-      if (!name || /^\p{N}/u.test(name)) name = `_${name}`;
+      let name = String(bekannt.get(id) || id).normalize('NFC').replace(/[^\p{ID_Continue}$]/gu, '_');
+      if (!/^[\p{ID_Start}_$]/u.test(name)) name = `_${name}`;
       if (RESERVIERT.has(name)) name += '_';
       for (let n = 2, basis = name; vergeben.has(name); n++) name = `${basis}${n}`;
       vergeben.add(name);
@@ -89,7 +89,9 @@
       jeder(b.inputs && b.inputs.DO && b.inputs.DO.block, x => { if (varId(x) === id && /^(variables_|math_change|controls_for)/.test(x.type)) innen++; });
       if (schleifen.get(id) === 1 && !gesetzt.has(id) && vorkommen.get(id) === innen + 1) lokal.add(id);
     });
+    // Hilfsnamen für „wiederhole“ dürfen keine Variable des Programms verdecken.
     const belegt = new Set(namen.values());
+    const frei = basis => { let name = basis; while (belegt.has(name)) name += '_'; return name; };
     const zaehler = ZAEHLER.filter(z => !belegt.has(z));
 
     const fehlt = () => ({ t: `undefined /* ${T.fehlt} */`, v: V.atom });
@@ -144,19 +146,19 @@
     }
 
     function wiederholkopf(b, ebene) {
-      const z = zaehler[ebene] || `z${ebene + 1}`;
+      const z = zaehler[ebene] || frei(`z${ebene + 1}`), ende = frei(`${z}Ende`);
       const fest = inhalt(b.inputs && b.inputs.TIMES);
       if (fest && fest.type === 'math_number' && Number.isFinite(Number(fest.fields && fest.fields.NUM)))
         return `for (let ${z} = 0; ${z} < ${Math.floor(Number(fest.fields.NUM))}; ${z}++) {`;
       // Die Anzahl einmal ausrechnen, wie der Block es tut, nicht bei jeder Runde neu.
-      return `for (let ${z} = 0, ${z}Ende = Math.floor(${wert(b.inputs && b.inputs.TIMES).t}); ${z} < ${z}Ende; ${z}++) {`;
+      return `for (let ${z} = 0, ${ende} = Math.floor(${wert(b.inputs && b.inputs.TIMES).t}); ${z} < ${ende}; ${z}++) {`;
     }
 
     function stapel(b, tiefe, ebene) {
       for (; b; b = naechster(b)) {
         if (!aktiv(b)) { schreibe(tiefe, `// (${T.aus})`); continue; }
         const notiz = b.icons && b.icons.comment && b.icons.comment.text;
-        if (notiz) for (const z of String(notiz).split(/\r\n|[\n\r\u2028\u2029]/)) schreibe(tiefe, `// ${z}`.trimEnd());
+        if (notiz) for (const z of String(notiz).split(/\r\n|[\n\r\u2028\u2029]/)) schreibe(tiefe, `// ${z.replace(/\bimport\b/g, 'Import')}`.trimEnd());   // skript.js weist das Wort import ab, auch im Kommentar
         const ein = b.inputs || {};
         const rumpf = (eingang, e = ebene) => stapel(eingang && eingang.block, tiefe + 1, e);
         switch (b.type) {

@@ -35,12 +35,15 @@
       auffrischen();
     }
 
-    // Zeilenwechsel: Einrückung der Zeile übernehmen, nach { zwei Leerzeichen mehr.
+    // Zeilenwechsel: Einrückung der Zeile übernehmen, nach { zwei Leerzeichen mehr. Eine } in einer leeren Zeile rückt zwei zurück.
     feld.addEventListener('keydown', e => {
-      if (e.key !== 'Enter' || e.isComposing || e.ctrlKey || e.metaKey || e.altKey) return;
+      if ((e.key !== 'Enter' && e.key !== '}') || e.isComposing || e.ctrlKey || e.metaKey) return;
       const davor = feld.value.slice(0, feld.selectionStart);
       const zeile = davor.slice(davor.lastIndexOf('\n') + 1);
-      const neu = `\n${/^[ \t]*/.exec(zeile)[0]}${/\{\s*$/.test(zeile) ? '  ' : ''}`;
+      let neu;
+      if (e.key === 'Enter') neu = `\n${/^[ \t]*/.exec(zeile)[0]}${/\{\s*$/.test(zeile) ? '  ' : ''}`;
+      else if (feld.selectionStart === feld.selectionEnd && /^ *  $/.test(zeile)) { neu = '}'; feld.selectionStart -= 2; }
+      else return;
       e.preventDefault();
       // execCommand erhält „Rückgängig“ im Browser; wo es fehlt, direkt einsetzen.
       if (!document.execCommand || !document.execCommand('insertText', false, neu)) {
