@@ -1,5 +1,6 @@
 // „Im Browser ausprobieren“: Blöcke zusammensetzen und einem simulierten PlotBot beim Zeichnen zusehen.
 // Angepasst aus der Blockly-Seite der PlotBot-Firmware (Blöcke, Thema, Werkzeugleiste, Laden der Demos).
+// Dazu der JavaScript-Modus: dasselbe Programm getippt statt gesteckt (js-editor.js, skript.js, block-js.js).
 // Weggelassen: Senden an den Roboter, Zustand vom Roboter, Speichern, Export und Import. Diese Seite spricht mit keinem Gerät.
 // Texte der Bedienung stehen im HTML (data-Attribute), damit die deutsche und die englische Seite dieselbe Datei nutzen.
 'use strict';
@@ -101,6 +102,10 @@
   const startBlock = () => arbeitsbereich.getBlocksByType('zr_start', false)[0];
   const melde = (text, fehler) => { $('meldung').textContent = text; $('meldung').classList.toggle('fehler', Boolean(fehler)); };
   let pruefung = null, ergebnis = null;
+  let modus = 'bloecke';   // oder 'js'
+  const sprache = document.documentElement.lang === 'en' ? 'en' : 'de';
+  const editor = JsEditor.erzeuge($('js-text'), $('js-zeilen'), $('js-fehler'));
+  let lauf = null;         // laufendes JavaScript-Programm im Worker
   let startwert = Math.floor(Math.random() * 4294967296);
 
   function ladeProgramm(programm) {
@@ -116,17 +121,59 @@
     $('stopp').textContent = laeuft ? TEXT.stopp : TEXT.neu;
   }
 
-  // Rechnet das Programm durch und zeigt gestrichelt, was gezeichnet würde.
-  function aktualisieren() {
-    const programm = Blockly.serialization.blocks.save(startBlock(), { addCoordinates: false, addInputBlocks: true, addNextBlocks: true });
-    $('wuerfeln').hidden = !Schildkroete.enthaeltZufall(programm);
-    ergebnis = Schildkroete.ausfuehren(programm, feld, startwert);
+  // Zeigt gestrichelt, was gezeichnet würde, und sagt, ob es aufs Blatt passt.
+  function zeige(neu) {
+    ergebnis = neu;
     pruefung = Schildkroete.pruefen(ergebnis, feld);
     roboter.zeige(ergebnis.striche, pruefung.aussen);
     if (pruefung.sendbar) melde(fuelle(TEXT.bereit, { n: pruefung.anzahl }));
+    else if (modus === 'js' && pruefung.anzahl === 0 && !ergebnis.fehler) melde(TEXT.leerJs);
     else melde(pruefung.grund, pruefung.anzahl > 0 || Boolean(ergebnis.fehler));
     knoepfe();
   }
+
+  // Rechnet das Programm durch: die Blöcke sofort, das JavaScript in einem Worker (skript.js).
+  function aktualisieren() {
+    if (lauf) lauf.abbrechen();
+    lauf = null;
+    if (modus === 'js') return aktualisiereJs();
+    const programm = Blockly.serialization.blocks.save(startBlock(), { addCoordinates: false, addInputBlocks: true, addNextBlocks: true });
+    $('wuerfeln').hidden = !Schildkroete.enthaeltZufall(programm);
+    zeige(Schildkroete.ausfuehren(programm, feld, startwert));
+  }
+
+  function aktualisiereJs() {
+    const meiner = lauf = Skript.laufe(editor.text(), { feld, startwert, sprache, erzeugeWorker: JsEditor.erzeugeWorker });
+    meiner.versprechen.then(neu => {
+      if (!neu || meiner !== lauf) return;   // überholt oder abgebrochen
+      lauf = null;
+      $('wuerfeln').hidden = !neu.zufall;
+      editor.zeigeFehler(neu.fehler, neu.zeile);
+      if (!neu.fehler) return zeige(neu);
+      // Bei einem Fehler bleibt die letzte Vorschau stehen, damit sie beim Tippen nicht flackert; gezeichnet wird erst wieder ohne Fehler.
+      pruefung = null;
+      melde(neu.fehler, true);
+      knoepfe();
+    });
+  }
+
+  // Blöcke und JavaScript sind zwei Ansichten mit je eigenem Programm; nur „Als JavaScript zeigen“ überträgt, und nur in diese Richtung.
+  function setzeModus(neu) {
+    modus = neu;
+    const js = modus === 'js';
+    $('arbeitsbereich').hidden = js;
+    $('hinweis-bloecke').hidden = js;
+    $('als-js').hidden = js;
+    $('js-bereich').hidden = !js;
+    $('modus-bloecke').setAttribute('aria-pressed', String(!js));
+    $('modus-js').setAttribute('aria-pressed', String(js));
+    roboter.zuruecksetzen();
+    if (js) editor.auffrischen();
+    else Blockly.svgResize(arbeitsbereich);
+    aktualisieren();
+  }
+
+  const alsJavaScript = programm => BlockJs.alsJavaScript(programm, { sprache });
 
   function zeichnen() {
     if (!pruefung || !pruefung.sendbar) return;
@@ -147,13 +194,23 @@
   }
 
   let warte = null;
-  arbeitsbereich.addChangeListener(e => {
-    if (e.isUiEvent) return;
+  const spaeter = () => {
     clearTimeout(warte);
     roboter.stopp();
     pruefung = null;
     knoepfe();
-    warte = setTimeout(aktualisieren, 150);
+    warte = setTimeout(aktualisieren, modus === 'js' ? 400 : 150);
+  };
+  $('js-text').addEventListener('input', spaeter);
+  $('modus-bloecke').addEventListener('click', () => setzeModus('bloecke'));
+  $('modus-js').addEventListener('click', () => setzeModus('js'));
+  $('als-js').addEventListener('click', () => {
+    if (editor.geaendert() && !window.confirm(TEXT.ueberschreiben)) return;
+    editor.setze(alsJavaScript(Blockly.serialization.workspaces.save(arbeitsbereich)));
+    setzeModus('js');
+  });
+  arbeitsbereich.addChangeListener(e => {
+    if (!e.isUiEvent && modus !== 'js') spaeter();
   });
 
   $('los').addEventListener('click', zeichnen);
@@ -165,12 +222,15 @@
   $('beispiel').addEventListener('change', e => {
     const demo = Programme.DEMOS[Number(e.target.value)];
     if (!demo) return;
+    if (modus === 'js' && editor.geaendert() && !window.confirm(TEXT.ueberschreiben)) { e.target.value = ''; return; }
     roboter.zuruecksetzen();
-    ladeProgramm(demo.programm);
+    if (modus === 'js') editor.setze(alsJavaScript(demo.programm));   // im JavaScript-Modus bleiben die Blöcke, wie sie sind
+    else ladeProgramm(demo.programm);
     aktualisieren();
   });
 
   ladeProgramm(BEISPIEL);
+  editor.setze(alsJavaScript(BEISPIEL));
   aktualisieren();
-  window.addEventListener('resize', () => Blockly.svgResize(arbeitsbereich));
+  window.addEventListener('resize', () => { if (modus !== 'js') Blockly.svgResize(arbeitsbereich); });
 }());

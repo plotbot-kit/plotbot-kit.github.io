@@ -24,6 +24,9 @@
 <script src="../../js/try/schildkroete.js" defer></script>
 <script src="../../js/try/beispiele.js" defer></script>
 <script src="../../js/try/roboter-vorschau.js" defer></script>
+<script src="../../js/try/skript.js" defer></script>
+<script src="../../js/try/block-js.js" defer></script>
+<script src="../../js/try/js-editor.js" defer></script>
 <script src="../../js/try/ausprobieren.js" defer></script>
 <link rel="icon" href="../../img/blume.svg" type="image/svg+xml">
 <script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../../vendor/goatcounter/count.js"></script>
@@ -53,6 +56,8 @@
         Alles, was unter dem Block „Los“ hängt, ist das Programm. Rechts daneben (auf dem Handy darunter) sehen Sie den Roboter von oben, mit seiner Grundplatte, den beiden Armpaaren und dem Stift.</p>
       <p>Ein Tipp auf „Zeichnen lassen“, und die Arme fahren das Programm ab. Gestrichelt steht vorher da, was gezeichnet wird; rote Punkte liegen außerhalb des Blatts.
         Unter „Beispiel laden“ finden Sie fertige Programme wie Haus, Stern und Blume. Nichts verlässt Ihren Browser: Die Seite spricht mit keinem Roboter und speichert nichts.</p>
+      <p>Wer lieber tippt, schaltet über dem Baukasten auf „JavaScript“ um und schreibt dasselbe Programm als Text: <code>vorwaerts(20);</code> statt eines Blocks.
+        <a href="#js-titel">Die Funktionen stehen weiter unten.</a></p>
       <noscript><p class="needs-js">Der Baukasten braucht JavaScript. Schalten Sie es in Ihrem Browser ein, dann erscheinen hier die Blöcke und der simulierte Roboter. Wie die Blöcke auf dem Handy aussehen, zeigt das Bild.</p></noscript>
     </div>
     <div class="pics">
@@ -69,7 +74,9 @@
   data-fertig="Fertig gezeichnet."
   data-gestoppt="Angehalten."
   data-stopp="Stopp"
-  data-neu="Blatt leeren">
+  data-neu="Blatt leeren"
+  data-leer-js="Noch keine Striche: Schreiben Sie zum Beispiel vorwaerts(20);"
+  data-ueberschreiben="Das JavaScript-Programm im Editor wird ersetzt. Fortfahren?">
   <div class="wrap">
     <h2 id="werkzeug-titel">Ihr Programm</h2>
     <div class="tool">
@@ -85,8 +92,22 @@
             <option value="5">Quadratspirale</option>
             <option value="6">Abprallen am Rand</option>
           </select></p>
+        <p class="row modus" role="group" aria-label="Ansicht">
+          <button id="modus-bloecke" type="button" aria-pressed="true">Blöcke</button>
+          <button id="modus-js" type="button" aria-pressed="false">JavaScript</button>
+          <button id="als-js" type="button">Als JavaScript zeigen</button>
+        </p>
         <div id="arbeitsbereich" role="application" aria-label="Blöcke"></div>
-        <p class="hint">Hängen Sie Blöcke unter „Los“. Die Schildkröte startet in der Mitte und schaut nach oben. Die Kategorien links öffnen die Blöcke.</p>
+        <p class="hint" id="hinweis-bloecke">Hängen Sie Blöcke unter „Los“. Die Schildkröte startet in der Mitte und schaut nach oben. Die Kategorien links öffnen die Blöcke.</p>
+        <div id="js-bereich" hidden>
+          <label class="visually-hidden" for="js-text">Ihr Programm in JavaScript</label>
+          <div class="editor">
+            <div class="zeilen" id="js-zeilen" aria-hidden="true"></div>
+            <textarea id="js-text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-describedby="js-fehler js-hinweis"></textarea>
+          </div>
+          <p id="js-fehler" hidden></p>
+          <p class="hint" id="js-hinweis">Tippen Sie Befehle wie <code>vorwaerts(20);</code> und <code>rechts(90);</code>. Die Vorschau rechnet mit, sobald das Programm fehlerfrei ist. <a href="#js-titel">Alle Funktionen</a></p>
+        </div>
       </div>
       <div>
         <svg id="zeichnung" role="img" aria-label="Simulierter PlotBot von oben mit Blatt"></svg>
@@ -104,6 +125,37 @@
           </select></p>
       </div>
     </div>
+  </div>
+</section>
+
+<section aria-labelledby="js-titel">
+  <div class="wrap">
+    <h2 id="js-titel">Dasselbe Programm in JavaScript</h2>
+    <p>Im Modus „JavaScript“ schreibt Ihr Kind echtes JavaScript. Die Schildkröte bringt eigene Funktionen mit, die so heißen wie die Blöcke.
+      Schleifen, <code>if</code>, Variablen und eigene Funktionen sind normales JavaScript. Dieses Programm zeichnet ein Quadrat:</p>
+    <pre class="beispiel-code"><code>for (let i = 0; i &lt; 4; i++) {
+  vorwaerts(20);
+  rechts(90);
+}</code></pre>
+    <div class="tabelle-rahmen">
+    <table class="funktionen">
+      <thead><tr><th scope="col">Funktion</th><th scope="col">Was sie tut</th><th scope="col">Englischer Name</th></tr></thead>
+      <tbody>
+        <tr><td><code>vorwaerts(20)</code></td><td>geht 20 mm vorwärts und malt dabei, wenn der Stift unten ist</td><td><code>forward</code></td></tr>
+        <tr><td><code>rechts(90)</code>, <code>links(90)</code></td><td>dreht sich um 90 Grad nach rechts oder links; <code>drehe(90)</code> dreht wie <code>rechts</code></td><td><code>right</code>, <code>left</code>, <code>turn</code></td></tr>
+        <tr><td><code>stiftAuf()</code>, <code>stiftAb()</code></td><td>hebt den Stift oder setzt ihn wieder auf</td><td><code>penUp</code>, <code>penDown</code></td></tr>
+        <tr><td><code>geheZu(40, 40)</code></td><td>fährt zum Punkt x, y, gemessen in mm ab der Ecke links unten</td><td><code>goTo</code></td></tr>
+        <tr><td><code>x()</code>, <code>y()</code>, <code>richtung()</code></td><td>wo die Schildkröte steht und wohin sie schaut (0 rechts, 90 oben)</td><td><code>x</code>, <code>y</code>, <code>heading</code></td></tr>
+        <tr><td><code>amRand()</code></td><td><code>true</code>, wenn sie höchstens 1 mm vom Rand des Blatts entfernt ist</td><td><code>atEdge</code></td></tr>
+        <tr><td><code>zufall(1, 10)</code></td><td>eine ganze Zufallszahl von 1 bis 10</td><td><code>random</code></td></tr>
+        <tr><td><code>zaehle(1, 9, 2)</code></td><td>die Zahlen 1, 3, 5, 7, 9 als Liste, für <code>for (const i of zaehle(1, 9, 2))</code></td><td><code>count</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>„Als JavaScript zeigen“ schreibt das Blockprogramm als JavaScript in den Editor. Umgekehrt geht es nicht: Aus getipptem JavaScript werden keine Blöcke.
+      Beide Ansichten behalten ihr eigenes Programm; unter „Beispiel laden“ kommen die Beispiele in der Ansicht, die gerade offen ist.</p>
+    <p>Ein Fehler erscheint unter dem Editor mit der Zeile, in der er steckt. Das Programm darf höchstens 1000 Punkte zeichnen und läuft höchstens 2 Sekunden; eine Schleife, die nie endet, wird abgebrochen.
+      Es läuft abgeschottet von der Seite und kann weder das Internet erreichen noch etwas speichern.</p>
   </div>
 </section>
 

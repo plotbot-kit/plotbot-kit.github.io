@@ -29,3 +29,26 @@
 @media (min-width: 48rem) {
   .explain { grid-template-columns: 2fr 1fr; }
 }
+/* JavaScript mode: view switch, plain textarea with a line-number gutter, help table */
+.tool .modus button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.tool .modus #als-js { margin-left: auto; }
+.editor { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); border: 2px solid var(--ink); border-radius: .6rem; overflow: hidden; background: #fff; }
+.editor textarea, .editor .zeilen { font: 1rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; padding: .6rem 0; }
+.editor .zeilen { position: relative; overflow: hidden; background: var(--cream); color: var(--muted); border-right: 1px solid var(--line); user-select: none; }
+.editor .zeilen > div { position: absolute; inset: .6rem 0 auto 0; counter-reset: zeile; }
+.editor .zeilen span { display: block; text-align: right; padding-right: .5rem; counter-increment: zeile; }
+.editor .zeilen span::before { content: counter(zeile); }
+.editor .zeilen span.fehler { background: #c0271f; color: #fff; font-weight: 600; }
+.editor textarea { display: block; width: 100%; height: 45vh; min-height: 14rem; padding-left: .6rem; padding-right: .6rem; border: 0; resize: vertical;
+  white-space: pre; overflow: auto; tab-size: 2; color: var(--ink); background: #fff; }
+.editor:focus-within { outline: 3px solid var(--sun); outline-offset: 2px; }
+.editor textarea:focus { outline: 0; }
+#js-fehler { color: #c0271f; font-weight: 600; margin: .5rem 0 0; }
+.funktionen { width: 100%; border-collapse: collapse; }
+.funktionen th, .funktionen td { text-align: left; vertical-align: top; padding: .4rem .75rem .4rem 0; border-bottom: 1px solid var(--line); }
+.funktionen code, .beispiel-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+.beispiel-code { background: #fff; border: 1px solid var(--line); border-radius: .6rem; padding: .75rem 1rem; overflow-x: auto; line-height: 1.5; }
+.tabelle-rahmen { overflow-x: auto; }
+@media (min-width: 60rem) {
+  .editor textarea { height: 70vh; }
+}
