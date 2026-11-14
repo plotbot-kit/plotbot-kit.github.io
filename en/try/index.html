@@ -20,13 +20,14 @@
 <script src="../../js/lang.js" defer></script>
 <script src="../../vendor/blockly/blockly_compressed.js" defer></script>
 <script src="../../vendor/blockly/blocks_compressed.js" defer></script>
-<script src="../../vendor/blockly/de.js" defer></script>
+<script src="../../vendor/blockly/en.js" defer></script>
 <script src="../../js/try/schildkroete.js" defer></script>
 <script src="../../js/try/beispiele.js" defer></script>
 <script src="../../js/try/roboter-vorschau.js" defer></script>
 <script src="../../js/try/skript.js" defer></script>
 <script src="../../js/try/block-js.js" defer></script>
 <script src="../../js/try/js-editor.js" defer></script>
+<script src="../../js/try/texte.js" defer></script>
 <script src="../../js/try/ausprobieren.js" defer></script>
 <link rel="icon" href="../../img/blume.svg" type="image/svg+xml">
 <script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../../vendor/goatcounter/count.js"></script>
@@ -53,7 +54,7 @@
     <div>
       <h2 id="explain-title">How this page works</h2>
       <p>The editor holds the same blocks the real PlotBot offers on its phone page: pen down, go 20 mm forward, turn 90°, repeat four times.
-        Everything hanging under the "Los" ("go") block is the program. Next to it (below it on a phone) you see the robot from above: its base plate, both pairs of arms and the pen.</p>
+        Everything hanging under the "Go" block is the program. Next to it (below it on a phone) you see the robot from above: its base plate, both pairs of arms and the pen.</p>
       <p>Press "Draw it" and the arms trace your program. Before that, a dashed line shows what will be drawn; red dots are off the sheet.
         "Load an example" has ready-made programs such as a house, a star and a flower. Nothing leaves your browser: the page doesn't talk to a robot and doesn't save anything.</p>
       <p>The blocks and their messages are in German, just like on the robot itself.</p>
@@ -87,13 +88,13 @@
         <p class="row"><label for="beispiel">Load an example</label>
           <select id="beispiel">
             <option value="">Choose …</option>
-            <option value="0">Square (Quadrat)</option>
-            <option value="1">House (Haus)</option>
-            <option value="2">Star (Stern)</option>
-            <option value="3">Flower (Blume)</option>
-            <option value="4">Random stars (Zufallssterne)</option>
-            <option value="5">Square spiral (Quadratspirale)</option>
-            <option value="6">Bouncing off the edge (Abprallen am Rand)</option>
+            <option value="0">Square</option>
+            <option value="1">House</option>
+            <option value="2">Star</option>
+            <option value="3">Flower</option>
+            <option value="4">Random stars</option>
+            <option value="5">Square spiral</option>
+            <option value="6">Bouncing off the edge</option>
           </select></p>
         <p class="row modus" role="group" aria-label="View">
           <button id="modus-bloecke" type="button" aria-pressed="true">Blocks</button>
@@ -101,7 +102,7 @@
           <button id="als-js" type="button">Show as JavaScript</button>
         </p>
         <div id="arbeitsbereich" role="application" aria-label="Blocks"></div>
-        <p class="hint" id="hinweis-bloecke">Attach blocks under "Los". The turtle starts in the middle, facing up. The categories on the left open the blocks.</p>
+        <p class="hint" id="hinweis-bloecke">Attach blocks under "Go". The turtle starts in the middle, facing up. The categories on the left open the blocks.</p>
         <div id="js-bereich" hidden>
           <label class="visually-hidden" for="js-text">Your program in JavaScript</label>
           <div class="editor">
