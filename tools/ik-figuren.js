@@ -64,7 +64,7 @@ function figuren(lang) {
 const ZIELE = [['A', 0, 75], ['B', 30, 100], ['C', -30, 90]];
 const BLATT = {
   de: { datei: 'de/kinematik/verstehen/arbeitsblatt.html', titel: 'Arbeitsblatt: Motorwinkel mit Zirkel und Geodreieck finden',
-    zurueck: 'Zur Seite „Inverse Kinematik verstehen“', druck: 'Drucken Sie in Originalgröße (100 %, nicht „an Seite anpassen“). Die Kontrollstrecke unten rechts muss 50 mm messen.',
+    zurueck: 'Zur Seite „Inverse Kinematik verstehen“', druck: 'Druck in Originalgröße (100 %, nicht „an Seite anpassen“). Die Kontrollstrecke unten rechts muss 50 mm messen.',
     schritte: ['Zirkel auf 65 mm stellen (Oberarm). Um jeden Motor einen Kreis ziehen.', 'Zirkel auf 90 mm stellen (Unterarm). In das Ziel A einstechen und einen Bogen ziehen, der beide Motorkreise schneidet.',
       'Der Bogen schneidet jeden Motorkreis zweimal. Auf jedem Kreis den äußeren Schnittpunkt markieren (beim linken Motor den linken): Das ist der Ellbogen.',
       'Mit dem Lineal verbinden: Motor – Ellbogen – Ziel.', 'Winkel am Motor messen, die Null zeigt nach rechts. In die Tabelle eintragen. Dann dasselbe für B und C.'],

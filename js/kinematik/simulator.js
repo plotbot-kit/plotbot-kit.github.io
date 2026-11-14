@@ -14,7 +14,8 @@
   const DRV = [['step', t('Schritt', 'Step'), 0.01, 2, 0.001, '°'], ['backlash', t('Spiel links', 'Backlash left'), 0, 5, 0.01, '°'],
     ['backlashR', t('Spiel rechts', 'Backlash right'), 0, 5, 0.01, '°'], ['travel', t('Stellweg (0 = ∞)', 'Travel (0 = ∞)'), 0, 360, 1, '°'],
     ['speed', t('max. Tempo', 'Max. speed'), 10, 1000, 5, '°/s'], ['ratio', t('Untersetzung', 'Reduction'), 1, 4, 0.05, ':1']];
-  const LIM = [['swL', t('Endschalter links', 'Limit switch left'), 90, 360, 0.01, '°'], ['swR', t('Endschalter rechts', 'Limit switch right'), -180, 90, 0.01, '°']];
+  const LIM = [['swLmin', t('Links ab', 'Left from'), 0, 180, 0.01, '°'], ['swL', t('Links bis (Endschalter)', 'Left to (limit switch)'), 90, 360, 0.01, '°'],
+    ['swR', t('Rechts ab (Endschalter)', 'Right from (limit switch)'), -180, 90, 0.01, '°'], ['swRmax', t('Rechts bis', 'Right to'), 0, 180, 0.01, '°']];
   const COUPLE = { L1l: 'L1r', L1r: 'L1l', L2l: 'L2r', L2r: 'L2l' };
 
   const st = { g: ZK.preset('plotbot'), view: {}, ov: { reach: true, crit: true, heat: true, heatArea: true, heatFixed: false, fore90: true, range: true },
@@ -247,7 +248,7 @@
     try {
       const inp = JSON.parse($('json').value), g = Object.assign({}, st.g);
       // Ältere Exporte ohne Spiel rechts / Endschalter: aus BASE bzw. Spiel links ergänzen, nicht vom aktiven Preset erben
-      for (const k of ['limits', 'swL', 'swR']) if (!(k in inp)) g[k] = ZK.BASE[k];
+      for (const k of ['limits', 'swLmin', 'swL', 'swR', 'swRmax']) if (!(k in inp)) g[k] = ZK.BASE[k];
       if (!('backlashR' in inp)) g.backlashR = typeof inp.backlash === 'number' ? inp.backlash : ZK.BASE.backlashR;
       for (const k of Object.keys(ZK.BASE)) {
         if (!(k in inp)) continue;

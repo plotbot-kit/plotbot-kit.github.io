@@ -9,9 +9,9 @@
   // Maße des PlotBot aus der Vorlage in kern.js: Wellenabstand 36, Oberarm 65, Unterarm 90, Feld 80 × 80 (y 35–115).
   // Quelle im Roboter-Repo: cad/params.scad:9-11 und firmware/lib/zeichnen/src/kinematik.h:12-16.
   const G = Object.assign(ZK.preset('plotbot'), { limits: false });
-  // Schwenkbereiche der Oberarme in Grad (Softlimit der Firmware): firmware/lib/zeichnen/src/kinematik.h:17-18.
-  // Die Vorlage in kern.js rechnet stattdessen mit den Endschalterwinkeln 236,96° / −56,96°; hier gilt die Firmware.
-  const BEREICH = { l: [78, 238], r: [-58, 102] };
+  // Schwenkbereiche der Oberarme in Grad (Softlimit der Firmware, firmware/lib/zeichnen/src/kinematik.h:17-18),
+  // aus derselben Vorlage wie der Simulator: links 78…238, rechts −58…102.
+  const BEREICH = { l: [G.swLmin, G.swL], r: [G.swR, G.swRmax] };
   const A = { x: -G.d / 2, y: 0 }, B = { x: G.d / 2, y: 0 };
   const FELD = { x0: G.cx - G.w / 2, x1: G.cx + G.w / 2, y0: G.cy - G.h / 2, y1: G.cy + G.h / 2 };
   const VIEW = { x0: -110, x1: 110, y0: -30, y1: 165 };   // sichtbarer Ausschnitt in mm

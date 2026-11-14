@@ -55,7 +55,7 @@
       <dt>Orange und Rot</dt><dd>Kritische Zonen: Ein Gelenk steht fast gestreckt oder die Unterarme liegen fast parallel. Dort reicht ein winziger Motorfehler für einen großen Stiftfehler.</dd>
       <dt>Heatmap</dt><dd>Von Dunkelviolett (genau) bis Gelb (ungenau): wie weit der Stift versetzt landet, wenn das Getriebespiel bei einem Richtungswechsel wirkt. Wahlweise zeigt sie den Stiftweg je Motorschritt oder je Grad.</dd>
       <dt>Pinke Schraffur</dt><dd>Hier stehen die Unterarme am Stift etwa im rechten Winkel (70–110°). Das ist der günstigste Bereich für die Zeichenfläche.</dd>
-      <dt>Grau schraffiert</dt><dd>Gesperrt: Die Oberarme würden sich kreuzen oder einen Endschalter überfahren.</dd>
+      <dt>Grau schraffiert</dt><dd>Gesperrt: Die Oberarme würden sich kreuzen oder ihren Schwenkbereich verlassen.</dd>
     </dl>
     <p>Zum Ausprobieren braucht der Simulator JavaScript. Die Bedienung ist für einen großen Bildschirm gedacht, auf dem Handy liegen die Regler unter der Zeichnung.</p>
   </div>
@@ -110,7 +110,7 @@
       <h2>Grenzen</h2>
       <label class="check"><input type="checkbox" id="limits"> Endschalter und Softlimit (Oberarme kreuzen nicht)</label>
       <div id="limRows"></div>
-      <p class="hint">Wie die Firmware: Der linke Arm darf nicht über den Endschalterwinkel hinaus, der rechte nicht darunter;
+      <p class="hint">Wie die Firmware: Jeder Oberarm bleibt in seinem Schwenkbereich, beim PlotBot links 78° bis 238°, rechts −58° bis 102°;
         Stellungen mit sich kreuzenden Oberarmen sind gesperrt (grau schraffiert).</p>
     </section>
     <section>
@@ -172,7 +172,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – Webseite Version <span class="version">0.12.0</span>. Der Simulator rechnet mit vereinfachten Modellen: Er zeigt Geometrie, Schrittraster und Getriebespiel, aber keine Reibung oder Nachgiebigkeit.
+    <p>PlotBot-Kit – Webseite Version <span class="version">0.14.0</span>. Der Simulator rechnet mit vereinfachten Modellen: Er zeigt Geometrie, Schrittraster und Getriebespiel, aber keine Reibung oder Nachgiebigkeit.
       · <a href="../">Zur PlotBot-Seite</a> · <a href="../../en/kinematics/" hreflang="en" lang="en" data-lang="en">English version</a></p>
     <p class="legal-links"><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20R%C3%BCckmeldung">Rückmeldung schicken</a></p>
   </div>

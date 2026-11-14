@@ -52,28 +52,28 @@
   /** Der Satz zum Konstruktionsschritt n (Zirkel und Lineal), mit den Zahlen des aktuellen Punkts. */
   function schrittText(L, n) {
     const g = I.G, geht = L.art !== 'weit' && L.art !== 'nah';
-    if (n === 1) return t(`Stechen Sie den Zirkel in jeden Motor ein und ziehen Sie einen Kreis mit ${g.L1l} mm Radius, so lang wie der Oberarm. Auf diesen beiden Kreisen liegen alle Punkte, die ein Ellbogen erreichen kann.`,
+    if (n === 1) return t(`Stich den Zirkel in jeden Motor ein und zieh einen Kreis mit ${g.L1l} mm Radius, so lang wie der Oberarm. Auf diesen beiden Kreisen liegen alle Punkte, die ein Ellbogen erreichen kann.`,
       `Put the compass point on each motor and draw a circle with a ${g.L1l} mm radius, the length of the upper arm. These two circles hold every point an elbow can reach.`);
-    if (n === 2) return t(`Wählen Sie das Ziel: Ziehen Sie den Stift dorthin, wohin der Roboter fahren soll. Im Moment steht er auf ${punktText(L.P)}.`,
+    if (n === 2) return t(`Wähle das Ziel: Zieh den Stift dorthin, wohin der Roboter fahren soll. Im Moment steht er auf ${punktText(L.P)}.`,
       `Pick the target: drag the pen to where the robot should go. Right now it's at ${punktText(L.P)}.`);
-    if (n === 3) return t(`Ziehen Sie um das Ziel einen Kreis mit ${g.L2l} mm Radius, so lang wie der Unterarm. Jeder Ellbogen ist genau ${g.L2l} mm vom Stift entfernt, liegt also auf diesem Kreis.`,
+    if (n === 3) return t(`Zieh um das Ziel einen Kreis mit ${g.L2l} mm Radius, so lang wie der Unterarm. Jeder Ellbogen ist genau ${g.L2l} mm vom Stift entfernt, liegt also auf diesem Kreis.`,
       `Draw a circle with a ${g.L2l} mm radius around the target, the length of the forearm. Each elbow is exactly ${g.L2l} mm from the pen, so it sits on this circle.`);
-    if (!geht) return t('Hier schneidet der graue Kreis nicht beide Motorkreise. Ein Ellbogen fehlt, der Punkt ist unerreichbar. Ziehen Sie den Stift zurück in die grüne Fläche.',
+    if (!geht) return t('Hier schneidet der graue Kreis nicht beide Motorkreise. Ein Ellbogen fehlt, der Punkt ist unerreichbar. Zieh den Stift zurück in die grüne Fläche.',
       'Here the grey circle doesn\'t cross both motor circles. An elbow is missing, so the point is out of reach. Drag the pen back into the green area.');
     if (n === 4) return t(`Der graue Kreis schneidet jeden Motorkreis zweimal. Nur an diesen vier Punkten stimmt beides: ${g.L1l} mm bis zum Motor und ${g.L2l} mm bis zum Stift. Für jeden Motor gibt es also zwei mögliche Ellbogen.`,
       `The grey circle crosses each motor circle twice. Only at these four points do both distances fit: ${g.L1l} mm to the motor and ${g.L2l} mm to the pen. So each motor has two possible elbows.`);
     if (n === 5) {
-      const frage = t('Welche Ellbogen nimmt der Roboter? Wählen Sie auf jedem Motorkreis einen der beiden Schnittpunkte aus. ', 'Which elbows does the robot use? Pick one of the two crossing points on each motor circle. ');
-      if (wahl.l === 'innen' || wahl.r === 'innen') return frage + t('Dieser Punkt passt in der Zeichnung auch. Der Oberarm greift dann aber über den anderen Motor hinweg, und in großen Teilen der Zeichenfläche kreuzen sich die Arme. Probieren Sie den anderen Punkt auf demselben Kreis.',
+      const frage = t('Welche Ellbogen nimmt der Roboter? Wähle auf jedem Motorkreis einen der beiden Schnittpunkte aus. ', 'Which elbows does the robot use? Pick one of the two crossing points on each motor circle. ');
+      if (wahl.l === 'innen' || wahl.r === 'innen') return frage + t('Dieser Punkt passt in der Zeichnung auch. Der Oberarm greift dann aber über den anderen Motor hinweg, und in großen Teilen der Zeichenfläche kreuzen sich die Arme. Probier den anderen Punkt auf demselben Kreis.',
         'This point fits the drawing too. But then the upper arm reaches across the other motor, and over large parts of the drawing area the arms cross. Try the other point on the same circle.');
       if (wahl.l && wahl.r) return t('Richtig: Der PlotBot nimmt für jeden Motor den äußeren Ellbogen, links den linken und rechts den rechten. So bleibt jeder Arm auf seiner Seite, und in der ganzen Zeichenfläche kommen sich die Arme nicht in die Quere.',
         'Correct: PlotBot uses the outer elbow for each motor, the left one on the left and the right one on the right. That keeps each arm on its own side, and the arms don\'t get in each other\'s way anywhere in the drawing area.');
       if (wahl.l || wahl.r) return frage + t(`Der Punkt auf dem ${wahl.l ? 'blauen' : 'orangen'} Kreis stimmt. Jetzt fehlt der andere Kreis.`, `The point on the ${wahl.l ? 'blue' : 'orange'} circle is correct. Now pick one on the other circle.`);
       return frage;
     }
-    if (n === 6) return t('Verbinden Sie die Punkte mit dem Lineal: vom Motor zum Ellbogen der Oberarm, vom Ellbogen zum Stift der Unterarm. So stehen die Arme, wenn der Stift am Ziel ist.',
+    if (n === 6) return t('Verbinde die Punkte mit dem Lineal: vom Motor zum Ellbogen der Oberarm, vom Ellbogen zum Stift der Unterarm. So stehen die Arme, wenn der Stift am Ziel ist.',
       'Join the points with a ruler: the upper arm from the motor to the elbow, the forearm from the elbow to the pen. This is the position of the arms when the pen is at the target.');
-    return t(`Legen Sie an jeden Motor einen Winkelmesser, die Null zeigt nach rechts. Lesen Sie ab, wohin der Oberarm zeigt: links ${z(L.t1, 0)}°, rechts ${z(L.t2, 0)}°.`,
+    return t(`Leg an jeden Motor einen Winkelmesser, die Null zeigt nach rechts. Lies ab, wohin der Oberarm zeigt: links ${z(L.t1, 0)}°, rechts ${z(L.t2, 0)}°.`,
       `Place a protractor on each motor with zero pointing right. Read off where the upper arm points: ${z(L.t1, 0)}° on the left, ${z(L.t2, 0)}° on the right.`) +
       (L.t2 < 0 ? t(' Der rechte Oberarm zeigt unter die Grundlinie, deshalb ist sein Winkel negativ.', ' The right upper arm points below the baseline, so its angle is negative.') : '') +
       (L.art === 'ok' ? t(' Auf diese Winkel dreht der Roboter seine Motoren.', ' The robot turns its motors to these angles.')
