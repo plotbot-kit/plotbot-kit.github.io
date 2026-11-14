@@ -24,6 +24,9 @@
 <script src="../../js/try/schildkroete.js" defer></script>
 <script src="../../js/try/beispiele.js" defer></script>
 <script src="../../js/try/roboter-vorschau.js" defer></script>
+<script src="../../js/try/skript.js" defer></script>
+<script src="../../js/try/block-js.js" defer></script>
+<script src="../../js/try/js-editor.js" defer></script>
 <script src="../../js/try/ausprobieren.js" defer></script>
 <link rel="icon" href="../../img/blume.svg" type="image/svg+xml">
 <script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../../vendor/goatcounter/count.js"></script>
@@ -54,6 +57,8 @@
       <p>Press "Draw it" and the arms trace your program. Before that, a dashed line shows what will be drawn; red dots are off the sheet.
         "Load an example" has ready-made programs such as a house, a star and a flower. Nothing leaves your browser: the page doesn't talk to a robot and doesn't save anything.</p>
       <p>The blocks and their messages are in German, just like on the robot itself.</p>
+      <p>If you'd rather type, switch to "JavaScript" above the blocks and write the same program as text: <code>forward(20);</code> instead of a block.
+        <a href="#js-title">The functions are listed further down.</a></p>
       <noscript><p class="needs-js">The block editor needs JavaScript. Turn it on in your browser and the blocks and the simulated robot appear here. The picture shows what the blocks look like on the phone.</p></noscript>
     </div>
     <div class="pics">
@@ -70,7 +75,11 @@
   data-fertig="Done."
   data-gestoppt="Stopped."
   data-stopp="Stop"
-  data-neu="Clear sheet">
+  data-neu="Clear sheet"
+  data-leer-js="No lines yet: try typing forward(20);"
+  data-aussen="{n} points off the sheet (red)."
+  data-aussen-eins="{n} point off the sheet (red)."
+  data-ueberschreiben="This replaces the JavaScript program in the editor. Continue?">
   <div class="wrap">
     <h2 id="tool-title">Your program</h2>
     <div class="tool">
@@ -86,8 +95,22 @@
             <option value="5">Square spiral (Quadratspirale)</option>
             <option value="6">Bouncing off the edge (Abprallen am Rand)</option>
           </select></p>
+        <p class="row modus" role="group" aria-label="View">
+          <button id="modus-bloecke" type="button" aria-pressed="true">Blocks</button>
+          <button id="modus-js" type="button" aria-pressed="false">JavaScript</button>
+          <button id="als-js" type="button">Show as JavaScript</button>
+        </p>
         <div id="arbeitsbereich" role="application" aria-label="Blocks"></div>
-        <p class="hint">Attach blocks under "Los". The turtle starts in the middle, facing up. The categories on the left open the blocks.</p>
+        <p class="hint" id="hinweis-bloecke">Attach blocks under "Los". The turtle starts in the middle, facing up. The categories on the left open the blocks.</p>
+        <div id="js-bereich" hidden>
+          <label class="visually-hidden" for="js-text">Your program in JavaScript</label>
+          <div class="editor">
+            <div class="zeilen" id="js-zeilen" aria-hidden="true"></div>
+            <textarea id="js-text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-describedby="js-fehler js-hinweis"></textarea>
+          </div>
+          <p id="js-fehler" hidden></p>
+          <p class="hint" id="js-hinweis">Type commands such as <code>forward(20);</code> and <code>right(90);</code>. The preview updates as soon as the program has no errors. <a href="#js-title">All functions</a></p>
+        </div>
       </div>
       <div>
         <svg id="zeichnung" role="img" aria-label="Simulated PlotBot seen from above, with a sheet of paper"></svg>
@@ -108,6 +131,37 @@
   </div>
 </section>
 
+<section aria-labelledby="js-title">
+  <div class="wrap">
+    <h2 id="js-title">The same program in JavaScript</h2>
+    <p>In "JavaScript" mode your kid writes real JavaScript. The turtle brings its own functions, one for each block.
+      Loops, <code>if</code>, variables and your own functions are plain JavaScript. This program draws a square:</p>
+    <pre class="beispiel-code"><code>for (let i = 0; i &lt; 4; i++) {
+  forward(20);
+  right(90);
+}</code></pre>
+    <div class="tabelle-rahmen">
+    <table class="funktionen">
+      <thead><tr><th scope="col">Function</th><th scope="col">What it does</th><th scope="col">German name</th></tr></thead>
+      <tbody>
+        <tr><td><code>forward(20)</code></td><td>moves 20 mm forward, drawing if the pen is down</td><td><code>vorwaerts</code></td></tr>
+        <tr><td><code>right(90)</code>, <code>left(90)</code></td><td>turns 90 degrees right or left; <code>turn(90)</code> turns like <code>right</code></td><td><code>rechts</code>, <code>links</code>, <code>drehe</code></td></tr>
+        <tr><td><code>penUp()</code>, <code>penDown()</code></td><td>lifts the pen or puts it back down</td><td><code>stiftAuf</code>, <code>stiftAb</code></td></tr>
+        <tr><td><code>goTo(40, 40)</code></td><td>moves to the point x, y, measured in mm from the bottom left corner</td><td><code>geheZu</code></td></tr>
+        <tr><td><code>x()</code>, <code>y()</code>, <code>heading()</code></td><td>where the turtle is and which way it faces (0 is right, 90 is up)</td><td><code>x</code>, <code>y</code>, <code>richtung</code></td></tr>
+        <tr><td><code>atEdge()</code></td><td><code>true</code> if the turtle is within 1 mm of the edge of the sheet</td><td><code>amRand</code></td></tr>
+        <tr><td><code>random(1, 10)</code></td><td>a random whole number from 1 to 10</td><td><code>zufall</code></td></tr>
+        <tr><td><code>count(1, 9, 2)</code></td><td>the numbers 1, 3, 5, 7, 9 as a list, for <code>for (const i of count(1, 9, 2))</code></td><td><code>zaehle</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>"Show as JavaScript" writes the block program into the editor as JavaScript. It doesn't work the other way round: typed JavaScript can't be turned into blocks.
+      Each view keeps its own program; "Load an example" loads the example into whichever view is open. The German names work here too.</p>
+    <p>An error shows up below the editor, usually with the line it's on. A program may draw 1000 points at most and run for 2 seconds at most; a loop that never ends is stopped.
+      It runs sealed off from the page and can neither reach the internet nor save anything.</p>
+  </div>
+</section>
+
 <section aria-labelledby="more-title">
   <div class="wrap">
     <h2 id="more-title">The real PlotBot works the same way</h2>
@@ -120,7 +174,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.15.0</span>. The robot on this page is a simulation.
+    <p>PlotBot-Kit – website version <span class="version">0.16.0</span>. The robot on this page is a simulation.
       · <a href="../../de/ausprobieren/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
     <p class="license">Blockly © Google, Apache License 2.0 (<a href="../../vendor/blockly/LICENSE">license text</a>).</p>
     <p class="legal-links"><a href="../imprint.html">Imprint</a><a href="../privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
