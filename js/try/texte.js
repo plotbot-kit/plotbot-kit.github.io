@@ -13,10 +13,10 @@
       en: { text: 'Go', tipp: 'Your program starts here.' } },
     zr_stift_ab: {
       de: { text: 'Stift ab', tipp: 'Ab jetzt malt die Schildkröte.' },
-      en: { text: 'pen down', tipp: 'From now on the turtle draws.' } },
+      en: { text: 'pen down', tipp: 'The turtle draws from now on.' } },
     zr_stift_auf: {
       de: { text: 'Stift auf', tipp: 'Ab jetzt fährt die Schildkröte, ohne zu malen.' },
-      en: { text: 'pen up', tipp: 'From now on the turtle moves without drawing.' } },
+      en: { text: 'pen up', tipp: 'The turtle moves without drawing from now on.' } },
     zr_vorwaerts: {
       de: { text: 'gehe %1 mm vorwärts' },
       en: { text: 'move %1 mm forward' } },
@@ -28,13 +28,13 @@
       en: { text: 'go to x %1 y %2', tipp: 'x and y in mm, measured from the bottom left corner of the sheet.' } },
     zr_x: {
       de: { text: 'x der Schildkröte', tipp: 'Wo die Schildkröte steht: mm ab dem linken Rand.' },
-      en: { text: 'x of the turtle', tipp: 'Where the turtle is: mm from the left edge.' } },
+      en: { text: 'turtle\'s x', tipp: 'Where the turtle is: mm from the left edge.' } },
     zr_y: {
       de: { text: 'y der Schildkröte', tipp: 'Wo die Schildkröte steht: mm ab dem unteren Rand.' },
-      en: { text: 'y of the turtle', tipp: 'Where the turtle is: mm from the bottom edge.' } },
+      en: { text: 'turtle\'s y', tipp: 'Where the turtle is: mm from the bottom edge.' } },
     zr_richtung: {
       de: { text: 'Richtung der Schildkröte', tipp: 'Wohin sie schaut, in Grad: 0 rechts, 90 oben, 180 links, 270 unten.' },
-      en: { text: 'direction of the turtle', tipp: 'Which way it faces, in degrees: 0 right, 90 up, 180 left, 270 down.' } },
+      en: { text: 'turtle\'s direction', tipp: 'Which way it faces, in degrees: 0 right, 90 up, 180 left, 270 down.' } },
     zr_am_rand: {
       de: { text: 'am Rand?', tipp: 'Wahr, wenn die Schildkröte höchstens 1 mm vom Rand des Felds entfernt ist oder draußen steht.' },
       en: { text: 'at the edge?', tipp: 'True when the turtle is within 1 mm of the edge of the sheet, or off it.' } },
@@ -55,7 +55,7 @@
   // Der Interpreter (schildkroete.js) kommt unverändert aus der Firmware und meldet auf Deutsch.
   // Die englische Seite übersetzt seine Meldungen hier; der Test prüft, dass keine fehlt.
   const STELLEN_EN = {
-    Vergleich: 'compare', Rechnen: 'arithmetic', 'Zufallszahl von': 'random number from', 'Zufallszahl bis': 'random number to',
+    Vergleich: 'comparison', Rechnen: 'calculation', 'Zufallszahl von': 'random integer from', 'Zufallszahl bis': 'random integer to',
     'und/oder': 'and/or', nicht: 'not', falls: 'if', 'zähle von': 'count from', 'zähle bis': 'count to',
     'zähle in Schritten': 'count by', 'gehe vorwärts': 'move forward', 'drehe dich': 'turn', 'gehe zu x': 'go to x',
     'gehe zu y': 'go to y', wiederhole: 'repeat', 'ändere': 'change',
@@ -63,20 +63,20 @@
   const WAS_EN = { 'eine Zahl': 'a number', 'ein Wahrheitswert': 'a true or false value', 'eine Bedingung': 'a condition' };
   const stelle = name => STELLEN_EN[name] || name;
   const MELDUNGEN_EN = [
-    [/^Zu viele Schritte: höchstens (\d+)\. Ist eine Wiederholung zu groß\?$/, m => `Too many steps: at most ${m[1]}. Is a repeat too big?`],
+    [/^Zu viele Schritte: höchstens (\d+)\. Ist eine Wiederholung zu groß\?$/, m => `Too many steps: at most ${m[1]}. Is a loop repeating too many times?`],
     [/^Zu viele Punkte: höchstens (\d+)\. Weniger Wiederholungen oder längere Striche\.$/,
       m => `Too many points: at most ${m[1]}. Use fewer repeats or longer lines.`],
-    [/^Bei „Zufallszahl“ sind die Grenzen zu groß\.$/, () => 'The limits of "random number" are too big.'],
+    [/^Bei „Zufallszahl“ sind die Grenzen zu groß\.$/, () => 'The numbers in "random integer" are too big.'],
     [/^Bei „zähle“ geht Schritt 0 nicht: Die Schleife käme nie an\.$/, () => '"count" can\'t use a step of 0: the loop would never finish.'],
     [/^Bei „(.+)“ fehlt (.+)\.$/, m => `"${stelle(m[1])}" is missing ${WAS_EN[m[2]] || 'a value'}.`],
     [/^Bei „(.+)“ steht ein Wahrheitswert, gebraucht wird eine Zahl\.$/, m => `"${stelle(m[1])}" has a true or false value, but it needs a number.`],
-    [/^Bei „(.+)“ kommt keine Zahl heraus \(etwa geteilt durch 0\)\.$/, m => `"${stelle(m[1])}" doesn't give a number (for example, when dividing by 0).`],
-    [/^Bei „(.+)“ kommt kein wahr oder falsch heraus\.$/, m => `"${stelle(m[1])}" doesn't give true or false.`],
+    [/^Bei „(.+)“ kommt keine Zahl heraus \(etwa geteilt durch 0\)\.$/, m => `"${stelle(m[1])}" doesn't work out to a number (for example, dividing by 0).`],
+    [/^Bei „(.+)“ kommt kein wahr oder falsch heraus\.$/, m => `"${stelle(m[1])}" doesn't work out to true or false.`],
     [/^Zwischen (.+) und (.+) liegt keine ganze Zahl\.$/, m => `There is no whole number between ${m[1]} and ${m[2]}.`],
     [/^Diesen Vergleich kennt der Roboter nicht\.$/, () => 'The robot doesn\'t know this comparison.'],
-    [/^Diese Rechenart kennt der Roboter nicht\.$/, () => 'The robot doesn\'t know this kind of arithmetic.'],
+    [/^Diese Rechenart kennt der Roboter nicht\.$/, () => 'The robot doesn\'t know this calculation.'],
     [/^Diese Verknüpfung kennt der Roboter nicht\.$/, () => 'The robot doesn\'t know this operation.'],
-    [/^Der Block „(.+)“ liefert hier keinen Wert\.$/, m => `The block "${m[1]}" doesn't give a value here.`],
+    [/^Der Block „(.+)“ liefert hier keinen Wert\.$/, m => `The block "${m[1]}" can't be used as a value here.`],
     [/^Den Block „(.+)“ kennt der Roboter nicht\.$/, m => `The robot doesn't know the block "${m[1]}".`],
     [/^Kein Startblock „Los“\.$/, () => 'There is no "Go" block to start from.'],
     [/^Das Programm ist zu tief verschachtelt\.$/, () => 'The program is nested too deeply.'],

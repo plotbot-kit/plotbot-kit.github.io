@@ -24,12 +24,20 @@ test('Blöcke: jeder eigene Block hat deutschen und englischen Text mit denselbe
     assert.equal(Boolean(en.tipp), Boolean(de.tipp), `${typ}: Tooltip in beiden Sprachen oder in keiner`);
     assert.deepEqual(Object.keys(en.optionen || {}), Object.keys(de.optionen || {}), `${typ}: Auswahlwerte`);
     for (const text of [en.text, en.tipp || '', ...Object.values(en.optionen || {})]) assert.doesNotMatch(text, DEUTSCH, `${typ}: englischer Text`);
+    // Ein deutscher Text ohne Umlaut („Stift ab“) fiele oben nicht auf: Die beiden Fassungen müssen sich unterscheiden.
+    assert.notEqual(en.text, de.text, `${typ}: Text`);
+    if (de.tipp) assert.notEqual(en.tipp, de.tipp, `${typ}: Tooltip`);
+    for (const wert of Object.keys(de.optionen || {})) assert.notEqual(en.optionen[wert], de.optionen[wert], `${typ}: Auswahl ${wert}`);
   }
 });
 
 test('Blöcke: ausprobieren.js schreibt keine Blocktexte und Kategorienamen mehr selbst', () => {
   const quelle = lies('js/try/ausprobieren.js');
   assert.doesNotMatch(quelle, /message0: '|tooltip: '|kind: 'category', name: '/);
+  // Die Seite muss die Texte auch in ihrer Sprache abholen. Das prüft nur den Quelltext; den Beweis im Browser liefert der Blick auf beide Seiten.
+  for (const aufruf of ['Texte.block(type, sprache)', 'Texte.kategorie(name, sprache)', 'Texte.meldung(pruefung.grund, sprache)'])
+    assert.ok(quelle.includes(aufruf), aufruf);
+  assert.match(quelle, /const sprache = document\.documentElement\.lang === 'en' \? 'en' : 'de';/);
   for (const name of Object.keys(Texte.KATEGORIEN)) {
     assert.match(quelle, new RegExp(`kategorie\\('${name}'`), name);
     assert.ok(Texte.kategorie(name, 'de') && Texte.kategorie(name, 'en'), name);
@@ -56,6 +64,8 @@ test('Seiten: jede lädt die Blockly-Texte ihrer Sprache und texte.js vor auspro
     assert.ok(skripte.includes('js/try/texte.js') && skripte.indexOf('js/try/texte.js') < skripte.indexOf('js/try/ausprobieren.js'), datei);
   }
   assert.doesNotMatch(lies(SEITEN.en), /[„"]Los[“"]/, 'die englische Seite nennt den Startblock „Go“');
+  assert.doesNotMatch(lies(SEITEN.en), /messages are in German|German blocks/, 'die englische Seite nennt ihre Blöcke nicht mehr deutsch');
+  assert.doesNotMatch(lies('llms.txt'), /German blocks/);
 });
 
 test('Blockly: die englischen Texte decken dieselben Schlüssel ab wie die deutschen', () => {
@@ -65,6 +75,8 @@ test('Blockly: die englischen Texte decken dieselben Schlüssel ab wie die deuts
 });
 
 test('Meldungen: jede Meldung des Interpreters hat eine englische Fassung', () => {
+  // Die Meldungen werden im Quelltext gesucht: einfache oder schräge Anführungszeichen, in einem Stück. schildkroete.js kommt unverändert
+  // aus der Firmware; eine Meldung in anderer Schreibweise fände dieser Test nicht.
   const quelle = lies('js/try/schildkroete.js');
   const roh = [...quelle.matchAll(/new Abbruch\((['`])(.*?)\1\)/g), ...quelle.matchAll(/fehler = (')(.*?)';/g)].map(m => m[2]);
   assert.ok(roh.length >= 17, `Meldungen gefunden: ${roh.length}`);
