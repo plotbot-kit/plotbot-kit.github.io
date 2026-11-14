@@ -3,6 +3,7 @@
   --ink: #1d1b2f; --muted: #4a4760; --paper: #fffdf6; --cream: #fff6d6;
   --sun: #ffd43b; --pink: #d6336c; --blue: #1864ab; --green: #237032; --line: #e7dfc4;
   --radius: 1rem; --max: 68rem;
+  --mint-m: #1864ab; --mint-i: #a61e4d; --mint-n: #237032; --mint-t: #1d1b2f;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4rem; }
@@ -74,6 +75,28 @@ h3 { font-size: 1.2rem; margin: 0 0 .4rem; }
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1rem; margin: 1.25rem 0; }
 .facts dt { font-weight: 700; }
 .facts dd { margin: 0; }
+/* "What your kid learns": robot picture with numbered markers. Each subject has a colour AND a shape AND a letter. */
+.mk { display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; color: #fff; font-weight: 700; font-size: .9rem; line-height: 1; }
+.mk-m { background: var(--mint-m); border-radius: 50%; }
+.mk-i { background: var(--mint-i); border-radius: .2rem; }
+.mk-n { background: var(--mint-n); clip-path: polygon(50% 0, 100% 100%, 0 100%); padding-top: .65rem; width: 2.1rem; }
+.mk-t { background: var(--mint-t); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); width: 2.2rem; height: 2.2rem; }
+.mint-legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; list-style: none; padding: 0; margin: 1rem 0 0; font-weight: 700; }
+.mint-legend li { display: flex; align-items: center; gap: .45rem; }
+.mint-map { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+.mint-map figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: .5rem; }
+.mint-bild { position: relative; }
+.mint-bild svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mint-bild text { font: 700 28px system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #fff; text-anchor: middle; }
+.mint-bild .zz { font-size: 24px; }
+.mint-bild .m { fill: var(--mint-m); } .mint-bild .i { fill: var(--mint-i); }
+.mint-bild .n { fill: var(--mint-n); } .mint-bild .t { fill: var(--mint-t); }
+.mint-bild .m, .mint-bild .i, .mint-bild .n, .mint-bild .t { stroke: #fff; stroke-width: 4; }
+.mint-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; }
+.mint-list li { display: grid; grid-template-columns: 2.3rem 1fr; gap: .6rem; align-items: start; }
+.mint-list b { display: block; }
+.mint-list .fach { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.mint-note { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; max-width: 42rem; }
 /* "What you need": checklist with ticks next to the short facts */
 .needs { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
 .needs > div { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
@@ -125,6 +148,8 @@ footer { font-size: .9rem; color: var(--muted); padding: 2rem 0 3rem; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .cards.three { grid-template-columns: repeat(3, 1fr); }
   .split { grid-template-columns: 1fr 1fr; }
+  .mint-map { grid-template-columns: 1fr 1fr; align-items: start; }
+  .mint-map figure { position: sticky; top: 4.5rem; }
   .split.flip > :first-child { order: 2; }
 }
 @media (prefers-reduced-motion: no-preference) {

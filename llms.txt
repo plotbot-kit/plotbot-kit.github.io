@@ -11,10 +11,10 @@
 - Tools: 2.5 mm hex key, small screwdriver, needle-nose pliers, small file
 
 ## What kids learn
-- Mechanics: levers, gears and backlash, ball bearings
-- Electronics: microcontroller, stepper motors, servo, limit switches
-- Programming: Blockly turtle graphics on the phone
-- Geometry: angles and coordinates in millimetres
+- Maths: working back from a point to the two arm angles; angles and coordinates in millimetres
+- Computing: microcontroller, limit switches and homing, Blockly turtle graphics on the phone
+- Science: electromagnets in the stepper motors, levers and friction; PLA, a plant-based plastic
+- Engineering: gears and backlash, ball bearings, 3D printing and fits
 
 ## The kit (PlotBot-Kit)
 - Book title (provisional): "PlotBot – Build your own drawing robot" / "PlotBot – Bau dir deinen Zeichenroboter"
