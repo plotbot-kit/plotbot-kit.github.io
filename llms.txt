@@ -13,7 +13,7 @@
 ## What kids learn
 - Maths: working back from a point to the two arm angles; angles and coordinates in millimetres
 - Computing: microcontroller, limit switches and homing, Blockly turtle graphics on the phone
-- Science: electromagnets in the stepper motors, levers and friction; PLA, a plastic made from lactic acid
+- Science: electromagnets in the stepper motors, levers and friction; PLA, a plant-based plastic
 - Engineering: gears and backlash, ball bearings, 3D printing and fits
 
 ## The kit (PlotBot-Kit)
