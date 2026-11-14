@@ -170,13 +170,15 @@
     bSchritt.setAttribute('aria-pressed', String(n !== 0));
     feld.hidden = n === 0;
     zurueck.disabled = n <= 1;
-    weiter.disabled = n >= SCHRITTE;
+    // Letzter Schritt: „Weiter“ wird zu „Fertig!“ und führt zurück zum freien Ziehen
+    weiter.textContent = n >= SCHRITTE ? weiter.dataset.fertig : weiter.dataset.weiter;
     zeige(true);
   }
   bFrei.addEventListener('click', () => geheZu(0));
   bSchritt.addEventListener('click', () => geheZu(schritt || 1));
   zurueck.addEventListener('click', () => geheZu(Math.max(1, schritt - 1)));
-  weiter.addEventListener('click', () => geheZu(Math.min(SCHRITTE, schritt + 1)));
+  weiter.dataset.weiter = weiter.textContent;
+  weiter.addEventListener('click', () => geheZu(schritt >= SCHRITTE ? 0 : schritt + 1));
 
   for (const k of knoepfe) {
     const waehle = () => { wahl[k.dataset.seite] = k.dataset.wo; zeige(false); };
