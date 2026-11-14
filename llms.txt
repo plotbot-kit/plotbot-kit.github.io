@@ -1,6 +1,6 @@
 # PlotBot-Kit – PlotBot, the drawing robot (German: Zeichenroboter)
 
-> PlotBot is a small drawing robot; the PlotBot-Kit (book, print files, firmware) shows how to build it, for kids aged about 12 and up, together with a parent. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
+> PlotBot is a small drawing robot; the PlotBot-Kit (book, print files, firmware) shows how to build it. Kids can draw and code with it from about age 8 and build and understand it themselves from about 12; younger kids build with an adult. One purchase includes three PDF editions. German page: https://plotbot-kit.github.io/de/ · English page: https://plotbot-kit.github.io/en/
 
 ## The robot (PlotBot)
 - Five-bar SCARA linkage: shoulders 36 mm apart, upper arms 65 mm, forearms 90 mm; drawing area 80 × 80 mm
