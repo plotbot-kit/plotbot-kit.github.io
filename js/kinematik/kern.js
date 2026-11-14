@@ -18,20 +18,21 @@
     frei: { name: t('frei (Werte von Hand)', 'custom (enter values)'), step: 0.5, backlash: 0.5, travel: 0, speed: 180 },
   };
 
-  // backlash = Spiel links, backlashR = Spiel rechts (Grad am Motor). limits: Endschalter swL/swR (Armwinkel in Grad)
-  // als Grenze und Softlimit "Oberarme kreuzen sich nicht" wie in der Firmware.
+  // backlash = Spiel links, backlashR = Spiel rechts (Grad am Motor). limits: Schwenkbereich der Oberarme in Grad,
+  // links swLmin…swL, rechts swR…swRmax (am Gerät sitzen die Endschalter bei swL und swR), dazu das Softlimit
+  // "Oberarme kreuzen sich nicht" wie in der Firmware.
   const BASE = { d: 36, L1l: 65, L2l: 90, L1r: 65, L2r: 90, coupled: true, cx: 0, cy: 75, w: 80, h: 80,
     drive: 'byj', step: 360 / 4096, backlash: 1.0, backlashR: 1.0, travel: 0, speed: 90, ratio: 1, elbowL: 'aussen', elbowR: 'aussen',
-    limits: false, swL: 270, swR: -90 };   // Vorgabe ohne Schalter: Arm zeigt nach hinten, sperrt das Feld nicht
+    limits: false, swLmin: 0, swL: 270, swR: -90, swRmax: 180 };   // Vorgabe ohne Schalter: sperrt das Feld nicht
   const HALB = 360 / 4096;   // ein Halbschritt des 28BYJ-48 (Untersetzung 1/64) in Grad
 
   const PRESETS = {
     plotbot: { label: 'PlotBot', hint: t('PlotBot: Wellen 36 mm auseinander, Oberarme 65 mm, Unterarme 90 mm, 28BYJ-48 im Halbschritt, ' +
-        'Endschalter wie am Gerät, Zeichenfläche 80 × 80 mm (y 35–115). Spiel geschätzt.',
+        'Schwenkbereiche wie in der Firmware, Zeichenfläche 80 × 80 mm (y 35–115). Spiel geschätzt.',
         'PlotBot: shafts 36 mm apart, 65 mm upper arms, 90 mm forearms, 28BYJ-48 half-stepping, ' +
-        'limit switches as on the robot, 80 × 80 mm drawing area (y 35–115). Backlash estimated.'),
+        'swing ranges as in the firmware, 80 × 80 mm drawing area (y 35–115). Backlash estimated.'),
       geo: { d: 36, L1l: 65, L2l: 90, L1r: 65, L2r: 90, cx: 0, cy: 75, w: 80, h: 80, drive: 'byj', ratio: 1,
-        limits: true, swL: 236.96, swR: -56.96 },
+        limits: true, swLmin: 78, swL: 238, swR: -58, swRmax: 102 },   // Roboter-Repo: firmware/lib/zeichnen/src/kinematik.h:17-18
       fields: { [t('80×80 (y 35–115)', '80×80 (y 35–115)')]: { cx: 0, cy: 75, w: 80, h: 80 },
         [t('60×60 (y 70–130)', '60×60 (y 70–130)')]: { cx: 0, cy: 100, w: 60, h: 60 } } },
     plotclock: { label: 'Plotclock', hint: t('Plotclock-Prinzip: Achsen 25 mm, Arme 35 / 55 mm, Servos SG90; Stiftversatz vereinfacht weggelassen',
@@ -131,8 +132,9 @@
   /** Softlimit wie firmware pruefeZiel: null = frei, sonst Grund. Ohne g.limits immer frei. */
   function limitViolation(g, s) {
     if (!g.limits) return null;
-    if (normL(s.t1) > g.swL) return t('Endschalter links', 'left limit switch');
-    if (normR(s.t2) < g.swR) return t('Endschalter rechts', 'right limit switch');
+    const l = normL(s.t1), r = normR(s.t2);
+    if (l > g.swL || l < g.swLmin) return t('Schwenkbereich links', 'left swing range');
+    if (r < g.swR || r > g.swRmax) return t('Schwenkbereich rechts', 'right swing range');
     if (upperCross(s)) return t('Oberarme kreuzen sich', 'upper arms cross');
     return null;
   }

@@ -16,7 +16,9 @@
 <script data-goatcounter="https://plotbot.goatcounter.com/count" async src="../../vendor/goatcounter/count.js"></script>
 </head>
 <body>
-<a class="skip" href="#content">Skip to <header class="page-head">
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="page-head">
   <div class="wrap">
     <nav class="topbar" aria-label="Navigation">
       <a class="brand" href="../">PlotBot-Kit</a>
@@ -36,6 +38,7 @@
       <p>The simulator shows that calculation from above. Drag the pen with your mouse or finger and watch the arms follow.
         Colours show which points the pen can reach, where the linkage gets close to a straight line, and how far the pen jumps when a motor takes one step.</p>
       <p>You can change the arm lengths, shaft distance, drawing area and motor, and let the robot trace test figures. That shows why the drawing area is 80 × 80 mm and why it sits where it does.</p>
+      <p>How the firmware finds the two motor angles is shown on a separate page, with compass and ruler: <a href="explained/">Understanding inverse kinematics</a>.</p>
     </div>
     <figure>
       <img class="shot" src="../../img/kinematik-en.webp" width="800" height="600" alt="Top view in the simulator: the two motor shafts at the bottom, blue and orange upper arms and grey forearms up to the pen. A green area marks where the pen can reach; a heatmap inside the dashed square of the drawing area shows where gear backlash has more effect.">
@@ -52,7 +55,7 @@
       <dt>Orange and red</dt><dd>Critical zones: a joint is almost straight or the forearms are almost parallel. There, a tiny motor error turns into a large pen error.</dd>
       <dt>Heatmap</dt><dd>From dark purple (accurate) to yellow (less accurate): how far off the pen lands when gear backlash kicks in on a change of direction. It can also show the pen travel per motor step or per degree.</dd>
       <dt>Pink hatching</dt><dd>Here the forearms meet at the pen at roughly a right angle (70–110°). That's the best place for the drawing area.</dd>
-      <dt>Grey hatching</dt><dd>Blocked: the upper arms would cross, or an arm would run past its limit switch.</dd>
+      <dt>Grey hatching</dt><dd>Blocked: the upper arms would cross, or an arm would leave its swing range.</dd>
     </dl>
     <p>The simulator needs JavaScript. It's built for a large screen; on a phone the controls sit below the drawing.</p>
   </div>
@@ -108,9 +111,9 @@
     </section>
     <section>
       <h2>Limits</h2>
-      <label class="check"><input type="checkbox" id="limits"> Limit switches and soft limit (upper arms never cross)</label>
+      <label class="check"><input type="checkbox" id="limits"> Swing range and soft limit (upper arms never cross)</label>
       <div id="limRows"></div>
-      <p class="hint">Like the firmware: the left arm may not go past its limit-switch angle, the right one not below it;
+      <p class="hint">Like the firmware: each upper arm stays within its swing range, on PlotBot 78° to 238° on the left and −58° to 102° on the right;
         poses with crossing upper arms are blocked (grey hatching).</p>
     </section>
     <section>
@@ -159,7 +162,7 @@
       <li><i class="hatch"></i>Forearms ≈ 90°</li>
       <li><i class="x">×</i>real pen on the step grid</li>
       <li><i class="hatch grey"></i>blocked (soft limit)</li>
-      <li><i class="dash" style="border-color:#dc2626"></i>Limit switch</li>
+      <li><i class="dash" style="border-color:#dc2626"></i>Swing-range limit</li>
     </ul>
   </section>
 
@@ -172,7 +175,7 @@
 
 <footer>
   <div class="wrap">
-    <p>PlotBot-Kit – website version <span class="version">0.13.0</span>. The simulator uses simplified models: it covers geometry, step resolution and gear backlash, but not friction or flex.
+    <p>PlotBot-Kit – website version <span class="version">0.14.0</span>. The simulator uses simplified models: it covers geometry, step resolution and gear backlash, but not friction or flex.
       · <a href="../">PlotBot main page</a> · <a href="../../de/kinematik/" hreflang="de" lang="de" data-lang="de">Deutsche Version</a></p>
     <p class="legal-links"><a href="../imprint.html">Imprint</a><a href="../privacy.html">Privacy</a><a href="mailto:ralf.d.mueller+plotbot@gmail.com?subject=PlotBot%3A%20Feedback">Send feedback</a></p>
   </div>
