@@ -2,13 +2,14 @@
 // Angepasst aus der Blockly-Seite der PlotBot-Firmware (Blöcke, Thema, Werkzeugleiste, Laden der Demos).
 // Dazu der JavaScript-Modus: dasselbe Programm getippt statt gesteckt (js-editor.js, skript.js, block-js.js).
 // Weggelassen: Senden an den Roboter, Zustand vom Roboter, Speichern, Export und Import. Diese Seite spricht mit keinem Gerät.
-// Texte der Bedienung stehen im HTML (data-Attribute), damit die deutsche und die englische Seite dieselbe Datei nutzen.
+// Texte der Bedienung stehen im HTML (data-Attribute), Texte der Blöcke in texte.js, damit die deutsche und die englische Seite dieselbe Datei nutzen.
 'use strict';
 (function () {
   const $ = id => document.getElementById(id);
   const werkzeug = $('werkzeug');
-  if (!werkzeug || typeof Blockly === 'undefined') return;
+  if (!werkzeug || typeof Blockly === 'undefined' || typeof Texte === 'undefined') return;
   const TEXT = werkzeug.dataset;
+  const sprache = document.documentElement.lang === 'en' ? 'en' : 'de';
   const fuelle = (vorlage, werte) => vorlage.replace(/\{(\w+)\}/g, (_, k) => String(werte[k]));
 
   // Keine Hilfe aus dem Internet und ein schlankes Kontextmenü, wie auf dem Roboter.
@@ -16,29 +17,27 @@
   for (const eintrag of ['blockHelp', 'blockInline', 'blockCollapseExpand'])
     if (Blockly.ContextMenuRegistry.registry.getItem(eintrag)) Blockly.ContextMenuRegistry.registry.unregister(eintrag);
 
-  // Eigene Blöcke der Schildkröte, unverändert aus der Firmware.
+  // Eigene Blöcke der Schildkröte wie in der Firmware. Was auf ihnen steht, kommt aus texte.js in der Sprache der Seite;
+  // Typen, Feldnamen und gespeicherte Werte sind in beiden Sprachen gleich.
+  const eigen = (type, rest) => {
+    const t = Texte.block(type, sprache);
+    return { type, message0: t.text, ...(t.tipp ? { tooltip: t.tipp } : {}), ...rest };
+  };
+  const auswahl = type => Object.entries(Texte.block(type, sprache).optionen).map(([wert, text]) => [text, wert]);
+  const anweisung = { previousStatement: null, nextStatement: null };
+  const zahlEingang = name => ({ type: 'input_value', name, check: 'Number' });
   Blockly.common.defineBlocksWithJsonArray([
-    { type: 'zr_start', message0: 'Los', nextStatement: null, colour: 45, tooltip: 'Hier fängt dein Programm an.' },
-    { type: 'zr_stift_ab', message0: 'Stift ab', previousStatement: null, nextStatement: null, style: 'stift_blocks',
-      tooltip: 'Ab jetzt malt die Schildkröte.' },
-    { type: 'zr_stift_auf', message0: 'Stift auf', previousStatement: null, nextStatement: null, style: 'stift_blocks',
-      tooltip: 'Ab jetzt fährt die Schildkröte, ohne zu malen.' },
-    { type: 'zr_vorwaerts', message0: 'gehe %1 mm vorwärts', args0: [{ type: 'input_value', name: 'WEG', check: 'Number' }],
-      inputsInline: true, previousStatement: null, nextStatement: null, style: 'bewegen_blocks' },
-    { type: 'zr_drehe', message0: 'drehe dich nach %1 um %2 °',
-      args0: [{ type: 'field_dropdown', name: 'RICHTUNG', options: [['rechts', 'RECHTS'], ['links', 'LINKS']] },
-        { type: 'input_value', name: 'WINKEL', check: 'Number' }],
-      inputsInline: true, previousStatement: null, nextStatement: null, style: 'bewegen_blocks' },
-    { type: 'zr_gehe_zu', message0: 'gehe zu x %1 y %2',
-      args0: [{ type: 'input_value', name: 'X', check: 'Number' }, { type: 'input_value', name: 'Y', check: 'Number' }],
-      inputsInline: true, previousStatement: null, nextStatement: null, style: 'bewegen_blocks',
-      tooltip: 'x und y in mm ab der Ecke links unten des Felds.' },
-    { type: 'zr_x', message0: 'x der Schildkröte', output: 'Number', style: 'bewegen_blocks', tooltip: 'Wo die Schildkröte steht: mm ab dem linken Rand.' },
-    { type: 'zr_y', message0: 'y der Schildkröte', output: 'Number', style: 'bewegen_blocks', tooltip: 'Wo die Schildkröte steht: mm ab dem unteren Rand.' },
-    { type: 'zr_richtung', message0: 'Richtung der Schildkröte', output: 'Number', style: 'bewegen_blocks',
-      tooltip: 'Wohin sie schaut, in Grad: 0 rechts, 90 oben, 180 links, 270 unten.' },
-    { type: 'zr_am_rand', message0: 'am Rand?', output: 'Boolean', style: 'bewegen_blocks',
-      tooltip: 'Wahr, wenn die Schildkröte höchstens 1 mm vom Rand des Felds entfernt ist oder draußen steht.' },
+    eigen('zr_start', { nextStatement: null, colour: 45 }),
+    eigen('zr_stift_ab', { ...anweisung, style: 'stift_blocks' }),
+    eigen('zr_stift_auf', { ...anweisung, style: 'stift_blocks' }),
+    eigen('zr_vorwaerts', { args0: [zahlEingang('WEG')], inputsInline: true, ...anweisung, style: 'bewegen_blocks' }),
+    eigen('zr_drehe', { args0: [{ type: 'field_dropdown', name: 'RICHTUNG', options: auswahl('zr_drehe') }, zahlEingang('WINKEL')],
+      inputsInline: true, ...anweisung, style: 'bewegen_blocks' }),
+    eigen('zr_gehe_zu', { args0: [zahlEingang('X'), zahlEingang('Y')], inputsInline: true, ...anweisung, style: 'bewegen_blocks' }),
+    eigen('zr_x', { output: 'Number', style: 'bewegen_blocks' }),
+    eigen('zr_y', { output: 'Number', style: 'bewegen_blocks' }),
+    eigen('zr_richtung', { output: 'Number', style: 'bewegen_blocks' }),
+    eigen('zr_am_rand', { output: 'Boolean', style: 'bewegen_blocks' }),
   ]);
 
   // Jede Kategorie hat eine eigene Farbe, ihre Blöcke tragen dieselbe.
@@ -54,37 +53,38 @@
     categoryStyles: Object.fromEntries(Object.entries(FARBEN).map(([name, colour]) => [name, { colour }])),
   });
 
+  const kategorie = (name, rest) => ({ kind: 'category', name: Texte.kategorie(name, sprache), categorystyle: name, ...rest });
   const zahl = n => ({ shadow: { type: 'math_number', fields: { NUM: n } } });
   const BEISPIEL = Programme.DEMOS[0].programm;
   const WERKZEUGE = {
     kind: 'categoryToolbox',
     contents: [
-      { kind: 'category', name: 'Stift', categorystyle: 'stift', contents: [
+      kategorie('stift', { contents: [
         { kind: 'block', type: 'zr_stift_ab' }, { kind: 'block', type: 'zr_stift_auf' },
-      ] },
-      { kind: 'category', name: 'Bewegen', categorystyle: 'bewegen', contents: [
+      ] }),
+      kategorie('bewegen', { contents: [
         { kind: 'block', type: 'zr_vorwaerts', inputs: { WEG: zahl(10) } },
         { kind: 'block', type: 'zr_drehe', inputs: { WINKEL: zahl(90) } },
         { kind: 'block', type: 'zr_gehe_zu', inputs: { X: zahl(40), Y: zahl(40) } },
         { kind: 'block', type: 'zr_am_rand' }, { kind: 'block', type: 'zr_x' }, { kind: 'block', type: 'zr_y' },
         { kind: 'block', type: 'zr_richtung' },
-      ] },
-      { kind: 'category', name: 'Wiederholen', categorystyle: 'wiederholen', contents: [
+      ] }),
+      kategorie('wiederholen', { contents: [
         { kind: 'block', type: 'controls_repeat_ext', inputs: { TIMES: zahl(4) } },
         { kind: 'block', type: 'controls_for', inputs: { FROM: zahl(1), TO: zahl(10), BY: zahl(1) } },
-      ] },
-      { kind: 'category', name: 'Logik', categorystyle: 'logik', contents: [
+      ] }),
+      kategorie('logik', { contents: [
         { kind: 'block', type: 'controls_if' },
         { kind: 'block', type: 'controls_if', extraState: { hasElse: true } },
         { kind: 'block', type: 'logic_compare', inputs: { A: zahl(0), B: zahl(0) } },
         { kind: 'block', type: 'logic_operation' }, { kind: 'block', type: 'logic_negate' }, { kind: 'block', type: 'logic_boolean' },
-      ] },
-      { kind: 'category', name: 'Zahlen', categorystyle: 'zahlen', contents: [
+      ] }),
+      kategorie('zahlen', { contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 10 } },
         { kind: 'block', type: 'math_arithmetic', inputs: { A: zahl(1), B: zahl(1) } },
         { kind: 'block', type: 'math_random_int', inputs: { FROM: zahl(1), TO: zahl(10) } },
-      ] },
-      { kind: 'category', name: 'Variablen', categorystyle: 'variablen', custom: 'VARIABLE' },
+      ] }),
+      kategorie('variablen', { custom: 'VARIABLE' }),
     ],
   };
 
@@ -103,7 +103,6 @@
   const melde = (text, fehler) => { $('meldung').textContent = text; $('meldung').classList.toggle('fehler', Boolean(fehler)); };
   let pruefung = null, ergebnis = null;
   let modus = 'bloecke';   // oder 'js'
-  const sprache = document.documentElement.lang === 'en' ? 'en' : 'de';
   const editor = JsEditor.erzeuge($('js-text'), $('js-zeilen'), $('js-fehler'));
   let lauf = null;         // laufendes JavaScript-Programm im Worker
   let startwert = Math.floor(Math.random() * 4294967296);
@@ -130,7 +129,7 @@
     else if (modus === 'js' && pruefung.anzahl === 0 && !ergebnis.fehler) melde(TEXT.leerJs);
     else if (modus === 'js' && !ergebnis.fehler && pruefung.aussen.length && TEXT.aussen)   // englische Seite: eigener Text statt des deutschen aus pruefen()
       melde(fuelle(pruefung.aussen.length === 1 ? TEXT.aussenEins : TEXT.aussen, { n: pruefung.aussen.length }), true);
-    else melde(pruefung.grund, pruefung.anzahl > 0 || Boolean(ergebnis.fehler));
+    else melde(Texte.meldung(pruefung.grund, sprache), pruefung.anzahl > 0 || Boolean(ergebnis.fehler));
     knoepfe();
   }
 
